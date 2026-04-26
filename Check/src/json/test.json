@@ -1,0 +1,35 @@
+[
+  {
+    "q": "HTML là gì?",
+    "img": "html.png",
+    "a": [
+      "dùng để tạo cấu trúc trang web",
+      "được viết bằng các thẻ",
+      "được sử dụng để hiển thị nội dung trên trình duyệt",
+      "được sử dụng để tạo liên kết giữa các trang web"
+    ],
+    "c": 0
+  },
+  {
+    "q": "CSS là gì?",
+    "img": "css.png",
+    "a": [
+      "dùng để tạo kiểu dáng cho trang web",
+      "được viết bằng các quy tắc",
+      "được sử dụng để làm đẹp cho trang web",
+      "được sử dụng để tạo tương tác cho trang web"
+    ],
+    "c": 2
+  },
+  {
+    "q": "JavaScript là gì?",
+    "img": "js.png",
+    "a": [
+      "dùng để tạo tương tác cho trang web",
+      "được viết bằng các hàm và biến",
+      "được sử dụng để làm cho trang web trở nên động",
+      "được sử dụng để tạo hiệu ứng cho trang web"
+    ],
+    "c": 0
+  }
+]
