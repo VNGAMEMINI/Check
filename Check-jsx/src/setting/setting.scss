@@ -1,0 +1,313 @@
+//? --------------------------
+/*
+  --- Cú Pháp: ---
+    border-radius: 1[top-left] 2[top-right] 3[bottom-right] 4[bottom-left];
+
+  --- Ví Dụ: ---
+    10px → góc trên trái [top-left]
+    15px → góc trên phải [top-right]
+    20px → góc dưới phải [bottom-right]
+    25px → góc dưới trái [bottom-left]
+
+  --- Sơ Đồ: ---
+    ——————————————————————————————
+    10px ┌──────────┐ 15px
+    (    |          │
+    25px └──────────┘ 20px         
+    —————————————————————————————— 
+*/
+//? --------------------------
+
+//? --------------------------
+/*----------------------------
+  | Thẻ  | Kích thước mặc định |
+  | ---- | ------------------- |
+  | `h1` | 2rem (≈ 32px)       |
+  | `h2` | 1.5rem (≈ 24px)     |
+  | `h3` | 1.17rem (≈ 18.72px) |
+  | `h4` | 1rem (≈ 16px)       |
+  | `h5` | 0.83rem (≈ 13.28px) |
+  | `h6` | 0.67rem (≈ 10.72px) | 
+  ----------------------------*/
+//? --------------------------
+
+//? --------------------------
+/*
+  xs → sm → md → lg → xl
+*/
+//? --------------------------
+
+/** ========= IMPORTS ========= */
+@use "./_tag.scss";
+@use "./_class.scss";
+
+//* ========= ROOT =========
+/** ===== BASE ===== */
+$bg-main: #020617;
+$bg-sunken: #010410;
+$bg-surface: #0f172a;
+$bg-card: #111827;
+$bg-elevated: #1e293b;
+
+/** ===== TEXT ===== */
+$text-bright: #f9fafb;
+$text-main: #e5e7eb;
+$text-muted: #9ca3af;
+$text-dim: #6b7280;
+
+/** ===== PRIMARY ===== */
+$primary: #3b82f6;
+$primary-hover: #60a5fa;
+$primary-active: #2563eb;
+$primary-glow: rgba(59, 130, 246, 0.5);
+
+/** ===== NEON ===== */
+$neon-cyan: #00f7ff;
+$neon-purple: #a855f7;
+$neon-pink: #ff2bd6;
+$neon-green: #39ff14;
+$neon-amber: #ffb800;
+
+/** ===== FEEDBACK COLORS ===== */
+$success-bg: rgba(16, 185, 129, 0.1);
+$warning-bg: rgba(245, 158, 11, 0.1);
+$danger-bg: rgba(239, 68, 68, 0.1);
+$info-bg: rgba(6, 182, 212, 0.1);
+
+/** ===== GRADIENTS ===== */
+$gradient-main: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #020617 100%);
+$gradient-primary: linear-gradient(135deg, #3b82f6, #06b6d4);
+$gradient-neon: linear-gradient(135deg, #00f7ff, #a855f7, #ff2bd6);
+$gradient-warm: linear-gradient(135deg, #ff2bd6, #ffb800);
+$gradient-matrix: linear-gradient(135deg, #39ff14, #06b6d4);
+
+/** ===== GLASS ===== */
+$glass-bg: rgba(255, 255, 255, 0.05);
+$glass-border: rgba(255, 255, 255, 0.2);
+$glass-bg-heavy: rgba(255, 255, 255, 0.08);
+$glass-border-heavy: rgba(255, 255, 255, 0.18);
+
+/** ===== OVERLAY ===== */
+$overlay-dark: rgba(0, 0, 0, 0.6);
+$overlay-light: rgba(255, 255, 255, 0.05);
+
+/** ===== SHADOWS ===== */
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 2px 4px rgba(0, 0, 0, 0.35);
+$shadow-lg: 0 8px 6px rgba(0, 0, 0, 0.4);
+$shadow-xl: 0 16px 8px rgba(0, 0, 0, 0.45);
+
+/** ===== GLOW ===== */
+$glow-primary:
+  0 0 20px rgba(59, 130, 246, 0.4),
+  0 0 40px rgba(59, 130, 246, 0.2);
+$glow-cyan:
+  0 0 20px rgba(0, 247, 255, 0.5),
+  0 0 60px rgba(0, 247, 255, 0.15);
+$glow-purple:
+  0 0 20px rgba(168, 85, 247, 0.5),
+  0 0 60px rgba(168, 85, 247, 0.15);
+$glow-pink:
+  0 0 20px rgba(255, 43, 214, 0.5),
+  0 0 60px rgba(255, 43, 214, 0.15);
+
+/** ===== BORDERS ===== */
+$border-xs: 0.5px solid $glass-border;
+$border-sm: 1px solid $glass-border;
+$border-md: 1px solid rgba(255, 255, 255, 0.15);
+$border-accent: 1px solid $primary;
+
+/** ===== BORDER RADIUS ===== */
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-pill: 9999px;
+
+/** ===== SPACING (4px base) ===== */
+$sp-1: 4px;
+$sp-2: 8px;
+$sp-3: 12px;
+$sp-4: 16px;
+$sp-5: 20px;
+$sp-6: 24px;
+$sp-7: 28px;
+$sp-8: 32px;
+$sp-9: 36px;
+$sp-10: 40px;
+$sp-12: 48px;
+
+/** ===== TYPOGRAPHY ===== */
+$text-xs: 11px;
+$text-sm: 13px;
+$text-md: 15px;
+$text-lg: 18px;
+$text-xl: 22px;
+$text-2xl: 28px;
+$text-3xl: 36px;
+
+/** ===== ANIMATION ===== */
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+$ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+$duration-fast: 120ms;
+$duration-base: 220ms;
+$duration-slow: 400ms;
+
+/** ===== Z-INDEX ===== */
+$z-base: 0;
+$z-raised: 10;
+$z-overlay: 100;
+$z-modal: 200;
+$z-toast: 300;
+$z-tooltip: 400;
+
+/** ===== TYPOGRAPHY UPGRADE ===== */
+$font-regular: 400;
+$font-medium: 500;
+$font-bold: 600;
+$font-semibold: 700;
+$font-black: 800;
+
+$lh-tight: 1.2;
+$lh-normal: 1.5;
+$lh-loose: 1.7;
+
+/** ===== TRANSITIONS ===== */
+$transition-base: all $duration-base $ease-out;
+
+$transition-fast: all $duration-fast $ease-smooth;
+
+//* ===== CSS VARIABLES EXPORT =====
+:root {
+  /** ===== BASE ===== */
+  --bg-main: #{$bg-main};
+  --bg-sunken: #{$bg-sunken};
+  --bg-surface: #{$bg-surface};
+  --bg-card: #{$bg-card};
+  --bg-elevated: #{$bg-elevated};
+
+  /** ===== TEXT ===== */
+  --text-bright: #{$text-bright};
+  --text-main: #{$text-main};
+  --text-muted: #{$text-muted};
+  --text-dim: #{$text-dim};
+
+  /** ===== PRIMARY ===== */
+  --primary: #{$primary};
+  --primary-hover: #{$primary-hover};
+  --primary-active: #{$primary-active};
+  --primary-glow: #{$primary-glow};
+
+  /** ===== NEON ===== */
+  --neon-cyan: #{$neon-cyan};
+  --neon-purple: #{$neon-purple};
+  --neon-pink: #{$neon-pink};
+  --neon-green: #{$neon-green};
+  --neon-amber: #{$neon-amber};
+
+  /** ===== FEEDBACK COLORS ===== */
+  --success-bg: #{$success-bg};
+  --warning-bg: #{$warning-bg};
+  --danger-bg: #{$danger-bg};
+  --info-bg: #{$info-bg};
+
+  /** ===== GRADIENTS ===== */
+  --gradient-main: #{$gradient-main};
+  --gradient-primary: #{$gradient-primary};
+  --gradient-neon: #{$gradient-neon};
+  --gradient-warm: #{$gradient-warm};
+  --gradient-matrix: #{$gradient-matrix};
+
+  /** ===== GLASS ===== */
+  --glass-bg: #{$glass-bg};
+  --glass-border: #{$glass-border};
+  --glass-bg-heavy: #{$glass-bg-heavy};
+  --glass-border-heavy: #{$glass-border-heavy};
+
+  /** ===== OVERLAY ===== */
+  --overlay-dark: #{$overlay-dark};
+  --overlay-light: #{$overlay-light};
+
+  /** ===== SHADOWS ===== */
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-xl: #{$shadow-xl};
+
+  /** ===== GLOW ===== */
+  --glow-primary: #{$glow-primary};
+  --glow-cyan: #{$glow-cyan};
+  --glow-purple: #{$glow-purple};
+  --glow-pink: #{$glow-pink};
+
+  /** ===== BORDERS ===== */
+  --border-xs: #{$border-xs};
+  --border-sm: #{$border-sm};
+  --border-md: #{$border-md};
+  --border-accent: #{$border-accent};
+
+  /** ===== BORDER RADIUS ===== */
+  --radius-xs: #{$radius-xs};
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+  --radius-pill: #{$radius-pill};
+
+  /** ===== SPACING (4px base) ===== */
+  --sp-1: #{$sp-1};
+  --sp-2: #{$sp-2};
+  --sp-3: #{$sp-3};
+  --sp-4: #{$sp-4};
+  --sp-5: #{$sp-5};
+  --sp-6: #{$sp-6};
+  --sp-7: #{$sp-7};
+  --sp-8: #{$sp-8};
+  --sp-9: #{$sp-9};
+  --sp-10: #{$sp-10};
+  --sp-12: #{$sp-12};
+
+  /** ===== TYPOGRAPHY ===== */
+  --text-xs: #{$text-xs};
+  --text-sm: #{$text-sm};
+  --text-md: #{$text-md};
+  --text-lg: #{$text-lg};
+  --text-xl: #{$text-xl};
+  --text-2xl: #{$text-2xl};
+  --text-3xl: #{$text-3xl};
+
+  /** ===== ANIMATION ===== */
+  --ease-out: #{$ease-out};
+  --ease-spring: #{$ease-spring};
+  --ease-smooth: #{$ease-smooth};
+
+  --duration-fast: #{$duration-fast};
+  --duration-base: #{$duration-base};
+  --duration-slow: #{$duration-slow};
+
+  /** ===== Z-INDEX ===== */
+  --z-base: #{$z-base};
+  --z-raised: #{$z-raised};
+  --z-overlay: #{$z-overlay};
+  --z-modal: #{$z-modal};
+  --z-toast: #{$z-toast};
+  --z-tooltip: #{$z-tooltip};
+
+  /** ===== TYPOGRAPHY UPGRADE ===== */
+  --font-regular: #{$font-regular};
+  --font-medium: #{$font-medium};
+  --font-bold: #{$font-bold};
+  --font-semibold: #{$font-semibold};
+  --font-black: #{$font-black};
+
+  --lh-tight: #{$lh-tight};
+  --lh-normal: #{$lh-normal};
+  --lh-loose: #{$lh-loose};
+
+  /** ===== TRANSITIONS ===== */
+  --transition-base: #{$transition-base};
+  --transition-fast: #{$transition-fast};
+}

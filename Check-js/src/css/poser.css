@@ -1,0 +1,481 @@
+/* ====================================
+   KEYFRAME ANIMATIONS
+   ==================================== */
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 18px 4px rgba(108, 99, 255, 0.35);
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes pop-yes {
+  0% {
+    transform: scale(0.95);
+  }
+  60% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake-no {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+/* ====================================
+   .POSER - Main Container
+   ==================================== */
+
+.poser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2rem 1.75rem;
+  max-width: 680px;
+  margin: 2rem auto;
+
+  background: #1a1d27;
+  border: 1px solid #2e3350;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+
+  animation: fadeSlideIn 0.45s ease both;
+
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  color: #e0e4f5;
+}
+
+/* ====================================
+   .TITLE - Section
+   ==================================== */
+
+.title {
+  text-align: center;
+  width: 100%;
+}
+
+.title h1 {
+  font-family: "Syne", "Segoe UI", sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+
+  background: linear-gradient(135deg, #8b84ff 0%, #22d17a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title p {
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  color: #7a82a8;
+  letter-spacing: 0.05em;
+}
+
+/* ====================================
+   .PROGRESS - Section
+   ==================================== */
+
+.progress {
+  width: 100%;
+  background: #23273a;
+  border: 1px solid #2e3350;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+}
+
+.progress__a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.progress__a p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+  background: #0f1117;
+  border: 1px solid #2e3350;
+  color: #7a82a8;
+}
+
+.progress__a p:nth-child(2) {
+  color: #22d17a;
+  border-color: rgba(34, 209, 122, 0.35);
+  background: rgba(34, 209, 122, 0.08);
+}
+
+.progress__a p:nth-child(3) {
+  color: #ff4f6a;
+  border-color: rgba(255, 79, 106, 0.35);
+  background: rgba(255, 79, 106, 0.08);
+}
+
+.progress__b {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #7a82a8;
+  margin-bottom: 0.5rem;
+}
+
+.progress__b p:last-child {
+  font-weight: 700;
+  color: #8b84ff;
+}
+
+.progress-bar {
+  display: block;
+  height: 6px;
+  width: 100%;
+  background: #0f1117;
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #6c63ff, #22d17a);
+  border-radius: 99px;
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: progress-fill 0.6s ease both;
+}
+
+/* ====================================
+   .QUESTION - Section
+   ==================================== */
+
+.question {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeSlideIn 0.35s ease both;
+}
+
+.question h2 {
+  font-size: clamp(1rem, 2.8vw, 1.3rem);
+  line-height: 1.55;
+  color: #e0e4f5;
+}
+
+.question .strong {
+  color: #8b84ff;
+  font-weight: 800;
+  margin-right: 0.4rem;
+}
+
+.question .em {
+  font-style: normal;
+  font-weight: 500;
+}
+
+.question div {
+  padding: 0.75rem;
+  background: #23273a;
+  border-radius: var(--radius-sm);
+}
+
+.question img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 2px solid #2e3350;
+  object-fit: cover;
+  transition: border-color 0.2s;
+}
+
+.question img:hover {
+  border-color: #6c63ff;
+}
+
+/* ====================================
+   .ANSWER - Section
+   ==================================== */
+
+.answer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.answer span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #23273a;
+  border: 1px solid #2e3350;
+  border-radius: var(--radius-md);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.answer span:hover {
+  border-color: #6c63ff;
+  background: rgba(108, 99, 255, 0.07);
+}
+
+.answer span.is-correct {
+  border-color: #22d17a;
+  background: rgba(34, 209, 122, 0.1);
+  animation: pop-yes 0.4s ease-out;
+}
+
+.answer span.is-correct button {
+  background: #22d17a;
+  color: #0f1117;
+}
+
+.answer span.is-wrong {
+  border-color: #ff4f6a;
+  background: rgba(255, 79, 106, 0.1);
+  animation: shake-no 0.5s ease-out;
+}
+
+.answer span.is-wrong button {
+  background: #ff4f6a;
+  color: #ffffff;
+}
+
+.answer button {
+  width: 100%;
+  padding: 0.65rem 1.1rem;
+  text-align: left;
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  color: #e0e4f5;
+  background: #0f1117;
+  border: 1px solid #2e3350;
+  border-radius: var(--radius-sm);
+
+  transition:
+    background 0.18s,
+    color 0.18s,
+    box-shadow 0.18s,
+    transform 0.12s;
+}
+
+.answer button:hover:not(:disabled) {
+  background: #6c63ff;
+  color: #ffffff;
+  border-color: #6c63ff;
+  box-shadow: 0 2px 12px rgba(108, 99, 255, 0.35);
+  transform: translateX(3px);
+}
+
+.answer button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.answer button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.answer img {
+  display: block;
+  width: 80%;
+  margin: 0.25rem auto 0;
+  border: 2px solid #2e3350;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  transition: border-color 0.2s;
+}
+
+.answer img:hover {
+  border-color: #8b84ff;
+}
+
+/* ====================================
+   .BTN-GROUP - Button Container
+   ==================================== */
+
+.btn-group {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  gap: 0.75rem;
+}
+
+.btn-group div {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* ====================================
+   .BTN - Button Styles
+   ==================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1rem;
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  border: 1px solid #2e3350;
+
+  color: #e0e4f5;
+  background: #23273a;
+  transition:
+    background 0.18s,
+    color 0.18s,
+    box-shadow 0.18s,
+    transform 0.1s;
+}
+
+.btn:hover {
+  background: #6c63ff;
+  color: #ffffff;
+  border-color: #6c63ff;
+  box-shadow: 0 2px 12px rgba(108, 99, 255, 0.35);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn--random {
+  flex: 1;
+}
+
+.btn--nav {
+  background: #6c63ff;
+  color: #ffffff;
+  border-color: #6c63ff;
+  animation: pulse-glow 2.8s ease-in-out infinite;
+}
+
+.btn--nav:hover {
+  background: #8b84ff;
+  border-color: #8b84ff;
+}
+
+/* ====================================
+   RESPONSIVE DESIGN
+   ==================================== */
+
+@media (min-width: 600px) {
+  .poser {
+    max-width: 860px;
+    padding: 2.5rem 3rem;
+    gap: 1.75rem;
+    margin: 3rem auto;
+    border-radius: calc(var(--radius-lg) + 0.4rem);
+  }
+
+  .title h1 {
+    font-size: 2.25rem;
+    letter-spacing: -0.03em;
+  }
+
+  .title p {
+    font-size: 0.95rem;
+    margin-top: 0.45rem;
+  }
+
+  .question h2 {
+    font-size: 1.35rem;
+  }
+
+  .progress {
+    padding: 1rem 1.3rem;
+  }
+
+  .progress__a {
+    gap: 0.7rem 1.5rem;
+  }
+
+  .btn-group {
+    gap: 1rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .poser {
+    max-width: 900px;
+    padding: 3rem 4rem;
+    gap: 2rem;
+  }
+
+  .title h1 {
+    font-size: 2.5rem;
+  }
+
+  .question h2 {
+    font-size: 1.5rem;
+  }
+
+  .answer span {
+    gap: 0.6rem;
+    padding: 0.7rem;
+  }
+
+  .answer button {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+  }
+}

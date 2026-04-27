@@ -142,7 +142,7 @@ function Poser({ data, title_h1, title_p }) {
     } else {
       setResult(r => ({ ...r, wrong: r.wrong + 1 }));
     }
-    setTimeout(next, 1000);
+    setTimeout(next, 1500);
   };
 
   return (
