@@ -1,5 +1,4 @@
-import { memo } from "preact/compat";
-import { useState } from "preact/hooks";
+import { memo, useState } from "react";
 import { rdArr } from "../setting/setting.js";
 import "./poser.scss";
 
@@ -88,7 +87,12 @@ function normalizeQuiz(data) {
   }));
 }
 
-function Poser({ data, title_h1, title_p }) {
+/**
+ * @param data - dữ liệu đáp án
+ * @param title_h1 - tiêu đề
+ * @param title_p - thông tin
+ */
+function Poser({ data = [], title_h1, title_p }) {
   /** */
   const [quiz] = useState(normalizeQuiz(data));
   /** */
