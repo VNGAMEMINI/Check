@@ -2,17 +2,68 @@ import { memo, useState } from "react";
 import { rdArr } from "../setting/setting.js";
 import "./poser.scss";
 
-// ─── Sub-components nên nằm ngoài để tránh re-create khi parent render ───
+// ─── CONFIGURATION & CONSTANTS ──────────────────────────────────────────────
 
+/**
+ * Định nghĩa các class CSS tương ứng với cấu trúc giao diện.
+ * Việc sử dụng hằng số giúp dễ dàng đổi tên class CSS mà không cần tìm kiếm thủ công trong code.
+ */
+const UI_CLASSES = {
+  CONTAINER: "poser",
+  TITLE: "title",
+  /** PROGRESS.CONTAINER: progress */
+  PROGRESS: {
+    CONTAINER: "progress",
+    STATS: "progress__a",
+    INFO: "progress__b",
+    BAR: "progress-bar",
+    FILL: "progress-fill",
+  },
+  /** QUESTION.CONTAINER: question */
+  QUESTION: {
+    CONTAINER: "question",
+    SENTENCE: "question__sentence",
+    S_SENTENCE: "strong",
+    E_SENTENCE: "em",
+    PICTURE_FRAME: "question__picture-frame",
+    IMG_SENTENCE: "question__img-sentence",
+  },
+  /** ANSWER.CONTAINER: answer */
+  ANSWER: {
+    CONTAINER: "answer",
+    CORRECT: "yes",
+    WRONG: "no",
+  },
+  BTN_GROUP: "btn-group",
+  BTN: "btn",
+};
+
+/**
+ * Các tham số cấu hình chung cho ứng dụng.
+ */
+const APP_CONFIG = {
+  IMAGE_BASE_PATH: "./src/img/",
+  AUTO_NEXT_DELAY: 1500, // Thời gian trễ (ms) trước khi tự động chuyển câu sau khi chọn đáp án
+};
+
+/**
+ * Component hiển thị nội dung câu hỏi và hình ảnh minh họa.
+ * @param {number} index - Thứ tự câu hỏi hiện tại.
+ * @param {string} q - Nội dung văn bản của câu hỏi.
+ * @param {string} img - Tên file ảnh minh họa.
+ */
 const Question = memo(({ index, q, img }) => (
-  <div className="question">
-    <h2 className="h2">
-      <strong className="strong">Câu {index + 1}:</strong>
-      <em className="em"> {q}</em>
-    </h2>
-    <div>
+  <div className={UI_CLASSES.QUESTION.CONTAINER}>
+    <div className={UI_CLASSES.QUESTION.SENTENCE}>
+      <strong className={UI_CLASSES.QUESTION.S_SENTENCE}>
+        Câu {index + 1}:
+      </strong>
+      <em className={UI_CLASSES.QUESTION.E_SENTENCE}> {q}</em>
+    </div>
+    <div className={UI_CLASSES.QUESTION.PICTURE_FRAME}>
       <img
-        src={`./src/img/${img}`}
+        className={UI_CLASSES.QUESTION.IMG_SENTENCE}
+        src={`${APP_CONFIG.IMAGE_BASE_PATH}${img}`}
         onError={e => {
           e.target.style.display = "none";
         }}
@@ -21,13 +72,19 @@ const Question = memo(({ index, q, img }) => (
   </div>
 ));
 
+/**
+ * Component hiển thị danh sách các đáp án lựa chọn.
+ * @param {Array} a - Danh sách các đối tượng đáp án.
+ * @param {number|null} selectedIndex - Vị trí đáp án người dùng đã chọn (null nếu chưa chọn).
+ * @param {Function} onAnswer - Hàm xử lý khi người dùng click chọn đáp án.
+ */
 const Answer = memo(({ a, selectedIndex, onAnswer }) => (
-  <div className="answer">
+  <div className={UI_CLASSES.ANSWER.CONTAINER}>
     {a.map((ans, i) => {
       let className = "";
       if (selectedIndex !== null) {
-        if (ans.correct) className = "yes";
-        else if (i === selectedIndex) className = "no";
+        if (ans.correct) className = UI_CLASSES.ANSWER.CORRECT;
+        else if (i === selectedIndex) className = UI_CLASSES.ANSWER.WRONG;
       }
 
       return (
@@ -36,7 +93,7 @@ const Answer = memo(({ a, selectedIndex, onAnswer }) => (
             {ans.text}
           </button>
           <img
-            src={`./src/img/${ans.img}`}
+            src={`${APP_CONFIG.IMAGE_BASE_PATH}${ans.img}`}
             onError={e => (e.target.style.display = "none")}
           />
         </span>
@@ -45,24 +102,30 @@ const Answer = memo(({ a, selectedIndex, onAnswer }) => (
   </div>
 ));
 
+/**
+ * Component hiển thị thanh tiến độ và thống kê kết quả đúng/sai.
+ * @param {number} index - Chỉ số câu hỏi hiện tại.
+ * @param {number} total - Tổng số câu hỏi.
+ * @param {Object} result - Đối tượng chứa số câu đúng và sai.
+ */
 const Progress = memo(({ index, total, result }) => {
   const progressPercent = Math.round(((index + 1) / total) * 100);
   return (
-    <div className="progress">
-      <div className="progress__a">
+    <div className={UI_CLASSES.PROGRESS.CONTAINER}>
+      <div className={UI_CLASSES.PROGRESS.STATS}>
         <p>
           Câu {index + 1} / {total}
         </p>
         <p>Đúng: {result.correct}</p>
         <p>Sai: {result.wrong}</p>
       </div>
-      <div className="progress__b">
+      <div className={UI_CLASSES.PROGRESS.INFO}>
         <p>tiến độ</p>
         <p>{progressPercent}%</p>
       </div>
-      <div className="progress-bar">
+      <div className={UI_CLASSES.PROGRESS.BAR}>
         <div
-          className="progress-fill"
+          className={UI_CLASSES.PROGRESS.FILL}
           style={{ width: `${progressPercent}%` }}
         ></div>
       </div>
@@ -70,12 +133,21 @@ const Progress = memo(({ index, total, result }) => {
   );
 });
 
+/**
+ * Nút bấm dùng chung cho các chức năng điều hướng và xáo trộn.
+ */
 const RandomBtn = memo(({ onClick, label }) => (
-  <button className="btn" onClick={onClick}>
+  <button className={UI_CLASSES.BTN} onClick={onClick}>
     {label}
   </button>
 ));
 
+/**
+ * Chuẩn hóa dữ liệu thô từ JSON sang định dạng ứng dụng yêu cầu.
+ * Xử lý linh hoạt trường hợp đáp án là chuỗi hoặc đối tượng có ảnh.
+ * @param {Array} data - Mảng dữ liệu câu hỏi thô.
+ * @returns {Array} Mảng dữ liệu đã qua xử lý.
+ */
 function normalizeQuiz(data) {
   return data.map(q => ({
     ...q,
@@ -87,30 +159,26 @@ function normalizeQuiz(data) {
   }));
 }
 
+// ─── CUSTOM HOOK FOR LOGIC ──────────────────────────────────────────────────
+
 /**
- * @param data - dữ liệu đáp án
- * @param title_h1 - tiêu đề
- * @param title_p - thông tin
+ * Custom Hook quản lý toàn bộ trạng thái và logic xử lý của bài trắc nghiệm.
+ * @param {Array} initialData - Dữ liệu câu hỏi gốc.
  */
-function Poser({ data = [], title_h1, title_p }) {
-  /** */
-  const [quiz] = useState(normalizeQuiz(data));
-  /** */
-  const [viewQuiz, setViewQuiz] = useState(quiz);
-  /** */
-  const [index, setIndex] = useState(0);
-  /** */
-  const question = viewQuiz[index] || { a: [] };
-  /** */
-  const [userSelections, setUserSelections] = useState({});
-  /** */
-  const selectedIndex = userSelections[index] ?? null;
-  /** */
+function useQuiz(initialData) {
+  const [quiz] = useState(() => normalizeQuiz(initialData)); // Dữ liệu đã chuẩn hóa
+  const [viewQuiz, setViewQuiz] = useState(quiz); // Dữ liệu hiện thị (có thể xáo trộn)
+  const [index, setIndex] = useState(0); // Vị trí câu hiện tại
+  const [userSelections, setUserSelections] = useState({}); // Lưu đáp án người dùng đã chọn
   const [result, setResult] = useState({
     correct: 0,
     wrong: 0,
   });
 
+  const currentQuestion = viewQuiz[index] || { a: [] }; // Câu hỏi hiện tại
+  const selectedIndex = userSelections[index] ?? null; // Lựa chọn của người dùng tại câu hiện tại
+
+  // Hàm xáo trộn đáp án trong câu hỏi đang xem
   const handleRandomAnswer = () => {
     const newQuiz = [...viewQuiz];
     newQuiz[index] = {
@@ -119,6 +187,8 @@ function Poser({ data = [], title_h1, title_p }) {
     };
     setViewQuiz(newQuiz);
   };
+
+  // Hàm xáo trộn toàn bộ bộ đề, reset lại từ câu đầu tiên
   const handleRandomAll = () => {
     const shuffledQuiz = rdArr([...quiz]).map(q => ({
       ...q,
@@ -130,51 +200,82 @@ function Poser({ data = [], title_h1, title_p }) {
     setResult({ correct: 0, wrong: 0 });
     setUserSelections({});
   };
-  const previous = () => {
-    setIndex(i => Math.max(0, i - 1));
-  };
-  const next = () => {
-    setIndex(i => Math.min(viewQuiz.length - 1, i + 1));
-  };
 
-  const handleAnswer = i => {
+  // Điều hướng: Quay lại câu trước
+  const previous = () => setIndex(i => Math.max(0, i - 1));
+  // Điều hướng: Chuyển sang câu sau
+  const next = () => setIndex(i => Math.min(viewQuiz.length - 1, i + 1));
+
+  // Xử lý khi chọn đáp án
+  const selectAnswer = i => {
     if (selectedIndex !== null) return;
+
     setUserSelections(prev => ({ ...prev, [index]: i }));
-    const ans = question.a[i];
+    const ans = currentQuestion.a[i];
     if (ans.correct) {
       setResult(r => ({ ...r, correct: r.correct + 1 }));
     } else {
       setResult(r => ({ ...r, wrong: r.wrong + 1 }));
     }
-    setTimeout(next, 1500);
+    // Tự động chuyển câu sau một khoảng trễ đã cấu hình
+    setTimeout(next, APP_CONFIG.AUTO_NEXT_DELAY);
   };
 
+  return {
+    index,
+    currentQuestion,
+    viewQuiz,
+    result,
+    selectedIndex,
+    handleRandomAnswer,
+    handleRandomAll,
+    previous,
+    next,
+    selectAnswer,
+  };
+}
+
+/**
+ * Component chính của module Poser.
+ * Phối hợp logic từ useQuiz và giao diện để hiển thị trọn bộ bài trắc nghiệm.
+ */
+function Poser({ data = [], title_h1, title_p }) {
+  const quizState = useQuiz(data);
+
   return (
-    <main className="poser">
-      <div className="title">
-        <h1 className="h1">{title_h1}</h1>
+    <main className={UI_CLASSES.CONTAINER}>
+      <div className={UI_CLASSES.TITLE}>
+        <h1>{title_h1}</h1>
         <p>{title_p}</p>
       </div>
 
-      <Progress index={index} total={viewQuiz.length} result={result} />
-
-      <Question index={index} q={question.q} img={question.img} />
-
-      <Answer
-        a={question.a || []}
-        selectedIndex={selectedIndex}
-        onAnswer={handleAnswer}
+      <Progress
+        index={quizState.index}
+        total={quizState.viewQuiz.length}
+        result={quizState.result}
       />
 
-      <div className="btn-group">
+      <Question
+        index={quizState.index}
+        q={quizState.currentQuestion.q}
+        img={quizState.currentQuestion.img}
+      />
+
+      <Answer
+        a={quizState.currentQuestion.a || []}
+        selectedIndex={quizState.selectedIndex}
+        onAnswer={quizState.selectAnswer}
+      />
+
+      <div className={UI_CLASSES.BTN_GROUP}>
         <div>
-          <RandomBtn onClick={handleRandomAnswer} label="xáo chộn" />
-          <RandomBtn onClick={handleRandomAll} label="Tất cả" />
+          <RandomBtn onClick={quizState.handleRandomAnswer} label="Xáo trộn" />
+          <RandomBtn onClick={quizState.handleRandomAll} label="Tất cả" />
         </div>
 
         <div>
-          <RandomBtn onClick={previous} label="<=" />
-          <RandomBtn onClick={next} label="=>" />
+          <RandomBtn onClick={quizState.previous} label="<=" />
+          <RandomBtn onClick={quizState.next} label="=>" />
         </div>
       </div>
     </main>

@@ -1,26 +1,4 @@
-@use "../setting/setting.scss";
-
-// ── Palette ────────────────────────────────────────────────
-$clr-bg: #0f1117;
-$clr-surface: #1a1d27;
-$clr-elevated: #23273a;
-$clr-border: #2e3350;
-
-$clr-primary: #6c63ff;
-$clr-primary-lt: #8b84ff;
-$clr-primary-glow: rgba(108, 99, 255, 0.35);
-
-$clr-success: #22d17a;
-$clr-danger: #ff4f6a;
-$clr-warning: #ffc14f;
-
-$clr-text: #e0e4f5;
-$clr-text-muted: #7a82a8;
-$clr-text-bright: #ffffff;
-
-// ── Typography ─────────────────────────────────────────────
-$font-display: "Syne", "Segoe UI", sans-serif;
-$font-body: "DM Sans", "Segoe UI", sans-serif;
+@use "../setting/setting" as *;
 
 // ── Breakpoints ────────────────────────────────────────────
 $bp-tablet: 600px;
@@ -32,7 +10,7 @@ $radius-md: 0.9rem;
 $radius-lg: 1.4rem;
 
 $shadow-card: 0 4px 24px rgba(0, 0, 0, 0.45);
-$shadow-btn: 0 2px 12px $clr-primary-glow;
+$shadow-btn: var(--shadow-brand);
 
 // ── Keyframes ──────────────────────────────────────────────
 @keyframes fadeSlideIn {
@@ -48,10 +26,10 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 $clr-primary-glow;
+    box-shadow: 0 0 0 0 var(--color-neo-electric-glow);
   }
   50% {
-    box-shadow: 0 0 18px 4px $clr-primary-glow;
+    box-shadow: 0 0 18px 4px var(--color-neo-electric-glow);
   }
 }
 @keyframes progress-fill {
@@ -92,6 +70,9 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
 // ══════════════════════════════════════════════════════════
 // .poser  — wrapper card
 // ══════════════════════════════════════════════════════════
+body {
+  background: var(--color-bg-base);
+}
 .poser {
   display: flex;
   flex-direction: column;
@@ -101,13 +82,13 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
   max-width: 680px;
   margin: 2rem auto;
 
-  background: $clr-surface;
-  border: 1px solid $clr-border;
+  @include glass(12px, var(--quiz-card-bg), var(--quiz-card-border));
   border-radius: $radius-lg;
   box-shadow: $shadow-card;
+  @include themed-transition();
 
-  font-family: $font-body;
-  color: $clr-text;
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
 }
 
 // ══════════════════════════════════════════════════════════
@@ -117,23 +98,18 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
   text-align: center;
 
   h1 {
-    font-family: $font-display;
+    font-family: inherit;
     font-size: clamp(1.4rem, 4vw, 2rem);
     font-weight: 800;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-
-    // gradient text
-    background: linear-gradient(135deg, $clr-primary-lt 0%, $clr-success 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @include gradient-text(var(--gradient-brand-primary));
   }
 
   p {
     margin-top: 0.3rem;
     font-size: 0.85rem;
-    color: $clr-text-muted;
+    color: var(--color-text-secondary);
     letter-spacing: 0.05em;
   }
 }
@@ -143,8 +119,8 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
 // ══════════════════════════════════════════════════════════
 .progress {
   width: 100%;
-  background: $clr-elevated;
-  border: 1px solid $clr-border;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
   border-radius: $radius-md;
   padding: 0.85rem 1.1rem;
 
@@ -160,22 +136,18 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
       letter-spacing: 0.04em;
       padding: 0.25rem 0.7rem;
       border-radius: 99px;
-      background: $clr-bg;
-      border: 1px solid $clr-border;
+      background: var(--color-bg-base);
+      border: 1px solid var(--color-border-subtle);
 
       // colour-coded badges
       &:nth-child(1) {
-        color: $clr-text-muted;
+        @include status-badge("neutral");
       }
       &:nth-child(2) {
-        color: $clr-success;
-        border-color: rgba($clr-success, 0.35);
-        background: rgba($clr-success, 0.08);
+        @include status-badge("success");
       }
       &:nth-child(3) {
-        color: $clr-danger;
-        border-color: rgba($clr-danger, 0.35);
-        background: rgba($clr-danger, 0.08);
+        @include status-badge("error");
       }
     }
   }
@@ -184,12 +156,12 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: $clr-text-muted;
+    color: var(--color-text-tertiary);
     margin-bottom: 0.5rem;
 
     p:last-child {
       font-weight: 700;
-      color: $clr-primary-lt;
+      color: var(--quiz-accent);
     }
   }
 
@@ -198,7 +170,7 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
     display: block;
     height: 6px;
     width: 100%;
-    background: $clr-bg;
+    background: var(--color-bg-inset);
     border-radius: 99px;
     overflow: hidden;
     position: relative;
@@ -206,7 +178,7 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
     .progress-fill {
       display: block;
       height: 100%;
-      background: linear-gradient(90deg, $clr-primary, $clr-success);
+      background: var(--gradient-success);
       border-radius: 99px;
       transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
       animation: progress-fill 0.6s ease both;
@@ -223,13 +195,13 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
   flex-direction: column;
   gap: 1rem;
 
-  h2 {
+  &__sentence {
     font-size: clamp(1rem, 2.8vw, 1.3rem);
     line-height: 1.55;
-    color: $clr-text;
+    color: var(--color-text-primary);
 
     .strong {
-      color: $clr-primary-lt;
+      color: var(--quiz-accent);
       font-weight: 800;
       margin-right: 0.4rem;
     }
@@ -239,21 +211,21 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
     }
   }
 
-  div {
+  &__picture-frame {
     padding: 0.75rem;
-    background: $clr-elevated;
+    background: var(--color-bg-muted);
     border-radius: $radius-sm;
   }
 
-  img {
+  &__img-sentence {
     width: 100%;
     border-radius: $radius-sm;
-    border: 2px solid $clr-border;
+    border: 2px solid var(--color-border-subtle);
     object-fit: cover;
-    transition: border-color 0.2s;
+    @include themed-transition();
 
     &:hover {
-      border-color: $clr-primary;
+      border-color: var(--quiz-accent);
     }
   }
 }
@@ -272,33 +244,54 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
     flex-direction: column;
     gap: 0.5rem;
     padding: 0.5rem;
-    background: $clr-elevated;
-    border: 1px solid $clr-border;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border-default);
     border-radius: $radius-md;
     transition:
       border-color 0.2s,
       background 0.2s;
 
+    // Giới hạn chiều cao và thêm thanh cuộn nếu nội dung đáp án quá dài
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand-300) transparent;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-brand-subtle);
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--quiz-accent);
+    }
+
     &:hover {
-      border-color: $clr-primary;
-      background: rgba($clr-primary, 0.07);
+      border-color: var(--quiz-accent);
+      background: var(--color-brand-hover);
     }
 
     // correct / wrong states (add class via JS)
     &.is-correct {
-      border-color: $clr-success;
-      background: rgba($clr-success, 0.1);
+      border-color: var(--quiz-success);
+      background: var(--color-success-subtle);
       button {
-        background: $clr-success;
-        color: $clr-bg;
+        background: var(--quiz-success);
+        color: var(--color-bg-base);
       }
     }
     &.is-wrong {
-      border-color: $clr-danger;
-      background: rgba($clr-danger, 0.1);
+      border-color: var(--quiz-error);
+      background: var(--color-error-subtle);
       button {
-        background: $clr-danger;
-        color: $clr-text-bright;
+        background: var(--quiz-error);
+        color: var(--color-neutral-0);
       }
     }
   }
@@ -307,25 +300,22 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
     width: 100%;
     padding: 0.65rem 1.1rem;
     text-align: left;
-    font-family: $font-body;
+    font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
+    white-space: normal; // Cho phép văn bản xuống dòng
+    word-break: break-word;
 
-    color: $clr-text;
-    background: $clr-bg;
-    border: 1px solid $clr-border;
+    color: var(--color-text-primary);
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-border-subtle);
     border-radius: $radius-sm;
-
-    transition:
-      background 0.18s,
-      color 0.18s,
-      box-shadow 0.18s,
-      transform 0.12s;
+    @include themed-transition();
 
     &:hover {
-      background: $clr-primary;
-      color: $clr-text-bright;
+      background: var(--quiz-accent);
+      color: var(--color-text-on-accent);
       box-shadow: $shadow-btn;
       transform: translateX(3px);
     }
@@ -338,69 +328,14 @@ $shadow-btn: 0 2px 12px $clr-primary-glow;
     display: block;
     width: 80%;
     margin: 0.25rem auto 0;
-    border: 2px solid $clr-border;
+    border: 2px solid var(--color-border-subtle);
     border-radius: $radius-sm;
     object-fit: cover;
-    transition: border-color 0.2s;
+    @include themed-transition(border-color);
 
     &:hover {
-      border-color: $clr-primary-lt;
+      border-color: var(--quiz-accent);
     }
-  }
-}
-
-// ══════════════════════════════════════════════════════════
-// hr — divider variants
-// ══════════════════════════════════════════════════════════
-hr {
-  width: 100%;
-  border: none;
-  border-top: 1px solid $clr-border;
-  margin: 0.5rem 0;
-
-  // gradient — đường kẻ nổi bật
-  &.hr--gradient {
-    border: none;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      $clr-primary,
-      $clr-success,
-      transparent
-    );
-  }
-
-  // primary — màu tím
-  &.hr--primary {
-    border-color: $clr-primary;
-    opacity: 0.5;
-  }
-
-  // success — màu xanh lá
-  &.hr--success {
-    border-color: $clr-success;
-    opacity: 0.5;
-  }
-
-  // danger — màu đỏ
-  &.hr--danger {
-    border-color: $clr-danger;
-    opacity: 0.5;
-  }
-
-  // warning — màu vàng
-  &.hr--warning {
-    border-color: $clr-warning;
-    opacity: 0.5;
-  }
-
-  // glow — có hiệu ứng phát sáng
-  &.hr--glow {
-    border: none;
-    height: 1px;
-    background: $clr-primary;
-    box-shadow: 0 0 8px 2px $clr-primary-glow;
   }
 }
 
@@ -428,28 +363,19 @@ hr {
   justify-content: center;
   gap: 0.3rem;
   padding: 0.5rem 1rem;
-  font-family: $font-body;
+  font-family: inherit;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   cursor: pointer;
   border-radius: $radius-sm;
-  border: 1px solid $clr-border;
-
-  // default style (Random buttons)
-  color: $clr-text;
-  background: $clr-elevated;
-  transition:
-    background 0.18s,
-    color 0.18s,
-    box-shadow 0.18s,
-    transform 0.1s;
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-primary);
+  background: var(--color-surface-3);
+  @include themed-transition();
 
   &:hover {
-    background: $clr-primary;
-    color: $clr-text-bright;
-    border-color: $clr-primary;
-    box-shadow: $shadow-btn;
+    @include gradient-button(var(--gradient-brand-subtle), var(--shadow-sm));
   }
   &:active {
     transform: scale(0.96);
@@ -457,31 +383,27 @@ hr {
 
   // nav buttons ("<=" / "=>") — more prominent
   &:last-child {
-    background: $clr-primary;
-    color: $clr-text-bright;
-    border-color: $clr-primary;
+    @include gradient-button(
+      var(--gradient-brand-primary),
+      var(--shadow-brand)
+    );
     animation: pulse-glow 2.8s ease-in-out infinite;
-
-    &:hover {
-      background: $clr-primary-lt;
-      border-color: $clr-primary-lt;
-    }
   }
 }
 
 // ── Đúng ───────────────────────────────────────────────
 .yes {
-  border-color: $clr-success;
-  background: rgba($clr-success, 0.1);
-  box-shadow: 0 0 0 3px rgba($clr-success, 0.2);
+  border-color: var(--quiz-success) !important;
+  background: var(--color-success-subtle) !important;
+  box-shadow: 0 0 0 3px var(--color-success-subtle);
   animation: pop-yes 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 
   button {
-    background: $clr-success;
-    color: $clr-bg;
+    background: var(--quiz-success) !important;
+    color: var(--color-neutral-0);
     font-weight: 800;
-    border-color: $clr-success;
-    box-shadow: 0 3px 14px rgba($clr-success, 0.4);
+    border-color: var(--quiz-success);
+    box-shadow: var(--shadow-success);
 
     // icon check ✓
     &::before {
@@ -493,17 +415,17 @@ hr {
 }
 // ── Sai ────────────────────────────────────────────────
 .no {
-  border-color: $clr-danger;
-  background: rgba($clr-danger, 0.08);
-  box-shadow: 0 0 0 3px rgba($clr-danger, 0.18);
+  border-color: var(--quiz-error) !important;
+  background: var(--color-error-subtle) !important;
+  box-shadow: 0 0 0 3px var(--color-error-subtle);
   animation: shake-no 0.4s ease both;
 
   button {
-    background: $clr-danger;
-    color: $clr-text-bright;
+    background: var(--quiz-error) !important;
+    color: var(--color-neutral-0);
     font-weight: 800;
-    border-color: $clr-danger;
-    box-shadow: 0 3px 14px rgba($clr-danger, 0.35);
+    border-color: var(--quiz-error);
+    box-shadow: var(--shadow-error);
 
     // icon X
     &::before {
@@ -514,50 +436,6 @@ hr {
   }
 }
 
-button {
-  width: 100%;
-  padding: 0.65rem 1.1rem;
-  text-align: left;
-  font-family: $font-body;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-
-  color: $clr-text;
-  background: $clr-bg;
-  border: 1px solid $clr-border;
-  border-radius: $radius-sm;
-
-  transition:
-    background 0.18s,
-    color 0.18s,
-    box-shadow 0.18s,
-    transform 0.12s;
-
-  &:hover {
-    background: $clr-primary;
-    color: $clr-text-bright;
-    box-shadow: $shadow-btn;
-    transform: translateX(3px);
-  }
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-img {
-  display: block;
-  width: 80%;
-  margin: 0.25rem auto 0;
-  border: 2px solid $clr-border;
-  border-radius: $radius-sm;
-  object-fit: cover;
-  transition: border-color 0.2s;
-
-  &:hover {
-    border-color: $clr-primary-lt;
-  }
-}
 // ══════════════════════════════════════════════════════════
 // Tablet  (≥ 600px)
 // ══════════════════════════════════════════════════════════

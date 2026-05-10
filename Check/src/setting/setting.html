@@ -1,0 +1,4867 @@
+<!doctype html>
+<html lang="vi" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System — Class Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════ */
+      :root {
+        --font-display: "Syne", sans-serif;
+        --font-body: "Outfit", sans-serif;
+        --font-mono: "DM Mono", monospace;
+
+        /* Backgrounds */
+        --color-bg-base: #fafbfc;
+        --color-bg-subtle: #f3f4f6;
+        --color-bg-muted: #e9ebee;
+        --color-bg-emphasis: #e0e3e8;
+        --color-bg-glass: rgba(255, 255, 255, 0.75);
+        --color-surface-1: #ffffff;
+        --color-surface-2: #f8f9fa;
+        --color-surface-sunken: rgba(0, 0, 0, 0.035);
+
+        /* Borders */
+        --color-border-subtle: #e8ecf0;
+        --color-border-default: #d1d5db;
+        --color-border-strong: #9ca3af;
+        --color-divider: rgba(0, 0, 0, 0.07);
+
+        /* Text */
+        --color-text-primary: #0d1117;
+        --color-text-secondary: #4b5563;
+        --color-text-tertiary: #9aa0a8;
+        --color-text-inverse: #ffffff;
+        --color-text-link: #2563eb;
+        --color-text-code: #dc2626;
+        --color-text-on-accent: #ffffff;
+
+        /* Brand */
+        --color-brand-500: #3b82f6;
+        --color-brand-600: #2563eb;
+        --color-brand-subtle: rgba(59, 130, 246, 0.1);
+        --color-accent-primary: #8b5cf6;
+        --color-accent-secondary: #22d3ee;
+        --color-accent-subtle: rgba(139, 92, 246, 0.1);
+
+        /* Status */
+        --color-success-base: #22c55e;
+        --color-success-subtle: rgba(34, 197, 94, 0.12);
+        --color-success-text: #15803d;
+        --color-warning-base: #f59e0b;
+        --color-warning-subtle: rgba(245, 158, 11, 0.12);
+        --color-warning-text: #b45309;
+        --color-error-base: #ef4444;
+        --color-error-subtle: rgba(239, 68, 68, 0.12);
+        --color-error-text: #b91c1c;
+        --color-info-base: #3b82f6;
+        --color-info-subtle: rgba(59, 130, 246, 0.12);
+        --color-info-text: #1d4ed8;
+        --color-neutral-base: #6b7280;
+        --color-neutral-subtle: rgba(107, 114, 128, 0.1);
+        --color-neutral-text: #374151;
+
+        /* Neo */
+        --color-neo-electric: #00b4ff;
+        --color-neo-cyan: #00ffea;
+        --color-neo-green: #39ff14;
+        --color-neo-lime: #ccff00;
+        --color-neo-magenta: #ff006e;
+        --color-neo-pink: #ff2d78;
+        --color-neo-fuchsia: #ff3dff;
+        --color-neo-yellow: #ffe600;
+        --color-neo-orange: #ff6b00;
+        --color-neo-violet: #7b2fff;
+        --color-neo-aurora: #00ffa3;
+        --color-neo-electric-glow: rgba(0, 180, 255, 0.12);
+        --color-neo-cyan-glow: rgba(0, 255, 234, 0.1);
+        --color-neo-green-glow: rgba(57, 255, 20, 0.1);
+        --color-neo-magenta-glow: rgba(255, 0, 110, 0.12);
+        --color-neo-violet-glow: rgba(123, 47, 255, 0.12);
+        --color-neo-orange-glow: rgba(255, 107, 0, 0.1);
+        --color-neo-aurora-glow: rgba(0, 255, 163, 0.1);
+
+        /* Gradients */
+        --gradient-brand-primary: linear-gradient(
+          135deg,
+          #3b82f6 0%,
+          #7c3aed 60%,
+          #6366f1 100%
+        );
+        --gradient-brand-vivid: linear-gradient(
+          135deg,
+          #22d3ee 0%,
+          #3b82f6 40%,
+          #6d28d9 100%
+        );
+        --gradient-brand-warm: linear-gradient(
+          135deg,
+          #f97316 0%,
+          #f43f5e 50%,
+          #db2777 100%
+        );
+        --gradient-neo-cyber: linear-gradient(
+          120deg,
+          #00b4ff 0%,
+          #00ffea 50%,
+          #00ffa3 100%
+        );
+        --gradient-neo-inferno: linear-gradient(
+          120deg,
+          #ffe600 0%,
+          #ff6b00 45%,
+          #ff006e 100%
+        );
+        --gradient-neo-aurora: linear-gradient(
+          135deg,
+          #00ffa3 0%,
+          #00b4ff 35%,
+          #ff3dff 70%,
+          #ff006e 100%
+        );
+        --gradient-neo-galaxy: linear-gradient(
+          135deg,
+          #4d00ff 0%,
+          #7b2fff 30%,
+          #ff3dff 65%,
+          #00ffea 100%
+        );
+        --gradient-neo-sunset: linear-gradient(
+          135deg,
+          #ffe600 0%,
+          #ff6b00 30%,
+          #ff006e 60%,
+          #7b2fff 100%
+        );
+        --gradient-neo-holographic: linear-gradient(
+          135deg,
+          #b8f7fe 0%,
+          #00ffea 25%,
+          #ff3dff 50%,
+          #ccff00 75%,
+          #b8f7fe 100%
+        );
+        --gradient-success: linear-gradient(135deg, #2dd4bf, #22c55e);
+        --gradient-warning: linear-gradient(135deg, #fde047, #f97316);
+        --gradient-error: linear-gradient(135deg, #fb7185, #dc2626);
+        --gradient-info: linear-gradient(135deg, #22d3ee, #2563eb);
+        --gradient-brand-subtle: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.08),
+          rgba(139, 92, 246, 0.06)
+        );
+        --gradient-mesh:
+          radial-gradient(
+            ellipse 80% 60% at 20% 20%,
+            rgba(59, 130, 246, 0.1) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 80% at 80% 80%,
+            rgba(139, 92, 246, 0.08) 0%,
+            transparent 60%
+          );
+
+        /* Shadows */
+        --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md:
+          0 4px 8px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+        --shadow-lg:
+          0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.05);
+        --shadow-xl:
+          0 24px 48px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06);
+        --shadow-2xl: 0 32px 64px rgba(0, 0, 0, 0.14);
+        --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        --shadow-brand:
+          0 4px 16px rgba(59, 130, 246, 0.28),
+          0 2px 6px rgba(59, 130, 246, 0.14);
+        --shadow-accent: 0 4px 16px rgba(139, 92, 246, 0.28);
+        --shadow-success: 0 4px 16px rgba(34, 197, 94, 0.28);
+        --shadow-warning: 0 4px 16px rgba(245, 158, 11, 0.28);
+        --shadow-error: 0 4px 16px rgba(239, 68, 68, 0.28);
+        --glow-electric:
+          0 0 8px rgba(0, 180, 255, 0.55), 0 0 22px rgba(0, 180, 255, 0.3),
+          0 0 44px rgba(0, 180, 255, 0.12);
+        --glow-cyan:
+          0 0 8px rgba(0, 255, 234, 0.55), 0 0 22px rgba(0, 255, 234, 0.3),
+          0 0 44px rgba(0, 255, 234, 0.12);
+        --glow-green:
+          0 0 8px rgba(57, 255, 20, 0.55), 0 0 22px rgba(57, 255, 20, 0.3),
+          0 0 44px rgba(57, 255, 20, 0.12);
+        --glow-magenta:
+          0 0 8px rgba(255, 0, 110, 0.55), 0 0 22px rgba(255, 0, 110, 0.3),
+          0 0 44px rgba(255, 0, 110, 0.12);
+        --glow-fuchsia:
+          0 0 8px rgba(255, 61, 255, 0.5), 0 0 22px rgba(255, 61, 255, 0.28),
+          0 0 44px rgba(255, 61, 255, 0.12);
+        --glow-violet:
+          0 0 8px rgba(123, 47, 255, 0.55), 0 0 22px rgba(123, 47, 255, 0.3),
+          0 0 44px rgba(123, 47, 255, 0.12);
+        --glow-orange:
+          0 0 8px rgba(255, 107, 0, 0.55), 0 0 22px rgba(255, 107, 0, 0.3),
+          0 0 44px rgba(255, 107, 0, 0.12);
+        --glow-aurora:
+          0 0 8px rgba(0, 255, 163, 0.5), 0 0 22px rgba(0, 255, 163, 0.28),
+          0 0 44px rgba(0, 255, 163, 0.12);
+        --ring-focus-brand: 0 0 0 3px rgba(59, 130, 246, 0.38);
+        --ring-focus-neo: 0 0 0 3px rgba(0, 180, 255, 0.42);
+
+        /* Transitions */
+        --duration-fast: 140ms;
+        --duration-normal: 240ms;
+        --duration-slow: 380ms;
+        --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        --transition-colors:
+          color 140ms ease, background-color 140ms ease,
+          border-color 140ms ease, box-shadow 140ms ease;
+      }
+
+      [data-theme="dark"] {
+        --color-bg-base: #07090e;
+        --color-bg-subtle: #0c0f18;
+        --color-bg-muted: #111520;
+        --color-bg-emphasis: #181d2c;
+        --color-bg-glass: rgba(11, 14, 24, 0.8);
+        --color-surface-1: #0c0f18;
+        --color-surface-2: #111520;
+        --color-surface-sunken: rgba(0, 0, 0, 0.3);
+        --color-border-subtle: rgba(255, 255, 255, 0.055);
+        --color-border-default: rgba(255, 255, 255, 0.09);
+        --color-border-strong: rgba(255, 255, 255, 0.16);
+        --color-divider: rgba(255, 255, 255, 0.065);
+        --color-text-primary: #e8eaf0;
+        --color-text-secondary: #9ba3b4;
+        --color-text-tertiary: #4d5566;
+        --color-text-inverse: #07090e;
+        --color-text-link: #60a5fa;
+        --color-text-code: #f87171;
+        --color-brand-500: #60a5fa;
+        --color-brand-600: #93c5fd;
+        --color-brand-subtle: rgba(59, 130, 246, 0.13);
+        --color-accent-primary: #a78bfa;
+        --color-accent-secondary: #67e8f9;
+        --color-accent-subtle: rgba(139, 92, 246, 0.14);
+        --color-success-text: #86efac;
+        --color-success-subtle: rgba(34, 197, 94, 0.11);
+        --color-warning-text: #fcd34d;
+        --color-warning-subtle: rgba(245, 158, 11, 0.11);
+        --color-error-text: #fca5a5;
+        --color-error-subtle: rgba(239, 68, 68, 0.11);
+        --color-info-text: #93c5fd;
+        --color-info-subtle: rgba(59, 130, 246, 0.11);
+        --color-neutral-text: #9ca3af;
+        --color-neutral-subtle: rgba(107, 114, 128, 0.11);
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.22);
+        --shadow-md:
+          0 4px 8px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25);
+        --shadow-lg:
+          0 12px 24px rgba(0, 0, 0, 0.45), 0 4px 8px rgba(0, 0, 0, 0.28);
+        --shadow-xl:
+          0 24px 48px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.3);
+        --shadow-2xl: 0 32px 64px rgba(0, 0, 0, 0.6);
+        --gradient-mesh:
+          radial-gradient(
+            ellipse 80% 60% at 20% 20%,
+            rgba(0, 180, 255, 0.1) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 80% at 80% 80%,
+            rgba(123, 47, 255, 0.09) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 50% at 55% 45%,
+            rgba(0, 255, 163, 0.05) 0%,
+            transparent 70%
+          );
+        --color-neo-electric-glow: rgba(0, 180, 255, 0.16);
+        --color-neo-cyan-glow: rgba(0, 255, 234, 0.13);
+        --color-neo-green-glow: rgba(57, 255, 20, 0.12);
+        --color-neo-magenta-glow: rgba(255, 0, 110, 0.15);
+        --color-neo-violet-glow: rgba(123, 47, 255, 0.15);
+        --color-neo-aurora-glow: rgba(0, 255, 163, 0.12);
+      }
+
+      /* ═══════════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════════ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--color-text-primary);
+        background-color: var(--color-bg-base);
+        background-image: var(--gradient-mesh);
+        background-attachment: fixed;
+        transition: var(--transition-colors);
+        min-height: 100vh;
+      }
+
+      ::selection {
+        background: rgba(59, 130, 246, 0.25);
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-border-strong);
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-brand-500);
+      }
+
+      /* ═══════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════ */
+      .app-shell {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* ═══════════════════════════════════════════════════
+   SIDEBAR NAV
+═══════════════════════════════════════════════════ */
+      .sidenav {
+        width: 240px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        background: var(--color-bg-subtle);
+        border-right: 1px solid var(--color-border-subtle);
+        display: flex;
+        flex-direction: column;
+        padding: 1.25rem 0.75rem;
+        gap: 2px;
+        z-index: 40;
+      }
+
+      .sidenav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.5rem 0.75rem 1.25rem;
+        border-bottom: 1px solid var(--color-border-subtle);
+        margin-bottom: 0.5rem;
+      }
+      .sidenav-logo-mark {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        background: var(--gradient-neo-cyber);
+        box-shadow: var(--glow-cyan);
+        flex-shrink: 0;
+      }
+      .sidenav-logo-name {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--color-text-primary);
+      }
+      .sidenav-logo-ver {
+        font-size: 0.6rem;
+        color: var(--color-text-tertiary);
+        font-family: var(--font-mono);
+      }
+
+      .sidenav-group-label {
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--color-text-tertiary);
+        padding: 0.85rem 0.75rem 0.3rem;
+        font-family: var(--font-mono);
+      }
+      .sidenav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.42rem 0.75rem;
+        border-radius: 7px;
+        font-size: 0.825rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        cursor: pointer;
+        transition: var(--transition-colors);
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+      }
+      .sidenav-item:hover {
+        color: var(--color-text-primary);
+        background: var(--color-bg-emphasis);
+      }
+      .sidenav-item.active {
+        color: var(--color-neo-electric);
+        background: var(--color-neo-electric-glow);
+        font-weight: 600;
+      }
+      .sidenav-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: var(--color-text-tertiary);
+        opacity: 0.4;
+      }
+      .sidenav-item.active .sidenav-dot {
+        background: var(--color-neo-electric);
+        box-shadow: 0 0 6px rgba(0, 180, 255, 0.7);
+        opacity: 1;
+      }
+
+      /* ═══════════════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════════════ */
+      .main-content {
+        flex: 1;
+        overflow-x: hidden;
+        min-width: 0;
+      }
+
+      /* ═══════════════════════════════════════════════════
+   TOP NAV
+═══════════════════════════════════════════════════ */
+      .topnav {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 2rem;
+        background: var(--color-bg-glass);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border-bottom: 1px solid var(--color-border-subtle);
+        box-shadow: var(--shadow-sm);
+      }
+      .topnav-title {
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        flex: 1;
+      }
+      .topnav-badge {
+        font-size: 0.65rem;
+        font-family: var(--font-mono);
+        background: var(--color-neo-electric-glow);
+        color: var(--color-neo-electric);
+        border: 1px solid rgba(0, 180, 255, 0.28);
+        padding: 0.2rem 0.55rem;
+        border-radius: 9999px;
+        box-shadow: 0 0 8px rgba(0, 180, 255, 0.18);
+      }
+      .theme-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.38rem 0.8rem;
+        border-radius: 8px;
+        border: 1px solid var(--color-border-default);
+        background: var(--color-surface-1);
+        color: var(--color-text-secondary);
+        font-size: 0.78rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          var(--transition-colors),
+          transform var(--duration-fast);
+        box-shadow: var(--shadow-sm);
+      }
+      .theme-btn:hover {
+        border-color: var(--color-neo-electric);
+        color: var(--color-neo-electric);
+        box-shadow: var(--glow-electric);
+        transform: translateY(-1px);
+      }
+
+      /* ═══════════════════════════════════════════════════
+   PAGE BODY
+═══════════════════════════════════════════════════ */
+      .page-body {
+        padding: 2.5rem 2rem 5rem;
+        max-width: 960px;
+      }
+
+      /* ═══════════════════════════════════════════════════
+   SECTION BLOCKS
+═══════════════════════════════════════════════════ */
+      .ds-section {
+        margin-bottom: 4rem;
+        scroll-margin-top: 5rem;
+      }
+      .ds-section-header {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        margin-bottom: 0.4rem;
+      }
+      .ds-section-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--color-text-primary);
+      }
+      .ds-section-num {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--color-neo-electric);
+        background: var(--color-neo-electric-glow);
+        border: 1px solid rgba(0, 180, 255, 0.25);
+        padding: 0.1rem 0.45rem;
+        border-radius: 5px;
+      }
+      .ds-section-desc {
+        font-size: 0.85rem;
+        color: var(--color-text-secondary);
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid var(--color-border-subtle);
+      }
+      .ds-class-ref {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--color-text-tertiary);
+        background: var(--color-surface-sunken);
+        padding: 0.08rem 0.4rem;
+        border-radius: 4px;
+        border: 1px solid var(--color-border-subtle);
+      }
+
+      /* Preview box */
+      .preview {
+        background: var(--color-surface-1);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 0.75rem;
+      }
+      .preview-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.6rem 1rem;
+        background: var(--color-bg-muted);
+        border-bottom: 1px solid var(--color-border-subtle);
+      }
+      .preview-dots {
+        display: flex;
+        gap: 5px;
+      }
+      .preview-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--color-border-default);
+      }
+      .preview-dot:nth-child(1) {
+        background: #ff5f57;
+      }
+      .preview-dot:nth-child(2) {
+        background: #ffbd2e;
+      }
+      .preview-dot:nth-child(3) {
+        background: #28ca42;
+      }
+      .preview-label {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--color-text-tertiary);
+      }
+      .preview-canvas {
+        padding: 1.75rem 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .preview-canvas--col {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .preview-canvas--grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
+      .preview-canvas--grid-sm {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      }
+      .preview-canvas--dark {
+        background: #07090e;
+      }
+      .preview-canvas--neo {
+        background: #07090e;
+        background-image:
+          radial-gradient(
+            ellipse 70% 50% at 20% 30%,
+            rgba(0, 180, 255, 0.1) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 60% at 80% 70%,
+            rgba(123, 47, 255, 0.09) 0%,
+            transparent 60%
+          );
+      }
+      .preview-canvas--mesh {
+        background: var(--color-bg-base);
+        background-image: var(--gradient-mesh);
+      }
+
+      /* ═══════════════════════════════════════════════════
+   ─── COMPONENT STYLES ───
+═══════════════════════════════════════════════════ */
+
+      /* BUTTONS */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4em;
+        padding: 0.55rem 1.15rem;
+        border-radius: 8px;
+        font-size: 0.855rem;
+        font-weight: 600;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        border: 1.5px solid transparent;
+        text-decoration: none;
+        font-family: var(--font-body);
+        transition:
+          transform var(--duration-fast) var(--ease-spring),
+          filter var(--duration-fast),
+          box-shadow var(--duration-fast),
+          background var(--duration-fast),
+          border-color var(--duration-fast),
+          color var(--duration-fast);
+      }
+      .btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        filter: brightness(1.08);
+      }
+      .btn:active:not(:disabled) {
+        transform: translateY(0) scale(0.97);
+        filter: brightness(0.95);
+      }
+      .btn:focus-visible {
+        outline: none;
+        box-shadow: var(--ring-focus-brand);
+      }
+      .btn:disabled {
+        opacity: 0.42;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .btn--xs {
+        padding: 0.28rem 0.6rem;
+        font-size: 0.7rem;
+        border-radius: 5px;
+      }
+      .btn--sm {
+        padding: 0.42rem 0.85rem;
+        font-size: 0.8rem;
+        border-radius: 7px;
+      }
+      .btn--lg {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.98rem;
+        border-radius: 10px;
+      }
+      .btn--xl {
+        padding: 0.9rem 2rem;
+        font-size: 1.05rem;
+        border-radius: 12px;
+      }
+      .btn--pill {
+        border-radius: 9999px;
+      }
+      .btn--icon {
+        padding: 0.6rem;
+        aspect-ratio: 1;
+      }
+      .btn--block {
+        width: 100%;
+      }
+
+      .btn--primary {
+        background: var(--gradient-brand-primary);
+        color: #fff;
+        box-shadow: var(--shadow-brand);
+      }
+      .btn--secondary {
+        background: var(--color-surface-2);
+        color: var(--color-text-primary);
+        border-color: var(--color-border-default);
+        box-shadow: var(--shadow-sm);
+      }
+      .btn--secondary:hover:not(:disabled) {
+        background: var(--color-bg-emphasis);
+      }
+      .btn--outline {
+        background: transparent;
+        color: var(--color-brand-500);
+        border-color: var(--color-brand-500);
+      }
+      .btn--outline:hover:not(:disabled) {
+        background: var(--color-brand-subtle);
+        box-shadow: var(--shadow-brand);
+      }
+      .btn--ghost {
+        background: transparent;
+        color: var(--color-text-secondary);
+        border-color: transparent;
+      }
+      .btn--ghost:hover:not(:disabled) {
+        background: var(--color-bg-muted);
+        color: var(--color-text-primary);
+      }
+      .btn--danger {
+        background: var(--gradient-error);
+        color: #fff;
+        box-shadow: var(--shadow-error);
+      }
+      .btn--success {
+        background: var(--gradient-success);
+        color: #fff;
+        box-shadow: var(--shadow-success);
+      }
+      .btn--warning {
+        background: var(--gradient-warning);
+        color: #0a0a0a;
+        box-shadow: var(--shadow-warning);
+      }
+      .btn--vivid {
+        background: var(--gradient-brand-vivid);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(34, 211, 238, 0.28);
+      }
+      .btn--warm {
+        background: var(--gradient-brand-warm);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(249, 115, 22, 0.28);
+      }
+      .btn--neo-cyber {
+        background: var(--gradient-neo-cyber);
+        color: #000;
+        box-shadow: var(--glow-cyan);
+      }
+      .btn--neo-inferno {
+        background: var(--gradient-neo-inferno);
+        color: #000;
+        box-shadow: var(--glow-magenta);
+      }
+      .btn--neo-aurora {
+        background: var(--gradient-neo-aurora);
+        color: #000;
+        box-shadow: var(--glow-electric);
+      }
+      .btn--neo-galaxy {
+        background: var(--gradient-neo-galaxy);
+        color: #fff;
+        box-shadow: var(--glow-violet);
+      }
+      .btn--neo-sunset {
+        background: var(--gradient-neo-sunset);
+        color: #fff;
+        box-shadow: var(--glow-magenta);
+      }
+      .btn--neon-electric {
+        background: var(--color-neo-electric-glow);
+        color: var(--color-neo-electric);
+        border-color: rgba(0, 180, 255, 0.4);
+        box-shadow: var(--glow-electric);
+      }
+      .btn--neon-magenta {
+        background: var(--color-neo-magenta-glow);
+        color: var(--color-neo-magenta);
+        border-color: rgba(255, 0, 110, 0.4);
+        box-shadow: var(--glow-magenta);
+      }
+      .btn--neon-violet {
+        background: var(--color-neo-violet-glow);
+        color: var(--color-neo-violet);
+        border-color: rgba(123, 47, 255, 0.4);
+        box-shadow: var(--glow-violet);
+      }
+      .btn--neon-aurora {
+        background: var(--color-neo-aurora-glow);
+        color: var(--color-neo-aurora);
+        border-color: rgba(0, 255, 163, 0.36);
+        box-shadow: var(--glow-aurora);
+      }
+
+      /* BADGES */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+        padding: 0.2rem 0.55rem;
+        border-radius: 9999px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        line-height: 1.4;
+        white-space: nowrap;
+        font-family: var(--font-body);
+      }
+      .badge__dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+      }
+      .badge--success {
+        color: var(--color-success-text);
+        background: var(--color-success-subtle);
+      }
+      .badge--warning {
+        color: var(--color-warning-text);
+        background: var(--color-warning-subtle);
+      }
+      .badge--error {
+        color: var(--color-error-text);
+        background: var(--color-error-subtle);
+      }
+      .badge--info {
+        color: var(--color-info-text);
+        background: var(--color-info-subtle);
+      }
+      .badge--neutral {
+        color: var(--color-neutral-text);
+        background: var(--color-neutral-subtle);
+      }
+      .badge--brand {
+        color: var(--color-brand-500);
+        background: var(--color-brand-subtle);
+      }
+      .badge--accent {
+        color: var(--color-accent-primary);
+        background: var(--color-accent-subtle);
+      }
+      .badge--solid-success {
+        background: var(--color-success-base);
+        color: #fff;
+      }
+      .badge--solid-error {
+        background: var(--color-error-base);
+        color: #fff;
+      }
+      .badge--solid-brand {
+        background: var(--color-brand-500);
+        color: #fff;
+      }
+      .badge--gradient-brand {
+        background: var(--gradient-brand-primary);
+        color: #fff;
+      }
+      .badge--gradient-cyber {
+        background: var(--gradient-neo-cyber);
+        color: #000;
+      }
+      .badge--gradient-aurora {
+        background: var(--gradient-neo-aurora);
+        color: #000;
+      }
+      .badge--neo-electric {
+        background: var(--color-neo-electric-glow);
+        color: var(--color-neo-electric);
+        border: 1px solid rgba(0, 180, 255, 0.32);
+        box-shadow: 0 0 7px rgba(0, 180, 255, 0.2);
+      }
+      .badge--neo-magenta {
+        background: var(--color-neo-magenta-glow);
+        color: var(--color-neo-magenta);
+        border: 1px solid rgba(255, 0, 110, 0.32);
+        box-shadow: 0 0 7px rgba(255, 0, 110, 0.2);
+      }
+      .badge--neo-aurora {
+        background: var(--color-neo-aurora-glow);
+        color: var(--color-neo-aurora);
+        border: 1px solid rgba(0, 255, 163, 0.3);
+        box-shadow: 0 0 7px rgba(0, 255, 163, 0.18);
+      }
+      .badge--neo-violet {
+        background: var(--color-neo-violet-glow);
+        color: var(--color-neo-violet);
+        border: 1px solid rgba(123, 47, 255, 0.32);
+        box-shadow: 0 0 7px rgba(123, 47, 255, 0.2);
+      }
+      .badge--sm {
+        font-size: 0.6rem;
+        padding: 0.1rem 0.42rem;
+      }
+      .badge--lg {
+        font-size: 0.8rem;
+        padding: 0.28rem 0.7rem;
+      }
+
+      /* CHIPS */
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35em;
+        padding: 0.3rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border: 1px solid var(--color-border-default);
+        background: var(--color-surface-2);
+        color: var(--color-text-primary);
+        cursor: pointer;
+        transition:
+          var(--transition-colors),
+          transform var(--duration-fast) var(--ease-spring);
+        font-family: var(--font-body);
+      }
+      .chip:hover {
+        background: var(--color-bg-emphasis);
+        border-color: var(--color-border-strong);
+        transform: translateY(-1px);
+      }
+      .chip--active {
+        background: var(--color-brand-subtle);
+        border-color: var(--color-brand-500);
+        color: var(--color-brand-500);
+      }
+
+      /* CARD */
+      .card {
+        background: var(--color-surface-1);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: 14px;
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        transition:
+          var(--transition-colors),
+          box-shadow var(--duration-normal),
+          transform var(--duration-fast) var(--ease-spring);
+      }
+      .card:hover {
+        box-shadow: var(--shadow-lg);
+      }
+      .card--interactive {
+        cursor: pointer;
+      }
+      .card--interactive:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-xl);
+      }
+      .card--interactive:active {
+        transform: translateY(0);
+      }
+      .card--brand {
+        border-top: 3px solid var(--color-brand-500);
+      }
+      .card--success {
+        border-top: 3px solid var(--color-success-base);
+      }
+      .card--warning {
+        border-top: 3px solid var(--color-warning-base);
+      }
+      .card--error {
+        border-top: 3px solid var(--color-error-base);
+      }
+      .card--accent {
+        border-top: 3px solid var(--color-accent-primary);
+      }
+      .card--gradient-border {
+        position: relative;
+        border: none;
+        background-clip: padding-box;
+      }
+      .card--gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: -1.5px;
+        border-radius: inherit;
+        background: var(--gradient-neo-cyber);
+        z-index: -1;
+      }
+      .card__header {
+        padding: 1.1rem 1.35rem;
+        border-bottom: 1px solid var(--color-border-subtle);
+      }
+      .card__body {
+        padding: 1.35rem;
+      }
+      .card__footer {
+        padding: 0.9rem 1.35rem;
+        border-top: 1px solid var(--color-border-subtle);
+        background: var(--color-bg-muted);
+      }
+      .card__title {
+        font-family: var(--font-display);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+      }
+      .card__subtitle {
+        font-size: 0.78rem;
+        color: var(--color-text-secondary);
+        margin-top: 0.2rem;
+      }
+
+      /* GLASS */
+      .glass {
+        backdrop-filter: blur(14px) saturate(180%);
+        -webkit-backdrop-filter: blur(14px) saturate(180%);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: 14px;
+        box-shadow: var(--shadow-md);
+      }
+      .glass--blue {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: rgba(59, 130, 246, 0.2);
+      }
+      .glass--violet {
+        background: rgba(139, 92, 246, 0.1);
+        border-color: rgba(139, 92, 246, 0.2);
+      }
+      .glass--green {
+        background: rgba(34, 197, 94, 0.09);
+        border-color: rgba(34, 197, 94, 0.18);
+      }
+      .glass--rose {
+        background: rgba(244, 63, 94, 0.09);
+        border-color: rgba(244, 63, 94, 0.18);
+      }
+      .glass--amber {
+        background: rgba(245, 158, 11, 0.09);
+        border-color: rgba(245, 158, 11, 0.18);
+      }
+      .glass--neo-electric {
+        background: rgba(0, 180, 255, 0.07);
+        border-color: rgba(0, 180, 255, 0.28);
+        box-shadow: var(--glow-electric), var(--shadow-md);
+      }
+      .glass--neo-violet {
+        background: rgba(123, 47, 255, 0.07);
+        border-color: rgba(123, 47, 255, 0.28);
+        box-shadow: var(--glow-violet), var(--shadow-md);
+      }
+      .glass--neo-aurora {
+        background: rgba(0, 255, 163, 0.06);
+        border-color: rgba(0, 255, 163, 0.26);
+        box-shadow: var(--glow-aurora), var(--shadow-md);
+      }
+      .glass--neo-magenta {
+        background: rgba(255, 0, 110, 0.07);
+        border-color: rgba(255, 0, 110, 0.26);
+        box-shadow: var(--glow-magenta), var(--shadow-md);
+      }
+      .glass--content {
+        padding: 1.35rem;
+      }
+
+      /* ALERT */
+      .alert {
+        display: flex;
+        gap: 0.7rem;
+        padding: 0.95rem 1.15rem;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        align-items: flex-start;
+      }
+      .alert__icon {
+        flex-shrink: 0;
+        width: 1em;
+        height: 1em;
+        margin-top: 0.18em;
+      }
+      .alert__body {
+        flex: 1;
+      }
+      .alert__title {
+        font-weight: 700;
+        margin-bottom: 0.18rem;
+        font-size: 0.88rem;
+      }
+      .alert--success {
+        background: var(--color-success-subtle);
+        border-color: var(--color-success-base);
+        color: var(--color-success-text);
+      }
+      .alert--warning {
+        background: var(--color-warning-subtle);
+        border-color: var(--color-warning-base);
+        color: var(--color-warning-text);
+      }
+      .alert--error {
+        background: var(--color-error-subtle);
+        border-color: var(--color-error-base);
+        color: var(--color-error-text);
+      }
+      .alert--info {
+        background: var(--color-info-subtle);
+        border-color: var(--color-info-base);
+        color: var(--color-info-text);
+      }
+      .alert--neo-electric {
+        background: var(--color-neo-electric-glow);
+        border-color: rgba(0, 180, 255, 0.38);
+        color: var(--color-neo-electric);
+        box-shadow: var(--glow-electric);
+      }
+      .alert--neo-aurora {
+        background: var(--color-neo-aurora-glow);
+        border-color: rgba(0, 255, 163, 0.35);
+        color: var(--color-neo-aurora);
+        box-shadow: var(--glow-aurora);
+      }
+
+      /* INPUT */
+      .input {
+        display: block;
+        width: 100%;
+        padding: 0.58rem 0.85rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        font-family: var(--font-body);
+        color: var(--color-text-primary);
+        background: var(--color-surface-1);
+        border: 1.5px solid var(--color-border-default);
+        border-radius: 8px;
+        outline: none;
+        transition:
+          var(--transition-colors),
+          box-shadow var(--duration-fast);
+      }
+      .input::placeholder {
+        color: var(--color-text-tertiary);
+      }
+      .input:hover:not(:disabled) {
+        border-color: var(--color-border-strong);
+      }
+      .input:focus {
+        border-color: var(--color-brand-500);
+        box-shadow: var(--ring-focus-brand);
+      }
+      .input--error {
+        border-color: var(--color-error-base);
+      }
+      .input--success {
+        border-color: var(--color-success-base);
+      }
+      .input--neo:focus {
+        border-color: var(--color-neo-electric);
+        box-shadow: var(--ring-focus-neo);
+      }
+      .input:disabled {
+        background: var(--color-bg-muted);
+        color: var(--color-text-tertiary);
+        cursor: not-allowed;
+        border-color: var(--color-border-subtle);
+      }
+
+      /* TOGGLE */
+      .toggle-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        cursor: pointer;
+        user-select: none;
+      }
+      .toggle-track {
+        position: relative;
+        width: 2.5rem;
+        height: 1.35rem;
+        border-radius: 9999px;
+        background: var(--color-border-strong);
+        transition: background var(--duration-fast) var(--ease-default);
+        flex-shrink: 0;
+      }
+      .toggle-thumb {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+        transition: transform var(--duration-fast) var(--ease-spring);
+      }
+      .toggle-inp {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .toggle-inp:checked + .toggle-track {
+        background: var(--color-brand-500);
+      }
+      .toggle-inp:checked + .toggle-track .toggle-thumb {
+        transform: translateX(1.15rem);
+      }
+      .toggle-inp:checked + .toggle-track.neo {
+        background: var(--gradient-neo-cyber);
+        box-shadow: var(--glow-cyan);
+      }
+      .toggle-label {
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+      }
+
+      /* AVATAR */
+      .avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        overflow: hidden;
+        font-weight: 700;
+        flex-shrink: 0;
+        background: var(--gradient-brand-primary);
+        color: #fff;
+        font-size: 0.85rem;
+        font-family: var(--font-display);
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .avatar--xs {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.62rem;
+      }
+      .avatar--sm {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 0.75rem;
+      }
+      .avatar--md {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 0.9rem;
+      }
+      .avatar--lg {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.1rem;
+      }
+      .avatar--xl {
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 1.4rem;
+      }
+      .avatar--vivid {
+        background: var(--gradient-brand-vivid);
+      }
+      .avatar--warm {
+        background: var(--gradient-brand-warm);
+      }
+      .avatar--cyber {
+        background: var(--gradient-neo-cyber);
+        color: #000;
+      }
+      .avatar--aurora {
+        background: var(--gradient-neo-aurora);
+        color: #000;
+      }
+      .avatar--galaxy {
+        background: var(--gradient-neo-galaxy);
+      }
+      .avatar--online {
+        box-shadow:
+          0 0 0 2.5px var(--color-bg-base),
+          0 0 0 4.5px var(--color-success-base);
+      }
+      .avatar--offline {
+        box-shadow:
+          0 0 0 2.5px var(--color-bg-base),
+          0 0 0 4.5px var(--color-neutral-base);
+      }
+      .avatar--busy {
+        box-shadow:
+          0 0 0 2.5px var(--color-bg-base),
+          0 0 0 4.5px var(--color-error-base);
+      }
+      .avatar--square {
+        border-radius: 9px;
+      }
+      .avatar-group {
+        display: inline-flex;
+        align-items: center;
+      }
+      .avatar-group .avatar {
+        margin-left: -0.6rem;
+        border: 2.5px solid var(--color-bg-base);
+      }
+      .avatar-group .avatar:first-child {
+        margin-left: 0;
+      }
+
+      /* PROGRESS */
+      .progress {
+        width: 100%;
+        height: 8px;
+        background: var(--color-bg-muted);
+        border-radius: 9999px;
+        overflow: hidden;
+      }
+      .progress__bar {
+        height: 100%;
+        border-radius: 9999px;
+        background: var(--gradient-brand-primary);
+        transition: width 0.6s var(--ease-default);
+        box-shadow: var(--shadow-brand);
+      }
+      .progress--xs .progress__bar,
+      .progress--xs {
+        height: 3px;
+      }
+      .progress--sm .progress__bar,
+      .progress--sm {
+        height: 5px;
+      }
+      .progress--lg .progress__bar,
+      .progress--lg {
+        height: 12px;
+      }
+      .progress--xl .progress__bar,
+      .progress--xl {
+        height: 16px;
+      }
+      .progress--cyber .progress__bar {
+        background: var(--gradient-neo-cyber);
+        box-shadow: var(--glow-cyan);
+      }
+      .progress--aurora .progress__bar {
+        background: var(--gradient-neo-aurora);
+        box-shadow: var(--glow-electric);
+      }
+      .progress--inferno .progress__bar {
+        background: var(--gradient-neo-inferno);
+        box-shadow: var(--glow-magenta);
+      }
+      .progress--success .progress__bar {
+        background: var(--gradient-success);
+        box-shadow: var(--shadow-success);
+      }
+      .progress--error .progress__bar {
+        background: var(--gradient-error);
+        box-shadow: var(--shadow-error);
+      }
+      .progress--striped .progress__bar {
+        background-image: linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.15) 25%,
+          transparent 25%,
+          transparent 50%,
+          rgba(255, 255, 255, 0.15) 50%,
+          rgba(255, 255, 255, 0.15) 75%,
+          transparent 75%
+        );
+        background-size: 1rem 1rem;
+        animation: stripedMove 1s linear infinite;
+      }
+
+      /* SKELETON */
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          var(--color-bg-muted) 0%,
+          var(--color-bg-emphasis) 50%,
+          var(--color-bg-muted) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s ease-in-out infinite;
+        border-radius: 6px;
+      }
+      .skeleton--text {
+        height: 0.875rem;
+        border-radius: 4px;
+      }
+      .skeleton--title {
+        height: 1.4rem;
+        border-radius: 6px;
+      }
+      .skeleton--avatar {
+        border-radius: 50%;
+      }
+      .skeleton--btn {
+        border-radius: 8px;
+        height: 2.2rem;
+      }
+
+      /* STAT */
+      .stat {
+        background: var(--color-surface-1);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: 14px;
+        padding: 1.35rem;
+        box-shadow: var(--shadow-sm);
+        transition:
+          var(--transition-colors),
+          transform var(--duration-fast) var(--ease-spring),
+          box-shadow var(--duration-normal);
+      }
+      .stat:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+      .stat__label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        font-family: var(--font-mono);
+      }
+      .stat__value {
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        margin: 0.3rem 0 0.4rem;
+        line-height: 1;
+      }
+      .stat__change {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .stat__change--up {
+        color: var(--color-success-text);
+      }
+      .stat__change--down {
+        color: var(--color-error-text);
+      }
+      .stat--brand {
+        border-top: 3px solid var(--color-brand-500);
+      }
+      .stat--success {
+        border-top: 3px solid var(--color-success-base);
+      }
+      .stat--gradient-cyber .stat__value {
+        background: var(--gradient-neo-cyber);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .stat--gradient-aurora .stat__value {
+        background: var(--gradient-neo-aurora);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .stat--gradient-brand .stat__value {
+        background: var(--gradient-brand-vivid);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* TAGS */
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+        padding: 0.25rem 0.6rem;
+        border-radius: 6px;
+        font-size: 0.73rem;
+        font-weight: 500;
+        background: var(--color-surface-2);
+        color: var(--color-text-secondary);
+        border: 1px solid var(--color-border-default);
+        font-family: var(--font-body);
+        transition: var(--transition-colors);
+      }
+      .tag--blue {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        border-color: rgba(59, 130, 246, 0.25);
+      }
+      .tag--violet {
+        background: rgba(139, 92, 246, 0.1);
+        color: #8b5cf6;
+        border-color: rgba(139, 92, 246, 0.25);
+      }
+      .tag--green {
+        background: rgba(34, 197, 94, 0.1);
+        color: #16a34a;
+        border-color: rgba(34, 197, 94, 0.25);
+      }
+      .tag--amber {
+        background: rgba(245, 158, 11, 0.1);
+        color: #d97706;
+        border-color: rgba(245, 158, 11, 0.25);
+      }
+      .tag--rose {
+        background: rgba(244, 63, 94, 0.1);
+        color: #e11d48;
+        border-color: rgba(244, 63, 94, 0.25);
+      }
+      .tag--cyan {
+        background: rgba(6, 182, 212, 0.1);
+        color: #0891b2;
+        border-color: rgba(6, 182, 212, 0.25);
+      }
+      .tag--neo-electric {
+        background: rgba(0, 180, 255, 0.1);
+        color: var(--color-neo-electric);
+        border-color: rgba(0, 180, 255, 0.28);
+        box-shadow: 0 0 5px rgba(0, 180, 255, 0.18);
+      }
+      .tag--neo-green {
+        background: rgba(57, 255, 20, 0.08);
+        color: var(--color-neo-green);
+        border-color: rgba(57, 255, 20, 0.26);
+        box-shadow: 0 0 5px rgba(57, 255, 20, 0.14);
+      }
+      .tag--neo-magenta {
+        background: rgba(255, 0, 110, 0.1);
+        color: var(--color-neo-magenta);
+        border-color: rgba(255, 0, 110, 0.28);
+        box-shadow: 0 0 5px rgba(255, 0, 110, 0.18);
+      }
+      .tag--neo-aurora {
+        background: rgba(0, 255, 163, 0.08);
+        color: var(--color-neo-aurora);
+        border-color: rgba(0, 255, 163, 0.26);
+        box-shadow: 0 0 5px rgba(0, 255, 163, 0.14);
+      }
+      .tag--gradient {
+        background: var(--gradient-brand-primary);
+        color: #fff;
+        border-color: transparent;
+      }
+      .tag--gradient-neo {
+        background: var(--gradient-neo-cyber);
+        color: #000;
+        border-color: transparent;
+      }
+
+      /* NEO BLOCK */
+      .neo-block {
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        padding: 1.35rem;
+        border: 1px solid;
+        transition:
+          var(--transition-colors),
+          box-shadow var(--duration-normal);
+      }
+      .neo-block::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.04;
+        background: radial-gradient(
+          ellipse at center,
+          currentColor 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .neo-block--electric {
+        color: var(--color-neo-electric);
+        border-color: rgba(0, 180, 255, 0.32);
+        background: rgba(0, 180, 255, 0.05);
+        box-shadow: var(--glow-electric);
+      }
+      .neo-block--cyan {
+        color: var(--color-neo-cyan);
+        border-color: rgba(0, 255, 234, 0.3);
+        background: rgba(0, 255, 234, 0.04);
+        box-shadow: var(--glow-cyan);
+      }
+      .neo-block--magenta {
+        color: var(--color-neo-magenta);
+        border-color: rgba(255, 0, 110, 0.32);
+        background: rgba(255, 0, 110, 0.05);
+        box-shadow: var(--glow-magenta);
+      }
+      .neo-block--violet {
+        color: var(--color-neo-violet);
+        border-color: rgba(123, 47, 255, 0.32);
+        background: rgba(123, 47, 255, 0.05);
+        box-shadow: var(--glow-violet);
+      }
+      .neo-block--aurora {
+        color: var(--color-neo-aurora);
+        border-color: rgba(0, 255, 163, 0.28);
+        background: rgba(0, 255, 163, 0.04);
+        box-shadow: var(--glow-aurora);
+      }
+      .neo-block--orange {
+        color: var(--color-neo-orange);
+        border-color: rgba(255, 107, 0, 0.32);
+        background: rgba(255, 107, 0, 0.05);
+        box-shadow: var(--glow-orange);
+      }
+      .neo-block__title {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 0.95rem;
+        margin-bottom: 0.35rem;
+      }
+      .neo-block__body {
+        font-size: 0.82rem;
+        opacity: 0.8;
+        color: var(--color-text-primary);
+      }
+
+      /* CODE */
+      .code-inline {
+        font-family: var(--font-mono);
+        font-size: 0.8em;
+        color: var(--color-text-code);
+        background: var(--color-surface-sunken);
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        border: 1px solid var(--color-border-subtle);
+      }
+      .code-block {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        background: #070b12;
+        color: #cbd5e1;
+        padding: 1.2rem 1.35rem;
+        border-radius: 0 0 12px 12px;
+        overflow-x: auto;
+        line-height: 1.75;
+        tab-size: 2;
+        white-space: pre;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: none;
+      }
+      .code-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.6rem 1rem;
+        background: #0d1117;
+        border-radius: 12px 12px 0 0;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .code-dots {
+        display: flex;
+        gap: 5px;
+      }
+      .code-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .code-dot:nth-child(1) {
+        background: #ff5f57;
+      }
+      .code-dot:nth-child(2) {
+        background: #ffbd2e;
+      }
+      .code-dot:nth-child(3) {
+        background: #28ca42;
+      }
+      .code-lang {
+        font-size: 0.65rem;
+        color: #4d5566;
+      }
+
+      /* DIVIDER */
+      .divider {
+        width: 100%;
+        height: 1px;
+        background: var(--color-divider);
+        border: none;
+        margin: 1.25rem 0;
+      }
+      .divider--gradient {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--color-border-strong),
+          transparent
+        );
+      }
+      .divider--neo {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--color-neo-electric),
+          transparent
+        );
+        box-shadow: 0 0 6px rgba(0, 180, 255, 0.28);
+        height: 1.5px;
+      }
+      .divider--label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        height: auto;
+        background: none;
+      }
+      .divider--label::before,
+      .divider--label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--color-divider);
+      }
+      .divider--label span {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--color-text-tertiary);
+        white-space: nowrap;
+        font-family: var(--font-mono);
+      }
+
+      /* TYPOGRAPHY */
+      .t-gradient {
+        background: var(--gradient-brand-vivid);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .t-gradient-cyber {
+        background: var(--gradient-neo-cyber);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .t-gradient-aurora {
+        background: var(--gradient-neo-aurora);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .t-gradient-galaxy {
+        background: var(--gradient-neo-galaxy);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .t-gradient-sunset {
+        background: var(--gradient-neo-sunset);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .t-gradient-inferno {
+        background: var(--gradient-neo-inferno);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .t-gradient-holo {
+        background: var(--gradient-neo-holographic);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* SHADOW DEMO CARDS */
+      .shadow-demo-card {
+        background: var(--color-surface-1);
+        border-radius: 10px;
+        padding: 1.1rem 0.9rem;
+        text-align: center;
+        border: 1px solid var(--color-border-subtle);
+        transition: transform var(--duration-fast) var(--ease-spring);
+      }
+      .shadow-demo-card:hover {
+        transform: translateY(-3px);
+      }
+      .shadow-demo-label {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: var(--color-text-secondary);
+      }
+      .shadow-demo-sub {
+        font-size: 0.58rem;
+        color: var(--color-text-tertiary);
+        font-family: var(--font-mono);
+        margin-top: 2px;
+      }
+
+      /* COLOR SWATCH */
+      .swatch-card {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--color-border-subtle);
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        transition:
+          transform var(--duration-fast) var(--ease-spring),
+          box-shadow var(--duration-normal);
+      }
+      .swatch-card:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: var(--shadow-lg);
+      }
+      .swatch-color {
+        height: 58px;
+        width: 100%;
+      }
+      .swatch-info {
+        padding: 0.45rem 0.55rem;
+        background: var(--color-surface-1);
+      }
+      .swatch-name {
+        font-size: 0.62rem;
+        font-weight: 700;
+        color: var(--color-text-secondary);
+        font-family: var(--font-mono);
+      }
+      .swatch-val {
+        font-size: 0.58rem;
+        color: var(--color-text-tertiary);
+        font-family: var(--font-mono);
+        margin-top: 1px;
+      }
+
+      /* GRADIENT SWATCH */
+      .grad-swatch {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--color-border-subtle);
+        box-shadow: var(--shadow-md);
+        cursor: pointer;
+        transition:
+          transform var(--duration-fast) var(--ease-spring),
+          box-shadow var(--duration-normal);
+      }
+      .grad-swatch:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: var(--shadow-xl);
+      }
+      .grad-color {
+        height: 72px;
+        width: 100%;
+      }
+      .grad-info {
+        padding: 0.5rem 0.65rem;
+        background: var(--color-surface-1);
+      }
+      .grad-name {
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        font-family: var(--font-mono);
+      }
+
+      /* NEO SWATCH */
+      .neo-swatch {
+        border-radius: 10px;
+        padding: 0.9rem 0.6rem;
+        text-align: center;
+        cursor: pointer;
+        transition: transform var(--duration-fast) var(--ease-spring);
+        border: 1px solid transparent;
+      }
+      .neo-swatch:hover {
+        transform: translateY(-4px) scale(1.05);
+      }
+      .neo-dot {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        margin: 0 auto 0.5rem;
+      }
+      .neo-label {
+        font-size: 0.62rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-family: var(--font-mono);
+      }
+      .neo-val {
+        font-size: 0.58rem;
+        font-family: var(--font-mono);
+        margin-top: 2px;
+        opacity: 0.75;
+      }
+
+      /* HERO DEMO */
+      .hero-demo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 3.5rem 2rem;
+        position: relative;
+        overflow: hidden;
+        background: #07090e;
+        background-image:
+          radial-gradient(
+            ellipse 80% 50% at 20% 20%,
+            rgba(0, 180, 255, 0.12) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 60% 70% at 80% 80%,
+            rgba(123, 47, 255, 0.1) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 40% at 55% 50%,
+            rgba(0, 255, 163, 0.06) 0%,
+            transparent 70%
+          );
+        border-radius: 14px;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--color-neo-electric);
+        background: var(--color-neo-electric-glow);
+        padding: 0.28rem 0.75rem;
+        border-radius: 9999px;
+        margin-bottom: 1.25rem;
+        border: 1px solid rgba(0, 180, 255, 0.25);
+        box-shadow: 0 0 10px rgba(0, 180, 255, 0.18);
+        font-family: var(--font-mono);
+      }
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        margin-bottom: 1rem;
+      }
+      .hero-sub {
+        font-size: 0.95rem;
+        color: var(--color-text-secondary);
+        max-width: 480px;
+        margin: 0 auto 2rem;
+        line-height: 1.65;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+
+      /* STAT GRID */
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+      }
+
+      /* TABLE */
+      .table-wrap {
+        border: 1px solid var(--color-border-subtle);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+      .ds-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.83rem;
+      }
+      .ds-table thead tr {
+        background: var(--color-bg-muted);
+        border-bottom: 1px solid var(--color-border-default);
+      }
+      .ds-table th {
+        padding: 0.65rem 1rem;
+        font-weight: 700;
+        color: var(--color-text-secondary);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+        font-family: var(--font-mono);
+      }
+      .ds-table td {
+        padding: 0.75rem 1rem;
+        color: var(--color-text-primary);
+        border-bottom: 1px solid var(--color-border-subtle);
+      }
+      .ds-table tbody tr:hover {
+        background: var(--color-bg-emphasis);
+      }
+      .ds-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* TABS DEMO */
+      .tabs-list {
+        display: flex;
+        border-bottom: 1px solid var(--color-border-subtle);
+        gap: 0.1rem;
+      }
+      .tabs-trigger {
+        padding: 0.55rem 0.95rem;
+        font-size: 0.855rem;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        transition: var(--transition-colors);
+        white-space: nowrap;
+        background: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        font-family: var(--font-body);
+      }
+      .tabs-trigger:hover {
+        color: var(--color-text-primary);
+      }
+      .tabs-trigger.active {
+        color: var(--color-brand-500);
+        border-bottom-color: var(--color-brand-500);
+        font-weight: 600;
+      }
+      .tabs-content {
+        padding: 1.25rem 0;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+      }
+
+      /* TOOLTIP DEMO */
+      .tooltip-wrap {
+        position: relative;
+        display: inline-flex;
+      }
+      .tooltip-wrap:hover .tooltip-box {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+      .tooltip-box {
+        position: absolute;
+        bottom: calc(100% + 6px);
+        left: 50%;
+        transform: translateX(-50%) translateY(4px);
+        background: var(--color-text-primary);
+        color: var(--color-text-inverse);
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.28rem 0.6rem;
+        border-radius: 6px;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          opacity var(--duration-fast),
+          transform var(--duration-fast) var(--ease-spring);
+        z-index: 100;
+        box-shadow: var(--shadow-lg);
+        font-family: var(--font-body);
+      }
+      .tooltip-box::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 4px solid transparent;
+        border-top-color: var(--color-text-primary);
+      }
+
+      /* DROPDOWN DEMO */
+      .dropdown-demo {
+        position: relative;
+        display: inline-flex;
+      }
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        min-width: 180px;
+        background: var(--color-surface-1);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: 10px;
+        box-shadow: var(--shadow-xl);
+        padding: 0.35rem;
+        z-index: 100;
+      }
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.48rem 0.75rem;
+        border-radius: 7px;
+        font-size: 0.855rem;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        transition: var(--transition-colors);
+      }
+      .dropdown-item:hover {
+        background: var(--color-bg-muted);
+      }
+      .dropdown-item--danger {
+        color: var(--color-error-text);
+      }
+      .dropdown-item--danger:hover {
+        background: var(--color-error-subtle);
+      }
+      .dropdown-sep {
+        height: 1px;
+        background: var(--color-divider);
+        margin: 0.35rem 0;
+      }
+
+      /* ANIMATIONS */
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+      @keyframes stripedMove {
+        to {
+          background-position: 1rem 0;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.45;
+        }
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes glow-pulse {
+        0%,
+        100% {
+          box-shadow: var(--glow-electric);
+        }
+        50% {
+          box-shadow: var(--glow-aurora);
+        }
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 0.5s ease both;
+      }
+
+      /* UTILITY */
+      .flex {
+        display: flex;
+      }
+      .inline-flex {
+        display: inline-flex;
+      }
+      .flex-col {
+        flex-direction: column;
+      }
+      .flex-wrap {
+        flex-wrap: wrap;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .justify-between {
+        justify-content: space-between;
+      }
+      .gap-1 {
+        gap: 0.25rem;
+      }
+      .gap-2 {
+        gap: 0.5rem;
+      }
+      .gap-3 {
+        gap: 0.75rem;
+      }
+      .gap-4 {
+        gap: 1rem;
+      }
+      .gap-6 {
+        gap: 1.5rem;
+      }
+      .w-full {
+        width: 100%;
+      }
+      .grid {
+        display: grid;
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grid-auto {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+      .grid-auto-sm {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      }
+      .grid-auto-xs {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      }
+      .text-xs {
+        font-size: 0.75rem;
+      }
+      .text-sm {
+        font-size: 0.855rem;
+      }
+      .text-base {
+        font-size: 1rem;
+      }
+      .text-lg {
+        font-size: 1.1rem;
+      }
+      .text-xl {
+        font-size: 1.25rem;
+      }
+      .text-2xl {
+        font-size: 1.5rem;
+      }
+      .font-bold {
+        font-weight: 700;
+      }
+      .font-black {
+        font-weight: 900;
+      }
+      .font-mono {
+        font-family: var(--font-mono);
+      }
+      .font-display {
+        font-family: var(--font-display);
+      }
+      .text-primary {
+        color: var(--color-text-primary);
+      }
+      .text-secondary {
+        color: var(--color-text-secondary);
+      }
+      .text-tertiary {
+        color: var(--color-text-tertiary);
+      }
+      .mb-1 {
+        margin-bottom: 0.25rem;
+      }
+      .mb-2 {
+        margin-bottom: 0.5rem;
+      }
+      .mb-3 {
+        margin-bottom: 0.75rem;
+      }
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+      .mb-6 {
+        margin-bottom: 1.5rem;
+      }
+      .mt-2 {
+        margin-top: 0.5rem;
+      }
+      .mt-3 {
+        margin-top: 0.75rem;
+      }
+      .opacity-50 {
+        opacity: 0.5;
+      }
+      .rounded-full {
+        border-radius: 9999px;
+      }
+      .truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .size-10 {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+      .size-8 {
+        width: 2rem;
+        height: 2rem;
+      }
+      .rotate-90 {
+        transform: rotate(90deg);
+      }
+
+      /* TOAST */
+      .toast {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        background: var(--gradient-brand-primary);
+        color: #fff;
+        padding: 0.55rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-brand);
+        opacity: 0;
+        transform: translateY(8px);
+        transition:
+          opacity 0.2s,
+          transform 0.2s var(--ease-spring);
+        pointer-events: none;
+        z-index: 9999;
+        font-family: var(--font-body);
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .sidenav {
+          display: none;
+        }
+        .page-body {
+          padding: 1.5rem 1rem 4rem;
+        }
+        .topnav {
+          padding: 0.65rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- ═══ SIDEBAR ═══════════════════════════════════════════ -->
+      <aside class="sidenav" id="sidenav">
+        <div class="sidenav-logo">
+          <div class="sidenav-logo-mark"></div>
+          <div>
+            <div class="sidenav-logo-name">DS Library</div>
+            <div class="sidenav-logo-ver">v2.0.0 · _class.scss</div>
+          </div>
+        </div>
+
+        <span class="sidenav-group-label">Foundations</span>
+        <a class="sidenav-item active" onclick="scrollTo('colors')"
+          ><span class="sidenav-dot"></span>Colors</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('gradients')"
+          ><span class="sidenav-dot"></span>Gradients</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('neo')"
+          ><span class="sidenav-dot"></span>Neo Accents</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('shadows')"
+          ><span class="sidenav-dot"></span>Shadows & Glows</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('typography')"
+          ><span class="sidenav-dot"></span>Typography</a
+        >
+
+        <span class="sidenav-group-label">Components</span>
+        <a class="sidenav-item" onclick="scrollTo('buttons')"
+          ><span class="sidenav-dot"></span>Buttons</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('badges')"
+          ><span class="sidenav-dot"></span>Badges & Chips</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('cards')"
+          ><span class="sidenav-dot"></span>Cards</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('glass')"
+          ><span class="sidenav-dot"></span>Glass</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('alerts')"
+          ><span class="sidenav-dot"></span>Alerts</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('forms')"
+          ><span class="sidenav-dot"></span>Forms</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('avatars')"
+          ><span class="sidenav-dot"></span>Avatars</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('progress')"
+          ><span class="sidenav-dot"></span>Progress</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('skeleton')"
+          ><span class="sidenav-dot"></span>Skeleton</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('neo-blocks')"
+          ><span class="sidenav-dot"></span>Neo Blocks</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('stats')"
+          ><span class="sidenav-dot"></span>Stat Cards</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('tags')"
+          ><span class="sidenav-dot"></span>Tags</a
+        >
+
+        <span class="sidenav-group-label">Patterns</span>
+        <a class="sidenav-item" onclick="scrollTo('dividers')"
+          ><span class="sidenav-dot"></span>Dividers</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('tabs')"
+          ><span class="sidenav-dot"></span>Tabs</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('dropdown')"
+          ><span class="sidenav-dot"></span>Dropdown</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('table')"
+          ><span class="sidenav-dot"></span>Table</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('code')"
+          ><span class="sidenav-dot"></span>Code Block</a
+        >
+        <a class="sidenav-item" onclick="scrollTo('hero')"
+          ><span class="sidenav-dot"></span>Hero</a
+        >
+      </aside>
+
+      <!-- ═══ MAIN ═══════════════════════════════════════════════ -->
+      <div class="main-content">
+        <!-- TOP NAV -->
+        <nav class="topnav">
+          <div class="topnav-title">Design System — Class Library</div>
+          <span class="topnav-badge">_class.scss</span>
+          <button class="theme-btn" onclick="toggleTheme()">
+            <span id="theme-icon">☀️</span>
+            <span id="theme-lbl">Light</span>
+          </button>
+        </nav>
+
+        <div class="page-body">
+          <!-- ══════════════════════════════════════════════
+       COLORS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="colors">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Colors</div>
+              <span class="ds-section-num">01</span>
+            </div>
+            <div class="ds-section-desc">
+              Semantic color tokens — responsive theo theme. Dùng
+              <code class="code-inline">var(--color-*)</code> trong CSS. Click
+              swatch để copy token.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">semantic colors</div>
+              </div>
+              <div
+                class="preview-canvas"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                  gap: 0.6rem;
+                "
+              >
+                <div id="color-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       GRADIENTS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="gradients">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Gradients</div>
+              <span class="ds-section-num">02</span>
+            </div>
+            <div class="ds-section-desc">
+              Thư viện gradient — Brand, Neo/Neon, Status. Dùng
+              <code class="code-inline">var(--gradient-*)</code> hoặc class
+              <code class="code-inline">.bg-gradient-*</code>.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">gradient library</div>
+              </div>
+              <div
+                class="preview-canvas"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+                  gap: 0.7rem;
+                "
+                id="grad-grid"
+              ></div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       NEO ACCENTS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="neo">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Neo / Neon Accents</div>
+              <span class="ds-section-num">03</span>
+            </div>
+            <div class="ds-section-desc">
+              Màu phát sáng neon — dùng cho highlight, glow, badge. Mỗi màu có
+              token glow riêng.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">
+                  neon accents · var(--color-neo-*)
+                </div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--dark"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                  gap: 0.6rem;
+                "
+                id="neo-grid"
+              ></div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       SHADOWS & GLOWS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="shadows">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Shadows & Glows</div>
+              <span class="ds-section-num">04</span>
+            </div>
+            <div class="ds-section-desc">
+              Elevation shadows + Neo glow — dùng class
+              <code class="code-inline">.shadow-*</code> /
+              <code class="code-inline">.glow-*</code>.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.shadow-* · .glow-*</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--mesh"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                  gap: 1.25rem;
+                "
+                id="shadow-grid"
+              ></div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       TYPOGRAPHY
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="typography">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Typography</div>
+              <span class="ds-section-num">05</span>
+            </div>
+            <div class="ds-section-desc">
+              Font scale, weights, text colors, gradient text. Classes
+              <code class="code-inline">.text-*</code>
+              <code class="code-inline">.font-*</code>
+              <code class="code-inline">.t-gradient-*</code>
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">typography scale</div>
+              </div>
+              <div class="preview-canvas preview-canvas--col">
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 2.5rem;
+                    font-weight: 900;
+                    letter-spacing: -0.05em;
+                    color: var(--color-text-primary);
+                  "
+                >
+                  Display · Syne 900
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 2rem;
+                    font-weight: 800;
+                    letter-spacing: -0.04em;
+                  "
+                  class="t-gradient"
+                >
+                  Gradient Heading · .t-gradient
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 1.75rem;
+                    font-weight: 800;
+                    letter-spacing: -0.04em;
+                  "
+                  class="t-gradient-cyber"
+                >
+                  Neo Cyber Text · .t-gradient-cyber
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 1.5rem;
+                    font-weight: 800;
+                    letter-spacing: -0.03em;
+                  "
+                  class="t-gradient-aurora"
+                >
+                  Aurora Gradient · .t-gradient-aurora
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 1.35rem;
+                    font-weight: 800;
+                    letter-spacing: -0.03em;
+                  "
+                  class="t-gradient-galaxy"
+                >
+                  Galaxy Gradient · .t-gradient-galaxy
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 1.2rem;
+                    font-weight: 800;
+                    letter-spacing: -0.02em;
+                  "
+                  class="t-gradient-sunset"
+                >
+                  Sunset Gradient · .t-gradient-sunset
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-display);
+                    font-size: 1.1rem;
+                    font-weight: 800;
+                  "
+                  class="t-gradient-holo"
+                >
+                  Holographic · .t-gradient-holo
+                </div>
+                <hr class="divider" style="margin: 0.5rem 0" />
+                <div
+                  style="
+                    font-size: 1rem;
+                    color: var(--color-text-primary);
+                    font-weight: 600;
+                  "
+                >
+                  Body / Primary text — .text-primary
+                </div>
+                <div
+                  style="font-size: 0.9rem; color: var(--color-text-secondary)"
+                >
+                  Secondary / Label text — .text-secondary
+                </div>
+                <div
+                  style="font-size: 0.82rem; color: var(--color-text-tertiary)"
+                >
+                  Tertiary / Hint text — .text-tertiary
+                </div>
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 0.82rem;
+                    color: var(--color-text-code);
+                    background: var(--color-surface-sunken);
+                    padding: 0.15rem 0.5rem;
+                    border-radius: 5px;
+                    display: inline-block;
+                  "
+                >
+                  var(--color-text-code) · .code-inline
+                </div>
+                <div
+                  style="
+                    font-size: 0.85rem;
+                    color: var(--color-text-link);
+                    text-decoration: underline;
+                    cursor: pointer;
+                  "
+                >
+                  Link text · .text-link
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       BUTTONS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="buttons">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Buttons</div>
+              <span class="ds-section-num">06</span>
+            </div>
+            <div class="ds-section-desc">
+              BEM component <code class="code-inline">.btn</code> — Variants,
+              sizes, neo/neon, pill, disabled.
+            </div>
+
+            <!-- Variants -->
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.btn--[variant]</div>
+              </div>
+              <div class="preview-canvas flex-wrap items-center">
+                <button class="btn btn--primary">Primary</button>
+                <button class="btn btn--secondary">Secondary</button>
+                <button class="btn btn--outline">Outline</button>
+                <button class="btn btn--ghost">Ghost</button>
+                <button class="btn btn--danger">Danger</button>
+                <button class="btn btn--success">Success</button>
+                <button class="btn btn--warning">Warning</button>
+                <button class="btn btn--vivid">Vivid</button>
+                <button class="btn btn--warm">Warm</button>
+              </div>
+            </div>
+
+            <!-- Neo variants -->
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.btn--neo-* · .btn--neon-*</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--dark flex-wrap items-center"
+              >
+                <button class="btn btn--neo-cyber">Neo Cyber</button>
+                <button class="btn btn--neo-inferno">Neo Inferno</button>
+                <button class="btn btn--neo-aurora">Neo Aurora</button>
+                <button class="btn btn--neo-galaxy">Neo Galaxy</button>
+                <button class="btn btn--neo-sunset">Neo Sunset</button>
+                <button class="btn btn--neon-electric">Neon Electric</button>
+                <button class="btn btn--neon-magenta">Neon Magenta</button>
+                <button class="btn btn--neon-violet">Neon Violet</button>
+                <button class="btn btn--neon-aurora">Neon Aurora</button>
+              </div>
+            </div>
+
+            <!-- Sizes + Pill + Disabled -->
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">
+                  .btn--[size] · --pill · :disabled
+                </div>
+              </div>
+              <div class="preview-canvas flex-wrap items-center">
+                <button class="btn btn--primary btn--xs">XSmall</button>
+                <button class="btn btn--primary btn--sm">Small</button>
+                <button class="btn btn--primary">Default</button>
+                <button class="btn btn--primary btn--lg">Large</button>
+                <button class="btn btn--primary btn--xl">XLarge</button>
+                <div
+                  class="divider divider--gradient"
+                  style="width: 100%; margin: 0.25rem 0"
+                ></div>
+                <button class="btn btn--vivid btn--pill btn--sm">
+                  Pill Small
+                </button>
+                <button class="btn btn--neo-cyber btn--pill">Pill Cyber</button>
+                <button class="btn btn--neon-violet btn--pill btn--lg">
+                  Pill Large
+                </button>
+                <button class="btn btn--primary" disabled>Disabled</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       BADGES & CHIPS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="badges">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Badges & Chips</div>
+              <span class="ds-section-num">07</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.badge</code> cho status —
+              <code class="code-inline">.chip</code> cho filter/tag tương tác.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.badge--[variant]</div>
+              </div>
+              <div class="preview-canvas flex-wrap items-center">
+                <span class="badge badge--success"
+                  ><span class="badge__dot"></span>Success</span
+                >
+                <span class="badge badge--warning"
+                  ><span class="badge__dot"></span>Warning</span
+                >
+                <span class="badge badge--error"
+                  ><span class="badge__dot"></span>Error</span
+                >
+                <span class="badge badge--info"
+                  ><span class="badge__dot"></span>Info</span
+                >
+                <span class="badge badge--neutral">Neutral</span>
+                <span class="badge badge--brand">Brand</span>
+                <span class="badge badge--accent">Accent</span>
+                <span class="badge badge--solid-success">Solid</span>
+                <span class="badge badge--solid-error">Solid Error</span>
+                <span class="badge badge--solid-brand">Solid Brand</span>
+                <span class="badge badge--gradient-brand">Gradient</span>
+                <span class="badge badge--gradient-cyber">Cyber</span>
+                <span class="badge badge--gradient-aurora">Aurora</span>
+                <span class="badge badge--sm badge--brand">SM</span>
+                <span class="badge badge--lg badge--accent">LG</span>
+              </div>
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.badge--neo-* (neon glow)</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--dark flex-wrap items-center"
+              >
+                <span class="badge badge--neo-electric"
+                  ><span class="badge__dot"></span>Electric</span
+                >
+                <span class="badge badge--neo-magenta"
+                  ><span class="badge__dot"></span>Magenta</span
+                >
+                <span class="badge badge--neo-aurora"
+                  ><span class="badge__dot"></span>Aurora</span
+                >
+                <span class="badge badge--neo-violet"
+                  ><span class="badge__dot"></span>Violet</span
+                >
+              </div>
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.chip — interactive filter</div>
+              </div>
+              <div class="preview-canvas flex-wrap">
+                <div class="chip chip--active">Design System</div>
+                <div class="chip">Components</div>
+                <div class="chip">Dark Mode</div>
+                <div class="chip">SCSS</div>
+                <div class="chip">Neo UI</div>
+                <div class="chip">Gradients</div>
+                <div class="chip">Glass</div>
+                <div class="chip">BEM</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       CARDS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="cards">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Cards</div>
+              <span class="ds-section-num">08</span>
+            </div>
+            <div class="ds-section-desc">
+              BEM component <code class="code-inline">.card</code> — variants,
+              accentbar, gradient border, interactive hover.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.card--[variant]</div>
+              </div>
+              <div
+                class="preview-canvas"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                  gap: 1rem;
+                "
+              >
+                <div class="card card--brand card--interactive">
+                  <div class="card__body">
+                    <div class="card__title">Brand Card</div>
+                    <div class="card__subtitle">.card--brand · hover me</div>
+                  </div>
+                  <div class="card__footer">
+                    <span class="badge badge--brand">Active</span>
+                  </div>
+                </div>
+                <div class="card card--success card--interactive">
+                  <div class="card__body">
+                    <div class="card__title">Success Card</div>
+                    <div class="card__subtitle">
+                      .card--success · interactive
+                    </div>
+                  </div>
+                  <div class="card__footer">
+                    <span class="badge badge--success"
+                      ><span class="badge__dot"></span>Healthy</span
+                    >
+                  </div>
+                </div>
+                <div class="card card--warning card--interactive">
+                  <div class="card__body">
+                    <div class="card__title">Warning Card</div>
+                    <div class="card__subtitle">.card--warning · hover me</div>
+                  </div>
+                  <div class="card__footer">
+                    <span class="badge badge--warning"
+                      ><span class="badge__dot"></span>Caution</span
+                    >
+                  </div>
+                </div>
+                <div class="card card--error card--interactive">
+                  <div class="card__body">
+                    <div class="card__title">Error Card</div>
+                    <div class="card__subtitle">.card--error · interactive</div>
+                  </div>
+                  <div class="card__footer">
+                    <span class="badge badge--error"
+                      ><span class="badge__dot"></span>Critical</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="card card--accent card--interactive"
+                  style="position: relative; z-index: 0"
+                >
+                  <div class="card__body">
+                    <div class="card__title t-gradient">Accent Card</div>
+                    <div class="card__subtitle">
+                      .card--accent · gradient title
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="card card--gradient-border card--interactive"
+                  style="position: relative; z-index: 0"
+                >
+                  <div class="card__body">
+                    <div class="card__title t-gradient-cyber">
+                      Gradient Border
+                    </div>
+                    <div class="card__subtitle">.card--gradient-border</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       GLASS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="glass">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Glassmorphism</div>
+              <span class="ds-section-num">09</span>
+            </div>
+            <div class="ds-section-desc">
+              Class <code class="code-inline">.glass</code> +
+              <code class="code-inline">.glass--[tint]</code> — backdrop-filter
+              blur, rgba backgrounds.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.glass--[color] + .glass--neo-*</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--neo"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                  gap: 1rem;
+                "
+              >
+                <div class="glass glass--blue glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: #60a5fa;
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Blue Glass
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--blue
+                  </div>
+                </div>
+                <div class="glass glass--violet glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: #a78bfa;
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Violet Glass
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--violet
+                  </div>
+                </div>
+                <div class="glass glass--green glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: #4ade80;
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Green Glass
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--green
+                  </div>
+                </div>
+                <div class="glass glass--rose glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: #f87171;
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Rose Glass
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--rose
+                  </div>
+                </div>
+                <div class="glass glass--neo-electric glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: var(--color-neo-electric);
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Neo Electric
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--neo-electric
+                  </div>
+                </div>
+                <div class="glass glass--neo-violet glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: var(--color-neo-violet);
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Neo Violet
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--neo-violet
+                  </div>
+                </div>
+                <div class="glass glass--neo-aurora glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: var(--color-neo-aurora);
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Neo Aurora
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--neo-aurora
+                  </div>
+                </div>
+                <div class="glass glass--neo-magenta glass--content">
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: var(--color-neo-magenta);
+                      margin-bottom: 4px;
+                      font-size: 0.85rem;
+                    "
+                  >
+                    Neo Magenta
+                  </div>
+                  <div style="font-size: 0.75rem; color: #9ba3b4">
+                    .glass--neo-magenta
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       ALERTS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="alerts">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Alerts</div>
+              <span class="ds-section-num">10</span>
+            </div>
+            <div class="ds-section-desc">
+              BEM <code class="code-inline">.alert</code> — status + neo
+              variants.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.alert--[variant]</div>
+              </div>
+              <div class="preview-canvas preview-canvas--col">
+                <div class="alert alert--info">
+                  <div class="alert__body">
+                    <div class="alert__title">Thông tin</div>
+                    Hệ thống sẽ bảo trì lúc 02:00 AM. Vui lòng lưu công việc
+                    trước.
+                  </div>
+                </div>
+                <div class="alert alert--success">
+                  <div class="alert__body">
+                    <div class="alert__title">Thành công!</div>
+                    Deploy hoàn tất. Version v2.0.0 đã lên production.
+                  </div>
+                </div>
+                <div class="alert alert--warning">
+                  <div class="alert__body">
+                    <div class="alert__title">Cảnh báo</div>
+                    API key sắp hết hạn trong 3 ngày. Hãy gia hạn để tránh gián
+                    đoạn.
+                  </div>
+                </div>
+                <div class="alert alert--error">
+                  <div class="alert__body">
+                    <div class="alert__title">Lỗi nghiêm trọng</div>
+                    Kết nối database thất bại. Đang thử lại...
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.alert--neo-* (neon alerts)</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--dark preview-canvas--col"
+              >
+                <div class="alert alert--neo-electric">
+                  <div class="alert__body">
+                    <div class="alert__title">Neo Electric Alert</div>
+                    Kết nối quantum đã thiết lập. Đang đồng bộ dữ liệu từ node
+                    chính.
+                  </div>
+                </div>
+                <div class="alert alert--neo-aurora">
+                  <div class="alert__body">
+                    <div class="alert__title">Neo Aurora Alert</div>
+                    Aurora protocol kích hoạt thành công. Hệ thống đang hoạt
+                    động ở chế độ nâng cao.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       FORMS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="forms">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Forms</div>
+              <span class="ds-section-num">11</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.input</code>
+              <code class="code-inline">.toggle</code>
+              <code class="code-inline">.checkbox</code> — variants + neo focus.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.input + .toggle</div>
+              </div>
+              <div class="preview-canvas preview-canvas--col">
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+                  "
+                >
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: var(--color-text-secondary);
+                        margin-bottom: 0.4rem;
+                        font-family: var(--font-mono);
+                      "
+                    >
+                      Default Input
+                    </div>
+                    <input class="input" placeholder="Nhập email của bạn..." />
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: var(--color-text-secondary);
+                        margin-bottom: 0.4rem;
+                        font-family: var(--font-mono);
+                      "
+                    >
+                      Success
+                    </div>
+                    <input
+                      class="input input--success"
+                      value="valid@email.com"
+                    />
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: var(--color-error-text);
+                        margin-bottom: 0.4rem;
+                        font-family: var(--font-mono);
+                      "
+                    >
+                      Error State
+                    </div>
+                    <input class="input input--error" value="invalid-email" />
+                  </div>
+                  <div>
+                    <div
+                      style="
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        color: var(--color-neo-electric);
+                        margin-bottom: 0.4rem;
+                        font-family: var(--font-mono);
+                      "
+                    >
+                      Neo Focus
+                    </div>
+                    <input
+                      class="input input--neo"
+                      placeholder="Focus → neo glow"
+                    />
+                  </div>
+                </div>
+                <hr class="divider" style="margin: 0.5rem 0" />
+                <div class="flex flex-wrap gap-4 items-center">
+                  <label class="toggle-wrap">
+                    <input
+                      type="checkbox"
+                      class="toggle-inp"
+                      id="t1"
+                      onchange="syncToggle(this)"
+                    />
+                    <div class="toggle-track" id="track1">
+                      <div class="toggle-thumb"></div>
+                    </div>
+                    <span class="toggle-label">Toggle Default</span>
+                  </label>
+                  <label class="toggle-wrap">
+                    <input
+                      type="checkbox"
+                      class="toggle-inp"
+                      id="t2"
+                      checked
+                      onchange="syncToggle(this)"
+                    />
+                    <div class="toggle-track" id="track2">
+                      <div class="toggle-thumb"></div>
+                    </div>
+                    <span class="toggle-label">Checked</span>
+                  </label>
+                  <label class="toggle-wrap">
+                    <input
+                      type="checkbox"
+                      class="toggle-inp"
+                      id="t3"
+                      onchange="syncToggleNeo(this)"
+                    />
+                    <div class="toggle-track" id="track3">
+                      <div class="toggle-thumb"></div>
+                    </div>
+                    <span
+                      class="toggle-label"
+                      style="color: var(--color-neo-electric)"
+                      >Neo Toggle</span
+                    >
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       AVATARS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="avatars">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Avatars</div>
+              <span class="ds-section-num">12</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.avatar</code> — sizes, gradient
+              variants, status rings, group.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">
+                  .avatar--[size] · --[variant] · --[status]
+                </div>
+              </div>
+              <div class="preview-canvas flex-wrap items-center gap-4">
+                <div class="flex items-center gap-3">
+                  <div class="avatar avatar--xs">A</div>
+                  <div class="avatar avatar--sm">DS</div>
+                  <div class="avatar avatar--md">UI</div>
+                  <div class="avatar avatar--lg">FX</div>
+                  <div class="avatar avatar--xl">NX</div>
+                </div>
+                <div class="divider" style="width: 100%; margin: 0"></div>
+                <div class="avatar avatar--md">BR</div>
+                <div class="avatar avatar--md avatar--vivid">VD</div>
+                <div class="avatar avatar--md avatar--warm">WM</div>
+                <div class="avatar avatar--md avatar--cyber">CY</div>
+                <div class="avatar avatar--md avatar--aurora">AU</div>
+                <div class="avatar avatar--md avatar--galaxy">GX</div>
+                <div class="divider" style="width: 100%; margin: 0"></div>
+                <div class="avatar avatar--md avatar--online">ON</div>
+                <div class="avatar avatar--md avatar--offline">OFF</div>
+                <div class="avatar avatar--md avatar--busy">BSY</div>
+                <div class="divider" style="width: 100%; margin: 0"></div>
+                <div class="avatar-group">
+                  <div class="avatar avatar--md avatar--cyber">A</div>
+                  <div class="avatar avatar--md avatar--aurora">B</div>
+                  <div class="avatar avatar--md avatar--galaxy">C</div>
+                  <div
+                    class="avatar avatar--md"
+                    style="
+                      background: var(--color-bg-muted);
+                      color: var(--color-text-secondary);
+                      font-size: 0.72rem;
+                      border: 2px solid var(--color-bg-base);
+                    "
+                  >
+                    +4
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       PROGRESS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="progress">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Progress</div>
+              <span class="ds-section-num">13</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.progress</code> — sizes, gradient
+              colors, neo glow, striped.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.progress--[variant]</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--col"
+                style="gap: 1.1rem"
+              >
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-text-secondary);
+                        font-family: var(--font-mono);
+                      "
+                      >.progress (default brand)</span
+                    ><span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-brand-500);
+                        font-family: var(--font-mono);
+                      "
+                      >68%</span
+                    >
+                  </div>
+                  <div class="progress">
+                    <div class="progress__bar" style="width: 68%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-text-secondary);
+                        font-family: var(--font-mono);
+                      "
+                      >.progress--cyber</span
+                    ><span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-neo-cyan);
+                        font-family: var(--font-mono);
+                      "
+                      >82%</span
+                    >
+                  </div>
+                  <div class="progress progress--cyber">
+                    <div class="progress__bar" style="width: 82%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-text-secondary);
+                        font-family: var(--font-mono);
+                      "
+                      >.progress--aurora</span
+                    ><span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-neo-electric);
+                        font-family: var(--font-mono);
+                      "
+                      >55%</span
+                    >
+                  </div>
+                  <div class="progress progress--aurora">
+                    <div class="progress__bar" style="width: 55%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-text-secondary);
+                        font-family: var(--font-mono);
+                      "
+                      >.progress--inferno</span
+                    ><span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-neo-orange);
+                        font-family: var(--font-mono);
+                      "
+                      >40%</span
+                    >
+                  </div>
+                  <div class="progress progress--inferno">
+                    <div class="progress__bar" style="width: 40%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-text-secondary);
+                        font-family: var(--font-mono);
+                      "
+                      >.progress--success</span
+                    ><span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-success-text);
+                        font-family: var(--font-mono);
+                      "
+                      >91%</span
+                    >
+                  </div>
+                  <div class="progress progress--success">
+                    <div class="progress__bar" style="width: 91%"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between mb-2">
+                    <span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-text-secondary);
+                        font-family: var(--font-mono);
+                      "
+                      >.progress--striped (animated)</span
+                    ><span
+                      style="
+                        font-size: 0.72rem;
+                        color: var(--color-brand-500);
+                        font-family: var(--font-mono);
+                      "
+                      >loading…</span
+                    >
+                  </div>
+                  <div class="progress progress--striped">
+                    <div class="progress__bar" style="width: 75%"></div>
+                  </div>
+                </div>
+                <div class="flex gap-4 items-end">
+                  <div style="flex: 1">
+                    <div
+                      style="
+                        font-size: 0.65rem;
+                        color: var(--color-text-tertiary);
+                        font-family: var(--font-mono);
+                        margin-bottom: 4px;
+                      "
+                    >
+                      --xs (3px)
+                    </div>
+                    <div class="progress progress--xs progress--cyber">
+                      <div class="progress__bar" style="width: 60%"></div>
+                    </div>
+                  </div>
+                  <div style="flex: 1">
+                    <div
+                      style="
+                        font-size: 0.65rem;
+                        color: var(--color-text-tertiary);
+                        font-family: var(--font-mono);
+                        margin-bottom: 4px;
+                      "
+                    >
+                      --sm (5px)
+                    </div>
+                    <div class="progress progress--sm progress--aurora">
+                      <div class="progress__bar" style="width: 75%"></div>
+                    </div>
+                  </div>
+                  <div style="flex: 1">
+                    <div
+                      style="
+                        font-size: 0.65rem;
+                        color: var(--color-text-tertiary);
+                        font-family: var(--font-mono);
+                        margin-bottom: 4px;
+                      "
+                    >
+                      --lg (12px)
+                    </div>
+                    <div class="progress progress--lg">
+                      <div class="progress__bar" style="width: 45%"></div>
+                    </div>
+                  </div>
+                  <div style="flex: 1">
+                    <div
+                      style="
+                        font-size: 0.65rem;
+                        color: var(--color-text-tertiary);
+                        font-family: var(--font-mono);
+                        margin-bottom: 4px;
+                      "
+                    >
+                      --xl (16px)
+                    </div>
+                    <div class="progress progress--xl progress--inferno">
+                      <div class="progress__bar" style="width: 85%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       SKELETON
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="skeleton">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Skeleton Loader</div>
+              <span class="ds-section-num">14</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.skeleton</code> — shimmer animation,
+              nhiều shape.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.skeleton--[shape]</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--col"
+                style="gap: 1.25rem"
+              >
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: auto 1fr;
+                    gap: 0.75rem;
+                    align-items: center;
+                  "
+                >
+                  <div
+                    class="skeleton skeleton--avatar"
+                    style="width: 48px; height: 48px"
+                  ></div>
+                  <div
+                    style="display: flex; flex-direction: column; gap: 0.5rem"
+                  >
+                    <div
+                      class="skeleton skeleton--title"
+                      style="width: 55%"
+                    ></div>
+                    <div
+                      class="skeleton skeleton--text"
+                      style="width: 80%"
+                    ></div>
+                    <div
+                      class="skeleton skeleton--text"
+                      style="width: 65%"
+                    ></div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0.75rem">
+                  <div
+                    class="skeleton"
+                    style="height: 120px; flex: 1; border-radius: 12px"
+                  ></div>
+                  <div
+                    class="skeleton"
+                    style="height: 120px; flex: 1; border-radius: 12px"
+                  ></div>
+                  <div
+                    class="skeleton"
+                    style="height: 120px; flex: 1; border-radius: 12px"
+                  ></div>
+                </div>
+                <div style="display: flex; gap: 0.5rem">
+                  <div
+                    class="skeleton skeleton--btn"
+                    style="width: 100px"
+                  ></div>
+                  <div class="skeleton skeleton--btn" style="width: 80px"></div>
+                  <div class="skeleton skeleton--btn" style="width: 90px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       NEO BLOCKS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="neo-blocks">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Neo Blocks</div>
+              <span class="ds-section-num">15</span>
+            </div>
+            <div class="ds-section-desc">
+              BEM <code class="code-inline">.neo-block--[color]</code> — neon
+              glow panels với radial background.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.neo-block--[variant]</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--dark"
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                  gap: 1rem;
+                "
+              >
+                <div class="neo-block neo-block--electric">
+                  <div class="neo-block__title">⚡ Electric</div>
+                  <div class="neo-block__body">.neo-block--electric</div>
+                </div>
+                <div class="neo-block neo-block--cyan">
+                  <div class="neo-block__title">◈ Cyan</div>
+                  <div class="neo-block__body">.neo-block--cyan</div>
+                </div>
+                <div class="neo-block neo-block--magenta">
+                  <div class="neo-block__title">✦ Magenta</div>
+                  <div class="neo-block__body">.neo-block--magenta</div>
+                </div>
+                <div class="neo-block neo-block--violet">
+                  <div class="neo-block__title">◉ Violet</div>
+                  <div class="neo-block__body">.neo-block--violet</div>
+                </div>
+                <div class="neo-block neo-block--aurora">
+                  <div class="neo-block__title">∿ Aurora</div>
+                  <div class="neo-block__body">.neo-block--aurora</div>
+                </div>
+                <div class="neo-block neo-block--orange">
+                  <div class="neo-block__title">◆ Orange</div>
+                  <div class="neo-block__body">.neo-block--orange</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       STATS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="stats">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Stat Cards</div>
+              <span class="ds-section-num">16</span>
+            </div>
+            <div class="ds-section-desc">
+              BEM <code class="code-inline">.stat</code> — metric cards với
+              gradient values.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.stat--[variant]</div>
+              </div>
+              <div class="preview-canvas stat-grid">
+                <div class="stat stat--brand">
+                  <div class="stat__label">Total Users</div>
+                  <div
+                    class="stat__value stat--gradient-brand"
+                    style="
+                      background: var(--gradient-brand-vivid);
+                      background-clip: text;
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+                    "
+                  >
+                    84.2K
+                  </div>
+                  <div class="stat__change stat__change--up">↑ 12.4%</div>
+                </div>
+                <div class="stat stat--success">
+                  <div class="stat__label">Revenue</div>
+                  <div
+                    class="stat__value"
+                    style="color: var(--color-success-text)"
+                  >
+                    $142K
+                  </div>
+                  <div class="stat__change stat__change--up">↑ 8.1%</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__label">Neo Requests</div>
+                  <div
+                    class="stat__value"
+                    style="
+                      background: var(--gradient-neo-cyber);
+                      background-clip: text;
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+                    "
+                  >
+                    9.6M
+                  </div>
+                  <div class="stat__change stat__change--up">↑ 24.7%</div>
+                </div>
+                <div class="stat">
+                  <div class="stat__label">Error Rate</div>
+                  <div
+                    class="stat__value"
+                    style="
+                      background: var(--gradient-error);
+                      background-clip: text;
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+                    "
+                  >
+                    0.12%
+                  </div>
+                  <div class="stat__change stat__change--down">↓ 0.03%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       TAGS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="tags">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Tags</div>
+              <span class="ds-section-num">17</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.tag</code> — color tinted, neo glow,
+              gradient variants.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.tag--[color] · .tag--neo-*</div>
+              </div>
+              <div class="preview-canvas flex-wrap">
+                <span class="tag">Default</span>
+                <span class="tag tag--blue">Blue</span>
+                <span class="tag tag--violet">Violet</span>
+                <span class="tag tag--green">Green</span>
+                <span class="tag tag--amber">Amber</span>
+                <span class="tag tag--rose">Rose</span>
+                <span class="tag tag--cyan">Cyan</span>
+                <span class="tag tag--gradient">Gradient</span>
+                <span class="tag tag--gradient-neo">Cyber</span>
+              </div>
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.tag--neo-* (neon glow)</div>
+              </div>
+              <div class="preview-canvas preview-canvas--dark flex-wrap">
+                <span class="tag tag--neo-electric">Neo Electric</span>
+                <span class="tag tag--neo-green">Neo Green</span>
+                <span class="tag tag--neo-magenta">Neo Magenta</span>
+                <span class="tag tag--neo-aurora">Neo Aurora</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       DIVIDERS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="dividers">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Dividers</div>
+              <span class="ds-section-num">18</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.divider</code> — default, gradient, neo
+              glow, with label.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.divider--[variant]</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--col"
+                style="gap: 1.5rem"
+              >
+                <div>
+                  <div
+                    style="
+                      font-size: 0.65rem;
+                      color: var(--color-text-tertiary);
+                      font-family: var(--font-mono);
+                      margin-bottom: 0.5rem;
+                    "
+                  >
+                    .divider (default)
+                  </div>
+                  <hr class="divider" style="margin: 0" />
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.65rem;
+                      color: var(--color-text-tertiary);
+                      font-family: var(--font-mono);
+                      margin-bottom: 0.5rem;
+                    "
+                  >
+                    .divider--gradient
+                  </div>
+                  <hr class="divider divider--gradient" style="margin: 0" />
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.65rem;
+                      color: var(--color-neo-electric);
+                      font-family: var(--font-mono);
+                      margin-bottom: 0.5rem;
+                    "
+                  >
+                    .divider--neo (glow)
+                  </div>
+                  <hr class="divider divider--neo" style="margin: 0" />
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 0.65rem;
+                      color: var(--color-text-tertiary);
+                      font-family: var(--font-mono);
+                      margin-bottom: 0.5rem;
+                    "
+                  >
+                    .divider--label
+                  </div>
+                  <div class="divider divider--label" style="margin: 0">
+                    <span>OR</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       TABS
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="tabs">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Tabs</div>
+              <span class="ds-section-num">19</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.tabs</code> — underline và pill
+              variants.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.tabs-list / .tabs-trigger</div>
+              </div>
+              <div class="preview-canvas preview-canvas--col">
+                <div class="tabs-list">
+                  <button
+                    class="tabs-trigger active"
+                    onclick="switchTab(this, 't-overview')"
+                  >
+                    Overview
+                  </button>
+                  <button
+                    class="tabs-trigger"
+                    onclick="switchTab(this, 't-analytics')"
+                  >
+                    Analytics
+                  </button>
+                  <button
+                    class="tabs-trigger"
+                    onclick="switchTab(this, 't-settings')"
+                  >
+                    Settings
+                  </button>
+                  <button
+                    class="tabs-trigger"
+                    onclick="switchTab(this, 't-api')"
+                  >
+                    API
+                  </button>
+                </div>
+                <div id="t-overview" class="tabs-content">
+                  📊 Overview: Hiển thị tổng quan về hệ thống, metrics và trạng
+                  thái.
+                </div>
+                <div
+                  id="t-analytics"
+                  class="tabs-content"
+                  style="display: none"
+                >
+                  📈 Analytics: Biểu đồ phân tích dữ liệu theo thời gian thực.
+                </div>
+                <div id="t-settings" class="tabs-content" style="display: none">
+                  ⚙️ Settings: Cài đặt hệ thống, bảo mật và tích hợp.
+                </div>
+                <div id="t-api" class="tabs-content" style="display: none">
+                  🔌 API: Tài liệu API và quản lý API keys.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       DROPDOWN
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="dropdown">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Dropdown</div>
+              <span class="ds-section-num">20</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.dropdown</code> — menu với hover open.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.dropdown-menu</div>
+              </div>
+              <div
+                class="preview-canvas"
+                style="
+                  min-height: 200px;
+                  align-items: flex-start;
+                  padding-top: 1rem;
+                "
+              >
+                <div class="dropdown-demo" style="position: relative">
+                  <button class="btn btn--secondary" onclick="toggleDd(this)">
+                    Actions ▾
+                  </button>
+                  <div class="dropdown-menu" id="dd1" style="display: none">
+                    <div class="dropdown-item">✏️ &nbsp;Chỉnh sửa</div>
+                    <div class="dropdown-item">📋 &nbsp;Sao chép</div>
+                    <div class="dropdown-item">📤 &nbsp;Xuất file</div>
+                    <div class="dropdown-sep"></div>
+                    <div class="dropdown-item dropdown-item--danger">
+                      🗑️ &nbsp;Xóa
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown-demo" style="position: relative">
+                  <button
+                    class="btn btn--neon-electric"
+                    onclick="toggleDd(this)"
+                  >
+                    Neo Menu ▾
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    id="dd2"
+                    style="
+                      display: none;
+                      background: rgba(11, 14, 24, 0.95);
+                      backdrop-filter: blur(16px);
+                      border-color: rgba(0, 180, 255, 0.25);
+                      box-shadow: var(--glow-electric), var(--shadow-xl);
+                    "
+                  >
+                    <div
+                      class="dropdown-item"
+                      style="color: var(--color-neo-electric)"
+                    >
+                      ⚡ Electric Mode
+                    </div>
+                    <div
+                      class="dropdown-item"
+                      style="color: var(--color-neo-aurora)"
+                    >
+                      ∿ Aurora Mode
+                    </div>
+                    <div
+                      class="dropdown-item"
+                      style="color: var(--color-neo-violet)"
+                    >
+                      ◉ Violet Mode
+                    </div>
+                    <div class="dropdown-sep"></div>
+                    <div class="dropdown-item dropdown-item--danger">
+                      ✕ &nbsp;Disconnect
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       TABLE
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="table">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Table</div>
+              <span class="ds-section-num">21</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.ds-table</code> — data table với hover
+              rows.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.table-wrap > .ds-table</div>
+              </div>
+              <div class="preview-canvas" style="padding: 1.25rem">
+                <div class="table-wrap" style="width: 100%">
+                  <table class="ds-table">
+                    <thead>
+                      <tr>
+                        <th>Component</th>
+                        <th>Class</th>
+                        <th>Variants</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code class="code-inline">Button</code></td>
+                        <td><code class="code-inline">.btn</code></td>
+                        <td>9 variants + neo</td>
+                        <td>
+                          <span class="badge badge--success"
+                            ><span class="badge__dot"></span>Stable</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code class="code-inline">Badge</code></td>
+                        <td><code class="code-inline">.badge</code></td>
+                        <td>Status + neo + gradient</td>
+                        <td>
+                          <span class="badge badge--success"
+                            ><span class="badge__dot"></span>Stable</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code class="code-inline">Card</code></td>
+                        <td><code class="code-inline">.card</code></td>
+                        <td>Color accent + gradient border</td>
+                        <td>
+                          <span class="badge badge--success"
+                            ><span class="badge__dot"></span>Stable</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code class="code-inline">Glass</code></td>
+                        <td><code class="code-inline">.glass</code></td>
+                        <td>Tint + neo glow</td>
+                        <td>
+                          <span class="badge badge--info"
+                            ><span class="badge__dot"></span>Beta</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code class="code-inline">Neo Block</code></td>
+                        <td><code class="code-inline">.neo-block</code></td>
+                        <td>6 neon colors</td>
+                        <td>
+                          <span class="badge badge--neo-electric"
+                            ><span class="badge__dot"></span>New</span
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       CODE BLOCK
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="code">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Code Block</div>
+              <span class="ds-section-num">22</span>
+            </div>
+            <div class="ds-section-desc">
+              <code class="code-inline">.code-block</code> — syntax display +
+              header chrome.
+            </div>
+            <div class="preview">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.code-header + .code-block</div>
+              </div>
+              <div
+                class="preview-canvas preview-canvas--col"
+                style="padding: 1.25rem"
+              >
+                <div class="code-header">
+                  <div class="code-dots">
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                    <div class="code-dot"></div>
+                  </div>
+                  <span class="code-lang">scss</span>
+                </div>
+                <div class="code-block">
+                  // Sử dụng .btn với variants
+                  <span style="color: #7dd3fc">.btn</span>.<span
+                    style="color: #86efac"
+                    >btn--neo-cyber</span
+                  >
+                  { background :
+                  <span style="color: #fde68a">var(--gradient-neo-cyber)</span>;
+                  box-shadow :
+                  <span style="color: #fde68a">var(--glow-cyan)</span>; color :
+                  <span style="color: #fca5a5">#000</span>; } // Glass + Neo
+                  <span style="color: #7dd3fc">.glass</span>.<span
+                    style="color: #86efac"
+                    >glass--neo-electric</span
+                  >
+                  { background :
+                  <span style="color: #fde68a">rgba(0, 180, 255, 0.07)</span>;
+                  border-color:
+                  <span style="color: #fde68a">rgba(0, 180, 255, 0.28)</span>;
+                  box-shadow :
+                  <span style="color: #fde68a">var(--glow-electric)</span>,
+                  <span style="color: #fde68a">var(--shadow-md)</span>; }
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ══════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════ -->
+          <div class="ds-section" id="hero">
+            <div class="ds-section-header">
+              <div class="ds-section-title">Hero Section</div>
+              <span class="ds-section-num">23</span>
+            </div>
+            <div class="ds-section-desc">
+              Pattern <code class="code-inline">.hero--neo</code> — mesh
+              background, gradient text, action buttons.
+            </div>
+            <div class="preview" style="overflow: hidden">
+              <div class="preview-toolbar">
+                <div class="preview-dots">
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                  <div class="preview-dot"></div>
+                </div>
+                <div class="preview-label">.hero--neo demo</div>
+              </div>
+              <div class="hero-demo">
+                <div class="hero-eyebrow">⚡ Design System v2.0</div>
+                <div class="hero-title">
+                  <span class="t-gradient-cyber">Build Faster.</span><br />
+                  <span style="color: #e8eaf0">Ship Smarter.</span>
+                </div>
+                <div class="hero-sub">
+                  Hệ thống màu sắc chuyên nghiệp với Neo Accents, Gradients động
+                  và Glassmorphism. Tương thích Dark / Light Mode hoàn toàn.
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn--neo-cyber btn--lg btn--pill">
+                    Get Started →
+                  </button>
+                  <button class="btn btn--neon-electric btn--lg btn--pill">
+                    View Docs
+                  </button>
+                  <button
+                    class="btn btn--ghost btn--lg btn--pill"
+                    style="
+                      color: #9ba3b4;
+                      border-color: rgba(255, 255, 255, 0.12);
+                    "
+                  >
+                    ★ GitHub
+                  </button>
+                </div>
+                <div
+                  class="flex flex-wrap gap-3"
+                  style="justify-content: center"
+                >
+                  <span class="badge badge--neo-electric"
+                    ><span class="badge__dot"></span>30 Components</span
+                  >
+                  <span class="badge badge--neo-aurora"
+                    ><span class="badge__dot"></span>Dark / Light</span
+                  >
+                  <span class="badge badge--neo-violet"
+                    ><span class="badge__dot"></span>SCSS Tokens</span
+                  >
+                  <span class="badge badge--neo-magenta"
+                    ><span class="badge__dot"></span>BEM + Utilities</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.page-body -->
+      </div>
+      <!-- /.main-content -->
+    </div>
+    <!-- /.app-shell -->
+
+    <div class="toast" id="toast">✓ Đã copy!</div>
+
+    <script>
+      /* ── THEME ─────────────────────────────────────── */
+      function toggleTheme() {
+        const html = document.documentElement;
+        const dark = html.getAttribute("data-theme") === "dark";
+        html.setAttribute("data-theme", dark ? "light" : "dark");
+        document.getElementById("theme-icon").textContent = dark ? "🌙" : "☀️";
+        document.getElementById("theme-lbl").textContent = dark
+          ? "Dark"
+          : "Light";
+      }
+
+      /* ── COPY TOAST ───────────────────────────────── */
+      function showToast() {
+        const t = document.getElementById("toast");
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 1800);
+      }
+      function copy(txt) {
+        navigator.clipboard?.writeText(txt);
+        showToast();
+      }
+
+      /* ── SIDEBAR HIGHLIGHT ────────────────────────── */
+      function scrollTo(id) {
+        document
+          .getElementById(id)
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        document
+          .querySelectorAll(".sidenav-item")
+          .forEach(i => i.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+      }
+
+      /* ── COLOR GRID ────────────────────────────────── */
+      const semanticSwatches = [
+        {
+          name: "bg-base",
+          css: "background:var(--color-bg-base)",
+          val: "var(--color-bg-base)",
+          outline: true,
+        },
+        {
+          name: "bg-subtle",
+          css: "background:var(--color-bg-subtle)",
+          val: "var(--color-bg-subtle)",
+        },
+        {
+          name: "bg-muted",
+          css: "background:var(--color-bg-muted)",
+          val: "var(--color-bg-muted)",
+        },
+        {
+          name: "surface-1",
+          css: "background:var(--color-surface-1)",
+          val: "var(--color-surface-1)",
+          outline: true,
+        },
+        { name: "brand-500", css: "background:#3B82F6", val: "#3B82F6" },
+        {
+          name: "brand-subtle",
+          css: "background:rgba(59,130,246,.10)",
+          val: "rgba(59,130,246,.10)",
+        },
+        { name: "accent-primary", css: "background:#8B5CF6", val: "#8B5CF6" },
+        { name: "accent-second", css: "background:#22D3EE", val: "#22D3EE" },
+        { name: "success-base", css: "background:#22C55E", val: "#22C55E" },
+        {
+          name: "success-subtle",
+          css: "background:rgba(34,197,94,.12)",
+          val: "rgba(34,197,94,.12)",
+        },
+        { name: "warning-base", css: "background:#F59E0B", val: "#F59E0B" },
+        {
+          name: "warning-subtle",
+          css: "background:rgba(245,158,11,.12)",
+          val: "rgba(245,158,11,.12)",
+        },
+        { name: "error-base", css: "background:#EF4444", val: "#EF4444" },
+        {
+          name: "error-subtle",
+          css: "background:rgba(239,68,68,.12)",
+          val: "rgba(239,68,68,.12)",
+        },
+        { name: "info-base", css: "background:#3B82F6", val: "#3B82F6" },
+        {
+          name: "text-primary",
+          css: "background:var(--color-text-primary)",
+          val: "--color-text-primary",
+        },
+        {
+          name: "text-secondary",
+          css: "background:var(--color-text-secondary)",
+          val: "--color-text-secondary",
+        },
+        {
+          name: "border-default",
+          css: "background:var(--color-border-default)",
+          val: "--color-border-default",
+        },
+        {
+          name: "overlay 60%",
+          css: "background:rgba(0,0,0,.60)",
+          val: "rgba(0,0,0,.60)",
+        },
+        {
+          name: "overlay 10%",
+          css: "background:rgba(0,0,0,.10)",
+          val: "rgba(0,0,0,.10)",
+        },
+      ];
+      const cg = document.getElementById("color-grid");
+      cg.parentElement.style.cssText =
+        "display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.6rem;padding:1.25rem";
+      cg.remove();
+      const cgParent = document.querySelector("#colors .preview-canvas");
+      semanticSwatches.forEach(s => {
+        const div = document.createElement("div");
+        div.className = "swatch-card";
+        div.onclick = () => copy(s.val);
+        div.innerHTML = `<div class="swatch-color" style="${s.css};${s.outline ? "border:1px solid var(--color-border-default)" : ""}"></div><div class="swatch-info"><div class="swatch-name">${s.name}</div><div class="swatch-val">${s.val.substring(0, 22)}</div></div>`;
+        cgParent.appendChild(div);
+      });
+
+      /* ── GRADIENT GRID ─────────────────────────────── */
+      const grads = [
+        {
+          name: "brand-primary",
+          css: "linear-gradient(135deg,#3B82F6,#7C3AED,#6366F1)",
+        },
+        {
+          name: "brand-vivid",
+          css: "linear-gradient(135deg,#22D3EE,#3B82F6,#6D28D9)",
+        },
+        {
+          name: "brand-warm",
+          css: "linear-gradient(135deg,#F97316,#F43F5E,#DB2777)",
+        },
+        {
+          name: "neo-cyber",
+          css: "linear-gradient(120deg,#00B4FF,#00FFEA,#00FFA3)",
+        },
+        {
+          name: "neo-inferno",
+          css: "linear-gradient(120deg,#FFE600,#FF6B00,#FF006E)",
+        },
+        {
+          name: "neo-aurora",
+          css: "linear-gradient(135deg,#00FFA3,#00B4FF,#FF3DFF,#FF006E)",
+        },
+        {
+          name: "neo-galaxy",
+          css: "linear-gradient(135deg,#4D00FF,#7B2FFF,#FF3DFF,#00FFEA)",
+        },
+        {
+          name: "neo-sunset",
+          css: "linear-gradient(135deg,#FFE600,#FF6B00,#FF006E,#7B2FFF)",
+        },
+        {
+          name: "neo-holographic",
+          css: "linear-gradient(135deg,#B8F7FE,#00FFEA,#FF3DFF,#CCFF00,#B8F7FE)",
+        },
+        {
+          name: "status-success",
+          css: "linear-gradient(135deg,#2DD4BF,#22C55E)",
+        },
+        {
+          name: "status-warning",
+          css: "linear-gradient(135deg,#FDE047,#F97316)",
+        },
+        {
+          name: "status-error",
+          css: "linear-gradient(135deg,#FB7185,#DC2626)",
+        },
+        { name: "status-info", css: "linear-gradient(135deg,#22D3EE,#2563EB)" },
+      ];
+      const gg = document.getElementById("grad-grid");
+      grads.forEach(g => {
+        const d = document.createElement("div");
+        d.className = "grad-swatch";
+        d.onclick = () => copy(g.css);
+        d.innerHTML = `<div class="grad-color" style="background:${g.css}"></div><div class="grad-info"><div class="grad-name">${g.name}</div></div>`;
+        gg.appendChild(d);
+      });
+
+      /* ── NEO GRID ──────────────────────────────────── */
+      const neos = [
+        {
+          name: "Electric",
+          val: "#00B4FF",
+          glow: "0 0 10px rgba(0,180,255,.65),0 0 24px rgba(0,180,255,.35)",
+        },
+        {
+          name: "Laser Cyan",
+          val: "#00FFEA",
+          glow: "0 0 10px rgba(0,255,234,.65),0 0 24px rgba(0,255,234,.35)",
+        },
+        {
+          name: "Neon Green",
+          val: "#39FF14",
+          glow: "0 0 10px rgba(57,255,20,.65),0 0 24px rgba(57,255,20,.35)",
+        },
+        {
+          name: "Acid Lime",
+          val: "#CCFF00",
+          glow: "0 0 10px rgba(204,255,0,.55),0 0 22px rgba(204,255,0,.30)",
+        },
+        {
+          name: "Hot Magenta",
+          val: "#FF006E",
+          glow: "0 0 10px rgba(255,0,110,.65),0 0 24px rgba(255,0,110,.35)",
+        },
+        {
+          name: "Cyber Pink",
+          val: "#FF2D78",
+          glow: "0 0 10px rgba(255,45,120,.60),0 0 24px rgba(255,45,120,.32)",
+        },
+        {
+          name: "Fuchsia",
+          val: "#FF3DFF",
+          glow: "0 0 10px rgba(255,61,255,.58),0 0 24px rgba(255,61,255,.30)",
+        },
+        {
+          name: "Solar Yel",
+          val: "#FFE600",
+          glow: "0 0 10px rgba(255,230,0,.58),0 0 24px rgba(255,230,0,.30)",
+        },
+        {
+          name: "Plasma Org",
+          val: "#FF6B00",
+          glow: "0 0 10px rgba(255,107,0,.62),0 0 24px rgba(255,107,0,.32)",
+        },
+        {
+          name: "Ultraviolet",
+          val: "#7B2FFF",
+          glow: "0 0 10px rgba(123,47,255,.65),0 0 24px rgba(123,47,255,.35)",
+        },
+        {
+          name: "Deep Indigo",
+          val: "#4D00FF",
+          glow: "0 0 10px rgba(77,0,255,.58),0 0 22px rgba(77,0,255,.30)",
+        },
+        {
+          name: "Aurora",
+          val: "#00FFA3",
+          glow: "0 0 10px rgba(0,255,163,.58),0 0 24px rgba(0,255,163,.30)",
+        },
+      ];
+      const ng = document.getElementById("neo-grid");
+      neos.forEach(n => {
+        const d = document.createElement("div");
+        d.className = "neo-swatch";
+        d.style = `background:${n.val}10;border-color:${n.val}35`;
+        d.onclick = () => copy(n.val);
+        d.innerHTML = `<div class="neo-dot" style="background:${n.val};box-shadow:${n.glow}"></div><div class="neo-label" style="color:${n.val}">${n.name}</div><div class="neo-val" style="color:${n.val}">${n.val}</div>`;
+        ng.appendChild(d);
+      });
+
+      /* ── SHADOW GRID ───────────────────────────────── */
+      const shadows = [
+        {
+          label: "shadow-xs",
+          box: "0 1px 2px rgba(0,0,0,0.08)",
+          sub: "0 1px 2px",
+        },
+        {
+          label: "shadow-sm",
+          box: "0 1px 3px rgba(0,0,0,0.14)",
+          sub: "0 1-3px",
+        },
+        {
+          label: "shadow-md",
+          box: "0 4px 8px rgba(0,0,0,0.14)",
+          sub: "0 4px 8px",
+        },
+        {
+          label: "shadow-lg",
+          box: "0 12px 24px rgba(0,0,0,0.14)",
+          sub: "0 12px 24px",
+        },
+        {
+          label: "shadow-xl",
+          box: "0 24px 48px rgba(0,0,0,0.16)",
+          sub: "0 24px 48px",
+        },
+        {
+          label: "shadow-brand",
+          box: "0 4px 16px rgba(59,130,246,0.35)",
+          sub: "brand glow",
+        },
+        {
+          label: "shadow-accent",
+          box: "0 4px 16px rgba(139,92,246,0.40)",
+          sub: "violet glow",
+        },
+        {
+          label: "glow-electric",
+          box: "0 0 8px rgba(0,180,255,.6),0 0 22px rgba(0,180,255,.35)",
+          sub: "neo blue",
+        },
+        {
+          label: "glow-cyan",
+          box: "0 0 8px rgba(0,255,234,.6),0 0 22px rgba(0,255,234,.35)",
+          sub: "neo cyan",
+        },
+        {
+          label: "glow-magenta",
+          box: "0 0 8px rgba(255,0,110,.6),0 0 22px rgba(255,0,110,.35)",
+          sub: "neo pink",
+        },
+        {
+          label: "glow-violet",
+          box: "0 0 8px rgba(123,47,255,.6),0 0 22px rgba(123,47,255,.35)",
+          sub: "neo violet",
+        },
+        {
+          label: "glow-aurora",
+          box: "0 0 8px rgba(0,255,163,.55),0 0 22px rgba(0,255,163,.30)",
+          sub: "neo green",
+        },
+      ];
+      const shg = document.getElementById("shadow-grid");
+      shadows.forEach(s => {
+        const d = document.createElement("div");
+        d.className = "shadow-demo-card";
+        d.style = `box-shadow:${s.box}`;
+        d.innerHTML = `<div class="shadow-demo-label">${s.label}</div><div class="shadow-demo-sub">${s.sub}</div>`;
+        shg.appendChild(d);
+      });
+
+      /* ── TOGGLE ────────────────────────────────────── */
+      function syncToggle(inp) {
+        const track = inp.nextElementSibling;
+        const thumb = track.querySelector(".toggle-thumb");
+        if (inp.checked) {
+          track.style.background = "var(--color-brand-500)";
+          thumb.style.transform = "translateX(1.15rem)";
+        } else {
+          track.style.background = "";
+          thumb.style.transform = "";
+        }
+      }
+      function syncToggleNeo(inp) {
+        const track = inp.nextElementSibling;
+        const thumb = track.querySelector(".toggle-thumb");
+        if (inp.checked) {
+          track.style.background = "linear-gradient(120deg,#00B4FF,#00FFEA)";
+          track.style.boxShadow = "0 0 8px rgba(0,255,234,.5)";
+          thumb.style.transform = "translateX(1.15rem)";
+        } else {
+          track.style.background = "";
+          track.style.boxShadow = "";
+          thumb.style.transform = "";
+        }
+      }
+      // Init checked state
+      document.getElementById("t2").dispatchEvent(new Event("change"));
+
+      /* ── TABS ──────────────────────────────────────── */
+      function switchTab(btn, contentId) {
+        document
+          .querySelectorAll(".tabs-trigger")
+          .forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        document
+          .querySelectorAll(".tabs-content")
+          .forEach(c => (c.style.display = "none"));
+        document.getElementById(contentId).style.display = "block";
+      }
+
+      /* ── DROPDOWN ──────────────────────────────────── */
+      function toggleDd(btn) {
+        const menu = btn.nextElementSibling;
+        const open = menu.style.display !== "none";
+        document
+          .querySelectorAll(".dropdown-menu")
+          .forEach(m => (m.style.display = "none"));
+        if (!open) menu.style.display = "block";
+        event.stopPropagation();
+      }
+      document.addEventListener("click", () =>
+        document
+          .querySelectorAll(".dropdown-menu")
+          .forEach(m => (m.style.display = "none")),
+      );
+
+      /* ── SCROLL SPY ────────────────────────────────── */
+      const sections = document.querySelectorAll(".ds-section");
+      const navItems = document.querySelectorAll(".sidenav-item");
+      const obs = new IntersectionObserver(
+        entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              navItems.forEach(i => i.classList.remove("active"));
+              const target = document.querySelector(
+                `.sidenav-item[onclick*="'${e.target.id}'"]`,
+              );
+              if (target) target.classList.add("active");
+            }
+          });
+        },
+        { threshold: 0.3, rootMargin: "-60px 0px -40% 0px" },
+      );
+      sections.forEach(s => obs.observe(s));
+    </script>
+  </body>
+</html>

@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
+import "../src/setting/setting.scss";
+
 import data from "./json/test.json";
 import Poser from "./element/poser.jsx";
 
