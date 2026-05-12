@@ -25,7 +25,6 @@ const UI_CLASSES = {
     SENTENCE: "question__sentence",
     S_SENTENCE: "strong",
     E_SENTENCE: "em",
-    PICTURE_FRAME: "question__picture-frame",
     IMG_SENTENCE: "question__img-sentence",
   },
   /** ANSWER.CONTAINER: answer */
@@ -42,9 +41,16 @@ const UI_CLASSES = {
  * Các tham số cấu hình chung cho ứng dụng.
  */
 const APP_CONFIG = {
-  IMAGE_BASE_PATH: "./src/img/",
   AUTO_NEXT_DELAY: 1500, // Thời gian trễ (ms) trước khi tự động chuyển câu sau khi chọn đáp án
 };
+
+const images = import.meta.glob("../img/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+});
+
+function getImage(name) {
+  return images[`../img/${name}`]?.default;
+}
 
 /**
  * Component hiển thị nội dung câu hỏi và hình ảnh minh họa.
@@ -60,15 +66,13 @@ const Question = memo(({ index, q, img }) => (
       </strong>
       <em className={UI_CLASSES.QUESTION.E_SENTENCE}> {q}</em>
     </div>
-    <div className={UI_CLASSES.QUESTION.PICTURE_FRAME}>
-      <img
-        className={UI_CLASSES.QUESTION.IMG_SENTENCE}
-        src={`${APP_CONFIG.IMAGE_BASE_PATH}${img}`}
-        onError={e => {
-          e.target.style.display = "none";
-        }}
-      />
-    </div>
+    <img
+      className={UI_CLASSES.QUESTION.IMG_SENTENCE}
+      src={getImage(img)}
+      onError={e => {
+        e.target.style.display = "none";
+      }}
+    />
   </div>
 ));
 
@@ -93,7 +97,7 @@ const Answer = memo(({ a, selectedIndex, onAnswer }) => (
             {ans.text}
           </button>
           <img
-            src={`${APP_CONFIG.IMAGE_BASE_PATH}${ans.img}`}
+            src={getImage(ans.img)}
             onError={e => (e.target.style.display = "none")}
           />
         </span>

@@ -72,6 +72,7 @@ $shadow-btn: var(--shadow-brand);
 // ══════════════════════════════════════════════════════════
 body {
   background: var(--color-bg-base);
+  font-family: sans-serif;
 }
 .poser {
   display: flex;
@@ -142,12 +143,15 @@ body {
       // colour-coded badges
       &:nth-child(1) {
         @include status-badge("neutral");
+        border: 1px solid var(--color-neutral-text);
       }
       &:nth-child(2) {
         @include status-badge("success");
+        border: 1px solid var(--color-success-text);
       }
       &:nth-child(3) {
         @include status-badge("error");
+        border: 1px solid var(--color-error-text);
       }
     }
   }
@@ -202,12 +206,12 @@ body {
 
     .strong {
       color: var(--quiz-accent);
-      font-weight: 800;
+      font-weight: 900;
       margin-right: 0.4rem;
     }
     .em {
-      font-style: normal;
-      font-weight: 500;
+      font-style: italic;
+      font-weight: 550;
     }
   }
 
@@ -539,6 +543,12 @@ body {
     font-size: 0.92rem;
     border-radius: calc($radius-sm + 0.1rem);
   }
+}
+
+h1,
+h2,
+h3 {
+  font-weight: bold;
 }
 
 // ══════════════════════════════════════════════════════════
