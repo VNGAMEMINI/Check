@@ -60,7 +60,7 @@ const Question = memo(({ index, q, img }) => (
     </div>
     <img
       className={UI_CLASSES.QUESTION.IMG_SENTENCE}
-      src={`${import.meta.env.BASE_URL}src/img/${img}`}
+      src={`${import.meta.env.BASE_URL}img/${img}`}
       onError={e => {
         e.target.style.display = "none";
       }}
@@ -89,7 +89,7 @@ const Answer = memo(({ a, selectedIndex, onAnswer }) => (
             {ans.text}
           </button>
           <img
-            src={`${import.meta.env.BASE_URL}src/img/${ans.img}`}
+            src={`${import.meta.env.BASE_URL}img/${ans.img}`}
             onError={e => (e.target.style.display = "none")}
           />
         </span>

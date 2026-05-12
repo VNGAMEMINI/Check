@@ -1,3 +1,5 @@
+// npm run build,npm run deploy
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
