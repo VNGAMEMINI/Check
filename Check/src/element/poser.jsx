@@ -44,14 +44,6 @@ const APP_CONFIG = {
   AUTO_NEXT_DELAY: 1500, // Thời gian trễ (ms) trước khi tự động chuyển câu sau khi chọn đáp án
 };
 
-const images = import.meta.glob("../img/*.{png,jpg,jpeg,webp}", {
-  eager: true,
-});
-
-function getImage(name) {
-  return images[`../img/${name}`]?.default;
-}
-
 /**
  * Component hiển thị nội dung câu hỏi và hình ảnh minh họa.
  * @param {number} index - Thứ tự câu hỏi hiện tại.
@@ -68,7 +60,7 @@ const Question = memo(({ index, q, img }) => (
     </div>
     <img
       className={UI_CLASSES.QUESTION.IMG_SENTENCE}
-      src={getImage(img)}
+      src={`${import.meta.env.BASE_URL}src/img/${img}`}
       onError={e => {
         e.target.style.display = "none";
       }}
@@ -97,7 +89,7 @@ const Answer = memo(({ a, selectedIndex, onAnswer }) => (
             {ans.text}
           </button>
           <img
-            src={getImage(ans.img)}
+            src={`${import.meta.env.BASE_URL}src/img/${ans.img}`}
             onError={e => (e.target.style.display = "none")}
           />
         </span>
