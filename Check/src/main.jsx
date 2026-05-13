@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client";
 
 import "../src/setting/setting.scss";
 
-import data from "./json/test.json";
+import data from "./json/pl10.json";
 import Poser from "./element/poser.jsx";
 
 const len = data.length;
