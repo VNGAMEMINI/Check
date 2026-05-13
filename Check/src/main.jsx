@@ -13,7 +13,12 @@ const len = data.length;
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <>
-      <Poser data={data} title_h1={"trang web"} title_p={`có ${len} câu hỏi`} />
+      <Poser data={data} title_h1={"Pháp luật"} title_p={`có ${len} câu hỏi`} />
     </>
   </StrictMode>,
 );
+/*
+[
+  
+]
+*/

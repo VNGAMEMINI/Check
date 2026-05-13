@@ -1,5 +1,5 @@
-import { memo, useState } from "react";
-import { rdArr } from "../setting/setting.js";
+import { memo, useState, useReducer, useCallback } from "react";
+import { useQuiz } from "./_manage";
 import "./poser.scss";
 
 // ─── CONFIGURATION & CONSTANTS ──────────────────────────────────────────────
@@ -35,13 +35,6 @@ const UI_CLASSES = {
   },
   BTN_GROUP: "btn-group",
   BTN: "btn",
-};
-
-/**
- * Các tham số cấu hình chung cho ứng dụng.
- */
-const APP_CONFIG = {
-  AUTO_NEXT_DELAY: 1500, // Thời gian trễ (ms) trước khi tự động chuyển câu sau khi chọn đáp án
 };
 
 /**
@@ -137,99 +130,6 @@ const RandomBtn = memo(({ onClick, label }) => (
     {label}
   </button>
 ));
-
-/**
- * Chuẩn hóa dữ liệu thô từ JSON sang định dạng ứng dụng yêu cầu.
- * Xử lý linh hoạt trường hợp đáp án là chuỗi hoặc đối tượng có ảnh.
- * @param {Array} data - Mảng dữ liệu câu hỏi thô.
- * @returns {Array} Mảng dữ liệu đã qua xử lý.
- */
-function normalizeQuiz(data) {
-  return data.map(q => ({
-    ...q,
-    a: q.a.map((ans, idx) => ({
-      text: typeof ans === "object" ? ans.text : ans,
-      img: typeof ans === "object" ? ans.img : `${idx}-${q.img}`,
-      correct: idx === q.c,
-    })),
-  }));
-}
-
-// ─── CUSTOM HOOK FOR LOGIC ──────────────────────────────────────────────────
-
-/**
- * Custom Hook quản lý toàn bộ trạng thái và logic xử lý của bài trắc nghiệm.
- * @param {Array} initialData - Dữ liệu câu hỏi gốc.
- */
-function useQuiz(initialData) {
-  const [quiz] = useState(() => normalizeQuiz(initialData)); // Dữ liệu đã chuẩn hóa
-  const [viewQuiz, setViewQuiz] = useState(quiz); // Dữ liệu hiện thị (có thể xáo trộn)
-  const [index, setIndex] = useState(0); // Vị trí câu hiện tại
-  const [userSelections, setUserSelections] = useState({}); // Lưu đáp án người dùng đã chọn
-  const [result, setResult] = useState({
-    correct: 0,
-    wrong: 0,
-  });
-
-  const currentQuestion = viewQuiz[index] || { a: [] }; // Câu hỏi hiện tại
-  const selectedIndex = userSelections[index] ?? null; // Lựa chọn của người dùng tại câu hiện tại
-
-  // Hàm xáo trộn đáp án trong câu hỏi đang xem
-  const handleRandomAnswer = () => {
-    const newQuiz = [...viewQuiz];
-    newQuiz[index] = {
-      ...newQuiz[index],
-      a: rdArr([...newQuiz[index].a]),
-    };
-    setViewQuiz(newQuiz);
-  };
-
-  // Hàm xáo trộn toàn bộ bộ đề, reset lại từ câu đầu tiên
-  const handleRandomAll = () => {
-    const shuffledQuiz = rdArr([...quiz]).map(q => ({
-      ...q,
-      a: rdArr([...q.a]),
-    }));
-
-    setViewQuiz(shuffledQuiz);
-    setIndex(0);
-    setResult({ correct: 0, wrong: 0 });
-    setUserSelections({});
-  };
-
-  // Điều hướng: Quay lại câu trước
-  const previous = () => setIndex(i => Math.max(0, i - 1));
-  // Điều hướng: Chuyển sang câu sau
-  const next = () => setIndex(i => Math.min(viewQuiz.length - 1, i + 1));
-
-  // Xử lý khi chọn đáp án
-  const selectAnswer = i => {
-    if (selectedIndex !== null) return;
-
-    setUserSelections(prev => ({ ...prev, [index]: i }));
-    const ans = currentQuestion.a[i];
-    if (ans.correct) {
-      setResult(r => ({ ...r, correct: r.correct + 1 }));
-    } else {
-      setResult(r => ({ ...r, wrong: r.wrong + 1 }));
-    }
-    // Tự động chuyển câu sau một khoảng trễ đã cấu hình
-    setTimeout(next, APP_CONFIG.AUTO_NEXT_DELAY);
-  };
-
-  return {
-    index,
-    currentQuestion,
-    viewQuiz,
-    result,
-    selectedIndex,
-    handleRandomAnswer,
-    handleRandomAll,
-    previous,
-    next,
-    selectAnswer,
-  };
-}
 
 /**
  * Component chính của module Poser.
