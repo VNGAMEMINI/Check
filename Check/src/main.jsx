@@ -1,24 +1,19 @@
-// npm run build,npm run deploy
-
+//? ------------------------------------------------------------
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import "../src/setting/setting.scss";
+import "../src/setting/Style.scss";
+import Style from "../src/setting/Style.jsx";
 
-import data from "./json/pl10.json";
-import Poser from "./element/poser.jsx";
+import data from "./json/test.json";
+import Poser from "./element/Poser.jsx";
+//? ------------------------------------------------------------
 
-const len = data.length;
+const testStyle = false;
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <>
-      <Poser data={data} title_h1={"Pháp luật"} title_p={`có ${len} câu hỏi`} />
-    </>
-  </StrictMode>,
+  <StrictMode>{testStyle ? <Style /> : <Poser data={data} />}</StrictMode>,
 );
-/*
-[
-  
-]npm run deploy
-*/
+
+//TODO: npm run build  |  npm run deploy
+//TODO: https://vngamemini.github.io/Check/

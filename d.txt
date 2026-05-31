@@ -1,0 +1,79 @@
+// khi vào trang web sẽ thiển thị 
+
+Bắt đầu làm bài
+
+* Thiết lập thông tin trước khi vào bài kiểm tra
+
+(và phần nhập tên input lưu tên khi làm bài xông)
+
+thiện TAG chế độ [ tự do , kiểm tra ]
+
+TỰ DO
+    * Tùy chọn bài thi
+    giới hạn câu hỏi // mặt định là "đối đa"
+    Xáo trộn đáp án; Xáo trộn câu hỏi
+    Tự động sang câu tiếp
+
+    * Thời gian
+    Tổng thời gian // mặt định là "không giới hạng"
+    Thời gian câu hỏi // mặt định là "không giới hạng"
+
+KHIỂM TRA
+    * Tùy chọn bài thi
+    giới hạn câu hỏi // mặt định là "đối đa"
+    Xáo trộn tất cả // mặt định true khóa lại 'Xáo trộn đáp án; Xáo trộn câu hỏi'
+    Tự động sang câu tiếp // mặt định true
+
+    * Thời gian
+    Tổng thời gian // mặt định là "60 phút"
+
+(DAO DIỆN)
+    * KHIỂM TRA
+    có (Tổng thời gian)
+    có (tiến độ)
+    bỏ (Câu 1 / ..) (Đúng: 0) (Sai: 0) (Nguội: 0)
+    bỏ (đánh dáu)
+
+    * TỰ DO
+    có (Tổng thời gian) (Thời gian câu hỏi)
+    có (tiến độ)
+    có (Câu 1 / ..) (Đúng: 0) (Sai: 0) (Nguội: 0)
+    có (đánh dáu)
+
+(Chế độ dao diện)
+    * chuyển câu {Tự do}
+    kiểu bấm vào câu hỏi thì Tự động chuyển câu kế tiếp
+    có nút qua lại các câu
+    thêm dao diện tag câu khi người dùng đánh câu hỏi thì sẽ thiện câu hỏi "A,B,.." trên tag đó
+    dao diện tag sẽ thiện màu vàng khi người dùng {đánh dáu} câu
+    {Tự động sang câu tiếp} tự động chuyển câu kế tiếp
+
+    * câu chung {Kiểm tra} 
+    kiểu tất cả câu hỏi gộp chung lại với nhau 
+    khi bấm vào câu hỏi thì dử câu đó 'kiểu input:radio'
+    thêm dao diện tag câu khi người dùng đánh câu hỏi thì sẽ thiện câu hỏi "A,B,.." trên tag đó
+    dao diện tag sẽ thiện màu vàng khi người dùng {đánh dáu} câu
+    {Tự động sang câu tiếp} tự động cuộn đến câu tiếp theo khi bấm vào câu hỏi
+
+(nộp bài)
+    nếu dưới 5 điểm thì "tạm biệt bạn [name]" 
+    nếu trên 5 điểm thì "chúc mừng bạn [name]"
+    thiển thị điểm 
+    phần trăm câu "sai , đúng"
+    thiện tất cả câu <câu 1: đúng ; câu 2: sai ; câu 3: nguội ; ...>
+    * đánh giá
+    nếu dưới 5 "chưa đạt"
+    nếu trên 5 "đạt"
+
+
+
+{ 
+    name = "" tên nếu không có thì "Bạn", 
+    randomSen = is xáo trộn câu hỏi,
+    randomAns = is xáo trộn đáp án,
+    timeTotal= 0 tổng thời gian,
+    timePasses = 0 thời gian trôi qua,
+    limit = 0 giới hạn câu, 
+    mode = "" chế độ 'kiểm tra' & 'tự do', 
+    autoNext = [is trạng thái, 0 thời gian không quá 3s],  
+}
