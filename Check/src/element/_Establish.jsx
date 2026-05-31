@@ -1,6 +1,9 @@
+//? ------------------------------------------------------------
 import React, { useState, useEffect } from "react";
 import { QUIZ_MODES, DEFAULT_SETTINGS, TEXT, CSS } from "./config/constants.js";
 import { observer } from "mobx-react-lite";
+import "./_Establish.scss";
+//? ------------------------------------------------------------
 
 /**
  * Giao diện thiết lập thông số bài thi
@@ -20,7 +23,10 @@ const Establish = observer(({ quiz, onStep }) => {
   };
 
   const updateConfig = (key, value) => {
-    setConfig(prev => ({ ...prev, [key]: value }));
+    // Đảm bảo các giá trị số được lưu đúng kiểu Number
+    const finalValue =
+      key === "limit" || key === "timeTotal" ? Number(value) : value;
+    setConfig(prev => ({ ...prev, [key]: finalValue }));
   };
 
   const handleStart = () => {

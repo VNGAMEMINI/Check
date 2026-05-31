@@ -1,6 +1,10 @@
+//? ------------------------------------------------------------
 import React, { memo, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { QUIZ_MODES, TEXT, CSS } from "./config/constants.js";
+import "./_Assignment.scss";
+//? ------------------------------------------------------------
+
 
 /**
  * Lưới hiển thị trạng thái các câu hỏi
@@ -170,7 +174,7 @@ const Free = observer(({ quiz, onComplete }) => {
   return (
     <main className={styles.CONTAINER}>
       <AssignmentHeader quiz={quiz} />
-      
+
       {/* TagGrid đưa lên trên */}
       <TagGrid quiz={quiz} />
 
@@ -202,12 +206,15 @@ const Free = observer(({ quiz, onComplete }) => {
         >
           {labels.NEXT}
         </button>
-        <button 
-          className={styles.BTN_SUBMIT} 
+        <button
+          className={styles.BTN_SUBMIT}
           onClick={onComplete}
           disabled={quiz.unansweredCount > 0}
         >
-          {labels.SUBMIT} {quiz.unansweredCount > 0 ? `(${quiz.answeredCount}/${quiz.lenSen})` : ""}
+          {labels.SUBMIT}{" "}
+          {quiz.unansweredCount > 0
+            ? `(${quiz.answeredCount}/${quiz.lenSen})`
+            : ""}
         </button>
       </footer>
     </main>
