@@ -1,0 +1,932 @@
+// ============================================================
+//! CẤM AI ĐỔI TÊN FILE NÀY (KHI LÀM DỰ ÁN)
+//! CẤM AI SỬA CHỮA TRỰC TIẾP FILE NÀY (KHI LÀM DỰ ÁN)
+// ============================================================
+//?  🎨  DESIGN TOKENS — Color System
+//?  Version : 2.0.0
+//?  Author  : Design System Team
+//?  Updated : 2026
+// ============================================================
+//*  Cấu trúc:
+//*    1. PRIMITIVE PALETTE - Bảng màu cơ bản.
+//*    2. NEO ACCENT PRIMITIVES - Các màu điểm nhấn Neon/Glow.
+//*    3. LIGHT TOKENS - Các token màu theo ngữ nghĩa (Light Theme).
+//*    4. DARK TOKENS - Các token màu theo ngữ nghĩa (Dark Theme).
+//*    5. GRADIENT LIBRARY - Thư viện dải màu dải (Brand & Neo).
+//*    6. SHADOW & GLOW TOKENS - Hiệu ứng đổ bóng và phát sáng.
+//*    7. TRANSPARENCY SCALE - Các mức độ trong suốt và lớp phủ (Overlay).
+//*    8. ANIMATION TOKENS - Các tham số thời gian và kiểu chuyển động.
+//*    9. SCSS MIXINS & FUNCTIONS - Các hàm và mixin hỗ trợ xử lý phong cách.
+// ============================================================
+
+//? ============================================================
+//* 1. PRIMITIVE PALETTE
+//*    Màu thuần – không dùng trực tiếp trong component,
+//*    chỉ tham chiếu từ semantic tokens.
+//? ============================================================
+
+//* --- Neutrals ---
+$-neutral-0: #ffffff;
+$-neutral-50: #f8f9fa;
+$-neutral-100: #f0f2f5;
+$-neutral-150: #e8ecf0;
+$-neutral-200: #d9dde3;
+$-neutral-300: #bec4cc;
+$-neutral-400: #9aa0a8;
+$-neutral-500: #6b7280;
+$-neutral-600: #4b5563;
+$-neutral-700: #374151;
+$-neutral-750: #252d3a;
+$-neutral-800: #1a2030;
+$-neutral-850: #131924;
+$-neutral-900: #0d1117;
+$-neutral-950: #080c12;
+$-neutral-1000: #020408;
+
+//* --- Blues ---
+$-blue-100: #dbeafe;
+$-blue-200: #bfdbfe;
+$-blue-300: #93c5fd;
+$-blue-400: #60a5fa;
+$-blue-500: #3b82f6;
+$-blue-600: #2563eb;
+$-blue-700: #1d4ed8;
+$-blue-800: #1e3a8a;
+
+//* --- Cyans ---
+$-cyan-100: #cffafe;
+$-cyan-300: #67e8f9;
+$-cyan-400: #22d3ee;
+$-cyan-500: #06b6d4;
+$-cyan-600: #0891b2;
+
+//* --- Teals ---
+$-teal-100: #ccfbf1;
+$-teal-300: #5eead4;
+$-teal-400: #2dd4bf;
+$-teal-500: #14b8a6;
+$-teal-600: #0d9488;
+
+//* --- Greens ---
+$-green-100: #dcfce7;
+$-green-300: #86efac;
+$-green-400: #4ade80;
+$-green-500: #22c55e;
+$-green-600: #16a34a;
+$-green-700: #15803d;
+
+//* --- Limes ---
+$-lime-300: #bef264;
+$-lime-400: #a3e635;
+$-lime-500: #84cc16;
+
+//* --- Yellows ---
+$-yellow-100: #fef9c3;
+$-yellow-300: #fde047;
+$-yellow-400: #facc15;
+$-yellow-500: #eab308;
+
+//* --- Ambers ---
+$-amber-300: #fcd34d;
+$-amber-400: #fbbf24;
+$-amber-500: #f59e0b;
+$-amber-600: #d97706;
+
+//* --- Oranges ---
+$-orange-100: #ffedd5;
+$-orange-300: #fdba74;
+$-orange-400: #fb923c;
+$-orange-500: #f97316;
+$-orange-600: #ea580c;
+
+//* --- Reds ---
+$-red-100: #fee2e2;
+$-red-300: #fca5a5;
+$-red-400: #f87171;
+$-red-500: #ef4444;
+$-red-600: #dc2626;
+$-red-700: #b91c1c;
+
+//* --- Roses ---
+$-rose-100: #ffe4e6;
+$-rose-300: #fda4af;
+$-rose-400: #fb7185;
+$-rose-500: #f43f5e;
+$-rose-600: #e11d48;
+
+//* --- Pinks ---
+$-pink-100: #fce7f3;
+$-pink-300: #f9a8d4;
+$-pink-400: #f472b6;
+$-pink-500: #ec4899;
+$-pink-600: #db2777;
+
+//* --- Fuchsias ---
+$-fuchsia-100: #fae8ff;
+$-fuchsia-300: #e879f9;
+$-fuchsia-400: #d946ef;
+$-fuchsia-500: #c026d3;
+
+//* --- Purples ---
+$-purple-100: #f3e8ff;
+$-purple-300: #c084fc;
+$-purple-400: #a855f7;
+$-purple-500: #9333ea;
+$-purple-600: #7c3aed;
+$-purple-700: #6d28d9;
+
+//* --- Violets ---
+$-violet-300: #a78bfa;
+$-violet-400: #8b5cf6;
+$-violet-500: #7c3aed;
+$-violet-600: #6d28d9;
+
+//* --- Indigos ---
+$-indigo-100: #e0e7ff;
+$-indigo-300: #a5b4fc;
+$-indigo-400: #818cf8;
+$-indigo-500: #6366f1;
+$-indigo-600: #4f46e5;
+
+//? ============================================================
+//* 2. NEO / NEON ACCENT PRIMITIVES
+//*    Màu phát sáng – dùng cho highlight, glow, badge, tag
+//? ============================================================
+
+$neo-electric-blue: #00b4ff; // điện xanh
+$neo-laser-cyan: #00ffea; // cyan laser
+$neo-neon-green: #39ff14; // xanh lá neon
+$neo-acid-lime: #ccff00; // vàng chanh
+$neo-hot-magenta: #ff006e; // hồng nóng
+$neo-cyber-pink: #ff2d78; // hồng cyber
+$neo-vivid-fuchsia: #ff3dff; // fuchsia sống động
+$neo-solar-yellow: #ffe600; // vàng mặt trời
+$neo-plasma-orange: #ff6b00; // cam plasma
+$neo-ultraviolet: #7b2fff; // tím cực tím
+$neo-deep-indigo: #4d00ff; // indigo đậm
+$neo-aurora-teal: #00ffa3; // teal aurora
+$neo-holographic: #b8f7fe; // holographic
+$neo-ghost-white: #f0f4ff; // trắng ma
+
+:root {
+  --neo-electric-blue: $neo-electric-blue;
+  --neo-laser-cyan: $neo-laser-cyan;
+  --neo-neon-green: $neo-neon-green;
+  --neo-acid-lime: $neo-acid-lime;
+  --neo-hot-magenta: $neo-hot-magenta;
+  --neo-cyber-pink: $neo-cyber-pink;
+  --neo-vivid-fuchsia: $neo-vivid-fuchsia;
+  --neo-solar-yellow: $neo-solar-yellow;
+  --neo-plasma-orange: $neo-plasma-orange;
+  --neo-ultraviolet: $neo-ultraviolet;
+  --neo-deep-indigo: $neo-deep-indigo;
+  --neo-aurora-teal: $neo-aurora-teal;
+  --neo-holographic: $neo-holographic;
+  --neo-ghost-white: $neo-ghost-white;
+}
+
+//? ============================================================
+//* 3. LIGHT TOKENS
+//? ============================================================
+
+.light,
+#light {
+  //* --- Surface ---
+  --color-bg: #{$-neutral-0};
+  --color-bg-secondary: #{$-neutral-50};
+  --color-bg-tertiary: #{$-neutral-100};
+  --color-bg-elevated: #{$-neutral-0};
+  --color-bg-floating: #{$-neutral-0};
+  --color-bg-inverse: #{$-neutral-900};
+  --color-bg-glass: rgba(255, 255, 255, 0.72);
+
+  //* --- Text ---
+  --color-text: #{$-neutral-900};
+  --color-text-secondary: #{$-neutral-700};
+  --color-text-muted: #{$-neutral-500};
+  --color-text-disabled: #{$-neutral-400};
+  --color-text-inverse: #{$-neutral-0};
+  --color-text-on-accent: #{$-neutral-0};
+
+  //* --- Border ---
+  --color-border: #{$-neutral-200};
+  --color-border-soft: #{$-neutral-150};
+  --color-border-strong: #{$-neutral-300};
+  --color-border-focus: #{$-blue-500};
+  --color-border-error: #{$-red-500};
+
+  //* --- Brand ---
+  --color-primary: #{$-blue-500};
+  --color-primary-rgb:
+    #{red($-blue-500)}, #{green($-blue-500)}, #{blue($-blue-500)};
+  --color-primary-hover: #{$-blue-600};
+  --color-primary-active: #{$-blue-700};
+  --color-primary-subtle: #{$-blue-100};
+
+  //* --- Secondary ---
+  --color-secondary: #{$-violet-500};
+  --color-secondary-hover: #{$-violet-600};
+  --color-secondary-subtle: #{$-purple-100};
+
+  //* --- Accent ---
+  --color-accent: #{$neo-electric-blue};
+  --color-accent-rgb:
+    #{red($neo-electric-blue)}, #{green($neo-electric-blue)},
+    #{blue($neo-electric-blue)};
+  --color-accent-hover: #{$neo-laser-cyan};
+  --color-accent-subtle: rgba(0, 180, 255, 0.12);
+
+  //* --- Success ---
+  --color-success: #{$-green-500};
+  --color-success-text: #{$-green-700};
+  --color-success-subtle: #{$-green-100};
+  --color-success-border: #{$-green-300};
+
+  //* --- Warning ---
+  --color-warning: #{$-amber-500};
+  --color-warning-text: #{$-amber-600};
+  --color-warning-subtle: #{$-yellow-100};
+  --color-warning-border: #{$-amber-300};
+
+  //* --- Error ---
+  --color-error: #{$-red-500};
+  --color-error-text: #{$-red-700};
+  --color-error-subtle: #{$-red-100};
+  --color-error-border: #{$-red-300};
+
+  //* --- Info ---
+  --color-info: #{$-blue-500};
+  --color-info-text: #{$-blue-700};
+  --color-info-subtle: #{$-blue-100};
+  --color-info-border: #{$-blue-300};
+
+  //* --- Neutral ---
+  --color-neutral: #{$-neutral-500};
+  --color-neutral-text: #{$-neutral-700};
+  --color-neutral-subtle: #{$-neutral-100};
+
+  //* --- Interactive ---
+  --color-link: #{$-blue-600};
+  --color-link-hover: #{$-blue-700};
+  --color-selection: rgba(59, 130, 246, 0.18);
+
+  --color-interactive-hover: rgba(0, 0, 0, 0.04);
+  --color-interactive-active: rgba(0, 0, 0, 0.08);
+  --color-interactive-disabled: #{$-neutral-200};
+
+  //* --- Input ---
+  --color-input-bg: #{$-neutral-0};
+  --color-input-border: #{$-neutral-300};
+  --color-input-placeholder: #{$-neutral-400};
+
+  //* --- Card ---
+  --color-card-bg: #{$-neutral-0};
+  --color-card-border: #{$-neutral-200};
+
+  //* --- Table ---
+  --color-table-header: #{$-neutral-100};
+  --color-table-row-hover: #{$-neutral-50};
+
+  //* --- Scrollbar ---
+  --color-scrollbar: #{$-neutral-300};
+  --color-scrollbar-hover: #{$-neutral-400};
+
+  //* --- Skeleton ---
+  --color-skeleton-base: #{$-neutral-150};
+  --color-skeleton-highlight: #{$-neutral-100};
+
+  //* --- Badge ---
+  --color-badge-bg: #{$-neutral-100};
+  --color-badge-text: #{$-neutral-700};
+
+  //* --- Glass ---
+  --color-glass-bg: rgba(255, 255, 255, 0.72);
+  --color-glass-border: rgba(255, 255, 255, 0.8);
+
+  //* --- Neo ---
+  --color-neo-blue: #{$neo-electric-blue};
+  --color-neo-cyan: #{$neo-laser-cyan};
+  --color-neo-green: #{$neo-neon-green};
+  --color-neo-magenta: #{$neo-hot-magenta};
+  --color-neo-violet: #{$neo-ultraviolet};
+}
+
+//? ============================================================
+//* 4. DARK TOKENS
+//? ============================================================
+
+.dark,
+#dark {
+  //* --- Surface ---
+  // Existing surface colors...
+  --color-bg: #{$-neutral-900};
+  --color-bg-secondary: #{$-neutral-850};
+  --color-bg-tertiary: #{$-neutral-800};
+  --color-bg-elevated: #{$-neutral-750};
+  --color-bg-floating: #{$-neutral-700};
+  --color-bg-inverse: #{$-neutral-0};
+  --color-bg-glass: rgba(13, 17, 23, 0.72);
+
+  //* --- Text ---
+  --color-text: #{$-neutral-50};
+  --color-text-secondary: #{$-neutral-200};
+  --color-text-muted: #{$-neutral-400};
+  --color-text-disabled: #{$-neutral-500};
+  --color-text-inverse: #{$-neutral-900};
+  --color-text-on-accent: #{$-neutral-0};
+
+  //* --- Border ---
+  --color-border: #{$-neutral-700};
+  --color-border-soft: #{$-neutral-800};
+  --color-border-strong: #{$-neutral-600};
+  --color-border-focus: #{$neo-electric-blue};
+  --color-border-error: #{$-red-500};
+
+  //* --- Brand ---
+  --color-primary: #{$-blue-400};
+  --color-primary-rgb:
+    #{red($-blue-400)}, #{green($-blue-400)}, #{blue($-blue-400)};
+  --color-primary-hover: #{$-blue-300};
+  --color-primary-active: #{$-blue-200};
+  --color-primary-subtle: rgba(59, 130, 246, 0.12);
+
+  //* --- Secondary ---
+  --color-secondary: #{$-violet-400};
+  --color-secondary-hover: #{$-violet-300};
+  --color-secondary-subtle: rgba(124, 58, 237, 0.15);
+
+  //* --- Accent ---
+  --color-accent: #{$neo-laser-cyan};
+  --color-accent-rgb:
+    #{red($neo-laser-cyan)}, #{green($neo-laser-cyan)}, #{blue($neo-laser-cyan)};
+  --color-accent-hover: #{$neo-electric-blue};
+  --color-accent-subtle: rgba(0, 255, 234, 0.12);
+
+  //* --- Success ---
+  --color-success: #{$-green-400};
+  --color-success-text: #{$-green-300};
+  --color-success-subtle: rgba(34, 197, 94, 0.12);
+  --color-success-border: rgba(34, 197, 94, 0.35);
+
+  //* --- Warning ---
+  --color-warning: #{$-amber-400};
+  --color-warning-text: #{$-amber-300};
+  --color-warning-subtle: rgba(245, 158, 11, 0.12);
+  --color-warning-border: rgba(245, 158, 11, 0.35);
+
+  //* --- Error ---
+  --color-error: #{$-red-400};
+  --color-error-text: #{$-red-300};
+  --color-error-subtle: rgba(239, 68, 68, 0.12);
+  --color-error-border: rgba(239, 68, 68, 0.35);
+
+  //* --- Info ---
+  --color-info: #{$-cyan-400};
+  --color-info-text: #{$-cyan-300};
+  --color-info-subtle: rgba(34, 211, 238, 0.12);
+  --color-info-border: rgba(34, 211, 238, 0.35);
+
+  //* --- Neutral ---
+  --color-neutral: #{$-neutral-400};
+  --color-neutral-text: #{$-neutral-200};
+  --color-neutral-subtle: rgba(255, 255, 255, 0.05);
+
+  //* --- Interactive ---
+  --color-link: #{$-blue-300};
+  --color-link-hover: #{$-cyan-300};
+  --color-selection: rgba(0, 180, 255, 0.22);
+
+  --color-interactive-hover: rgba(255, 255, 255, 0.06);
+  --color-interactive-active: rgba(255, 255, 255, 0.12);
+  --color-interactive-disabled: #{$-neutral-700};
+
+  //* --- Input ---
+  --color-input-bg: #{$-neutral-800};
+  --color-input-border: #{$-neutral-700};
+  --color-input-placeholder: #{$-neutral-500};
+
+  //* --- Card ---
+  --color-card-bg: #{$-neutral-800};
+  --color-card-border: #{$-neutral-700};
+
+  //* --- Table ---
+  --color-table-header: #{$-neutral-800};
+  --color-table-row-hover: rgba(255, 255, 255, 0.03);
+
+  //* --- Scrollbar ---
+  --color-scrollbar: #{$-neutral-700};
+  --color-scrollbar-hover: #{$-neutral-600};
+
+  //* --- Skeleton ---
+  --color-skeleton-base: #{$-neutral-800};
+  --color-skeleton-highlight: #{$-neutral-700};
+
+  //* --- Badge ---
+  --color-badge-bg: rgba(255, 255, 255, 0.08);
+  --color-badge-text: #{$-neutral-100};
+
+  //* --- Glass ---
+  --color-glass-bg: rgba(13, 17, 23, 0.72);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+
+  //* --- Neo ---
+  --color-neo-blue: #{$neo-electric-blue};
+  --color-neo-cyan: #{$neo-laser-cyan};
+  --color-neo-green: #{$neo-neon-green};
+  --color-neo-magenta: #{$neo-hot-magenta};
+  --color-neo-violet: #{$neo-ultraviolet};
+}
+
+//? ============================================================
+//* 5. GRADIENT LIBRARY
+//*    Tất cả gradient dùng CSS custom properties để linh hoạt
+//*    thay đổi theo theme.
+//? ============================================================
+
+:root {
+  //* --- Brand Gradients ---
+  --gradient-brand-primary: linear-gradient(
+    135deg,
+    #{$-blue-500} 0%,
+    #{$-violet-500} 60%,
+    #{$-indigo-500} 100%
+  );
+
+  --gradient-brand-subtle: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.12) 0%,
+    rgba(139, 92, 246, 0.08) 100%
+  );
+
+  --gradient-brand-vivid: linear-gradient(
+    135deg,
+    #{$-cyan-400} 0%,
+    #{$-blue-500} 40%,
+    #{$-violet-600} 100%
+  );
+
+  --gradient-brand-warm: linear-gradient(
+    135deg,
+    #{$-orange-500} 0%,
+    #{$-rose-500} 50%,
+    #{$-pink-600} 100%
+  );
+
+  //* --- Neo / Neon Gradients  (sống động) ---
+  --gradient-neo-cyber: linear-gradient(
+    120deg,
+    #{$neo-electric-blue} 0%,
+    #{$neo-laser-cyan} 50%,
+    #{$neo-aurora-teal} 100%
+  );
+
+  --gradient-neo-inferno: linear-gradient(
+    120deg,
+    #{$neo-solar-yellow} 0%,
+    #{$neo-plasma-orange} 45%,
+    #{$neo-hot-magenta} 100%
+  );
+
+  --gradient-neo-aurora: linear-gradient(
+    135deg,
+    #{$neo-aurora-teal} 0%,
+    #{$neo-electric-blue} 35%,
+    #{$neo-vivid-fuchsia} 70%,
+    #{$neo-hot-magenta} 100%
+  );
+
+  --gradient-neo-galaxy: linear-gradient(
+    135deg,
+    #{$neo-deep-indigo} 0%,
+    #{$neo-ultraviolet} 30%,
+    #{$neo-vivid-fuchsia} 65%,
+    #{$neo-laser-cyan} 100%
+  );
+
+  --gradient-neo-matrix: linear-gradient(
+    180deg,
+    #{$neo-neon-green} 0%,
+    rgba(57, 255, 20, 0.6) 50%,
+    rgba(57, 255, 20, 0) 100%
+  );
+
+  --gradient-neo-sunset: linear-gradient(
+    135deg,
+    #{$neo-solar-yellow} 0%,
+    #{$neo-plasma-orange} 30%,
+    #{$neo-hot-magenta} 60%,
+    #{$neo-ultraviolet} 100%
+  );
+
+  --gradient-neo-holographic: linear-gradient(
+    135deg,
+    #{$neo-holographic} 0%,
+    #{$neo-laser-cyan} 25%,
+    #{$neo-vivid-fuchsia} 50%,
+    #{$neo-acid-lime} 75%,
+    #{$neo-holographic} 100%
+  );
+
+  //* --- UI Utility Gradients ---
+  --gradient-surface-top: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  --gradient-surface-bottom: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.06) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  --gradient-fade-right: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+
+  --gradient-fade-bottom: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+
+  --gradient-skeleton: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04) 0%,
+    rgba(0, 0, 0, 0.08) 50%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+
+  //* --- Status Gradients ---
+  --gradient-success: linear-gradient(
+    135deg,
+    #{$-teal-400} 0%,
+    #{$-green-500} 100%
+  );
+
+  --gradient-warning: linear-gradient(
+    135deg,
+    #{$-yellow-300} 0%,
+    #{$-orange-500} 100%
+  );
+
+  --gradient-error: linear-gradient(
+    135deg,
+    #{$-rose-400} 0%,
+    #{$-red-600} 100%
+  );
+
+  --gradient-info: linear-gradient(
+    135deg,
+    #{$-cyan-400} 0%,
+    #{$-blue-600} 100%
+  );
+
+  //* --- Mesh Gradient  (background sâu) ---
+  --gradient-mesh-light:
+    radial-gradient(
+      ellipse 80% 60% at 20% 20%,
+      rgba(59, 130, 246, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 80% 80%,
+      rgba(139, 92, 246, 0.1) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 50% 50%,
+      rgba(6, 182, 212, 0.06) 0%,
+      transparent 70%
+    );
+
+  --gradient-mesh-dark:
+    radial-gradient(
+      ellipse 80% 60% at 20% 20%,
+      rgba(0, 180, 255, 0.15) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 80% 80%,
+      rgba(123, 47, 255, 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 50% 50%,
+      rgba(0, 255, 234, 0.08) 0%,
+      transparent 70%
+    );
+
+  --gradient-mesh-neo:
+    radial-gradient(
+      ellipse 70% 50% at 10% 10%,
+      rgba(0, 180, 255, 0.25) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 60% 70% at 90% 85%,
+      rgba(255, 61, 255, 0.2) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 40% at 50% 50%,
+      rgba(0, 255, 163, 0.12) 0%,
+      transparent 65%
+    );
+}
+
+//? ============================================================
+//* 6. SHADOW & GLOW TOKENS
+//*    Sử dụng rgba() để tạo chiều sâu và hiệu ứng glow
+//? ============================================================
+
+:root {
+  //* --- Elevation Shadows  (neutral) ---
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 8px 10px rgba(0, 0, 0, 0.06);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  //* --- Brand / Color Shadows ---
+  --shadow-brand:
+    0 4px 14px rgba(59, 130, 246, 0.3), 0 2px 6px rgba(59, 130, 246, 0.15);
+  --shadow-accent:
+    0 4px 14px rgba(139, 92, 246, 0.3), 0 2px 6px rgba(139, 92, 246, 0.15);
+  --shadow-success: 0 4px 14px rgba(34, 197, 94, 0.3);
+  --shadow-warning: 0 4px 14px rgba(245, 158, 11, 0.3);
+  --shadow-error: 0 4px 14px rgba(239, 68, 68, 0.3);
+
+  //* --- Neo Glow Shadows  (mạnh – dùng cho neon UI) ---
+  --glow-electric:
+    0 0 8px rgba(0, 180, 255, 0.6), 0 0 20px rgba(0, 180, 255, 0.35),
+    0 0 40px rgba(0, 180, 255, 0.15);
+
+  --glow-cyan:
+    0 0 8px rgba(0, 255, 234, 0.6), 0 0 20px rgba(0, 255, 234, 0.35),
+    0 0 40px rgba(0, 255, 234, 0.15);
+
+  --glow-green:
+    0 0 8px rgba(57, 255, 20, 0.6), 0 0 20px rgba(57, 255, 20, 0.35),
+    0 0 40px rgba(57, 255, 20, 0.15);
+
+  --glow-magenta:
+    0 0 8px rgba(255, 0, 110, 0.6), 0 0 20px rgba(255, 0, 110, 0.35),
+    0 0 40px rgba(255, 0, 110, 0.15);
+
+  --glow-fuchsia:
+    0 0 8px rgba(255, 61, 255, 0.55), 0 0 20px rgba(255, 61, 255, 0.3),
+    0 0 40px rgba(255, 61, 255, 0.15);
+
+  --glow-violet:
+    0 0 8px rgba(123, 47, 255, 0.6), 0 0 20px rgba(123, 47, 255, 0.35),
+    0 0 40px rgba(123, 47, 255, 0.15);
+
+  --glow-orange:
+    0 0 8px rgba(255, 107, 0, 0.6), 0 0 20px rgba(255, 107, 0, 0.35),
+    0 0 40px rgba(255, 107, 0, 0.15);
+
+  --glow-aurora:
+    0 0 8px rgba(0, 255, 163, 0.55), 0 0 20px rgba(0, 255, 163, 0.3),
+    0 0 40px rgba(0, 255, 163, 0.15);
+
+  //* --- Focus Ring (accessibility) ---
+  --ring-focus-brand: 0 0 0 3px rgba(59, 130, 246, 0.4);
+  --ring-focus-error: 0 0 0 3px rgba(239, 68, 68, 0.4);
+  --ring-focus-neo: 0 0 0 3px rgba(0, 180, 255, 0.45);
+
+  //* --- Borders ---
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+  --border-width-lg: 3px;
+
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-full: 9999px; // For pill-shaped elements
+}
+
+//? ============================================================
+//* 7. TRANSPARENCY / OVERLAY SCALE
+//*    rgba() overlay tokens – dùng cho modal, tooltip, scrim
+//? ============================================================
+
+:root {
+  --overlay-white-5: rgba(255, 255, 255, 0.05);
+  --overlay-white-8: rgba(255, 255, 255, 0.08);
+  --overlay-white-10: rgba(255, 255, 255, 0.1);
+  --overlay-white-15: rgba(255, 255, 255, 0.15);
+  --overlay-white-20: rgba(255, 255, 255, 0.2);
+  --overlay-white-30: rgba(255, 255, 255, 0.3);
+  --overlay-white-50: rgba(255, 255, 255, 0.5);
+  --overlay-white-72: rgba(255, 255, 255, 0.72);
+  --overlay-white-90: rgba(255, 255, 255, 0.9);
+
+  --overlay-black-5: rgba(0, 0, 0, 0.05);
+  --overlay-black-8: rgba(0, 0, 0, 0.08);
+  --overlay-black-10: rgba(0, 0, 0, 0.1);
+  --overlay-black-20: rgba(0, 0, 0, 0.2);
+  --overlay-black-30: rgba(0, 0, 0, 0.3);
+  --overlay-black-40: rgba(0, 0, 0, 0.4);
+  --overlay-black-50: rgba(0, 0, 0, 0.5);
+  --overlay-black-60: rgba(0, 0, 0, 0.6);
+  --overlay-black-75: rgba(0, 0, 0, 0.75);
+  --overlay-black-90: rgba(0, 0, 0, 0.9);
+
+  // Màu sắc overlay
+  --overlay-brand-10: rgba(59, 130, 246, 0.1);
+  --overlay-brand-20: rgba(59, 130, 246, 0.2);
+  --overlay-accent-10: rgba(139, 92, 246, 0.1);
+  --overlay-accent-20: rgba(139, 92, 246, 0.2);
+  --overlay-danger-10: rgba(239, 68, 68, 0.1);
+  --overlay-success-10: rgba(34, 197, 94, 0.1);
+  --overlay-neo-10: rgba(0, 180, 255, 0.1);
+  --overlay-neo-20: rgba(0, 180, 255, 0.2);
+}
+
+//? ============================================================
+//* 8. ANIMATION / TRANSITION TOKENS
+//? ============================================================
+
+:root {
+  // Duration
+  --duration-instant: 80ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  --duration-slowest: 900ms;
+
+  // Easing
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1); // material ease
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); // spring overshoot
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  // Shorthand transitions
+  --transition-colors:
+    color var(--duration-fast) var(--ease-default),
+    background-color var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+  --transition-all: all var(--duration-normal) var(--ease-default);
+  --transition-transform: transform var(--duration-normal) var(--ease-spring);
+  --transition-opacity: opacity var(--duration-fast) var(--ease-out);
+}
+
+//? ============================================================
+//* 9. SCSS HELPER MIXINS & FUNCTIONS
+//? ============================================================
+
+//* --- Mixin: Glassmorphism Panel ---
+@mixin glass(
+  $blur: 12px,
+  $bg: var(--color-bg-glass),
+  $border: var(--color-border-subtle)
+) {
+  background: $bg;
+  backdrop-filter: blur($blur) saturate(180%);
+  -webkit-backdrop-filter: blur($blur) saturate(180%);
+  border: 1px solid $border;
+}
+
+//* --- Mixin: Neo Glow Border ---
+@mixin neon-border($color: $neo-electric-blue, $alpha: 0.7, $width: 1px) {
+  @if type-of($color) == color {
+    // If it's a Sass color, extract components
+    border: $width solid rgba(red($color), green($color), blue($color), $alpha);
+    box-shadow:
+      0 0 6px rgba(red($color), green($color), blue($color), 0.5),
+      0 0 14px rgba(red($color), green($color), blue($color), 0.35),
+      inset 0 0 8px rgba(red($color), green($color), blue($color), 0.1);
+  } @else if type-of($color) == string {
+    // If it's a string (assumed to be a CSS variable for RGB components)
+    border: $width solid rgba(var(#{$color}), $alpha);
+    box-shadow:
+      0 0 6px rgba(var(#{$color}), 0.5),
+      0 0 14px rgba(var(#{$color}), 0.35),
+      inset 0 0 8px rgba(var(#{$color}), 0.1);
+  } @else {
+    @error "Invalid color type for neon-border mixin: #{$color}. Expected a Sass color or a CSS variable name (e.g., '--my-color-rgb').";
+  }
+}
+
+//* --- Mixin: Gradient Text ---
+@mixin gradient-text($gradient: var(--gradient-brand-primary)) {
+  background: $gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+//* --- Mixin: Focus Ring ---
+@mixin focus-ring($color: var(--ring-focus-brand)) {
+  &:focus-visible {
+    outline: none;
+    box-shadow: $color;
+  }
+}
+
+//* --- Mixin: Status Badge ---
+@mixin status-badge($status: "info") {
+  $map: (
+    "success": (
+      var(--color-success-text),
+      var(--color-success-subtle),
+    ),
+    "warning": (
+      var(--color-warning-text),
+      var(--color-warning-subtle),
+    ),
+    "error": (
+      var(--color-error-text),
+      var(--color-error-subtle),
+    ),
+    "info": (
+      var(--color-info-text),
+      var(--color-info-subtle),
+    ),
+    "neutral": (
+      var(--color-neutral-text),
+      var(--color-neutral-subtle),
+    ),
+  );
+
+  $colors: map-get($map, $status);
+  color: nth($colors, 1);
+  background: nth($colors, 2);
+}
+
+//* --- Mixin: Themed Transition ---
+@mixin themed-transition($props: all) {
+  transition: $props var(--duration-normal) var(--ease-default);
+}
+
+//* --- Mixin: Skeleton Loading ---
+@mixin skeleton-loading($radius: 4px) {
+  background: var(--gradient-skeleton);
+  background-size: 200% 100%;
+  border-radius: $radius;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+//* --- Mixin: Gradient Button ---
+@mixin gradient-button(
+  $gradient: var(--gradient-brand-primary),
+  $glow: var(--shadow-brand)
+) {
+  background: $gradient;
+  box-shadow: $glow;
+  color: var(--color-text-on-accent);
+  border: none;
+  transition:
+    var(--transition-colors),
+    transform var(--duration-fast) var(--ease-spring);
+
+  &:hover {
+    filter: brightness(1.08) saturate(1.1);
+    transform: translateY(-1px);
+    box-shadow:
+      $glow,
+      0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+    filter: brightness(0.96);
+  }
+
+  &:disabled {
+    background: var(--color-interactive-disabled);
+    box-shadow: none;
+    filter: none;
+    cursor: not-allowed;
+  }
+}
+
+//* --- Function: Alpha color ---
+@function alpha($hex-color, $opacity) {
+  @return rgba(red($hex-color), green($hex-color), blue($hex-color), $opacity);
+}
+
+//* ---0 Function: Neo tint ---
+@function neo-tint($color, $strength: 0.15) {
+  @return rgba(red($color), green($color), blue($color), $strength);
+}

@@ -18,7 +18,7 @@ export const DEFAULT_SETTINGS = {
     timeTotal: 0,
   },
   [QUIZ_MODES.EXAM]: {
-    limit: 0,
+    limit: 60,
     randomSen: true,
     randomAns: true,
     autoNext: true,
@@ -93,7 +93,7 @@ export const CSS = {
 export const TEXT = {
   ESTABLISH: {
     TITLE: "Thiết lập bài kiểm tra",
-    SUBTITLE: "* Thiết lập thông tin trước khi vào bài kiểm tra",
+    SUBTITLE: "Thiết lập thông tin trước khi vào bài kiểm tra",
     NAME_LABEL: "Tên của bạn:",
     NAME_PLACEHOLDER: "Nhập tên để lưu kết quả...",
     MODE_FREE: "TỰ DO",
@@ -115,8 +115,8 @@ export const TEXT = {
     PENDING: "Nguội", // Đổi tên từ STATS_SKIPPED
     TOTAL_TIME: "Tổng thời gian",
     Q_TIME: "Thời gian câu", // Đổi tên từ QUESTION_TIME
-    PREV: "Câu trước", // Đổi tên từ BTN_PREV
-    NEXT: "Câu tiếp", // Đổi tên từ BTN_NEXT
+    PREV: "<=", // Đổi tên từ BTN_PREV
+    NEXT: "=>", // Đổi tên từ BTN_NEXT
     MARK: "Đánh dấu", // Đổi tên từ BOOKMARK
     UNMARK: "Bỏ đánh dấu", // Thêm nhãn bỏ đánh dấu
     SUBMIT: "Nộp bài", // Đổi tên từ BTN_SUBMIT

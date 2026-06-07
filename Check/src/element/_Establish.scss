@@ -1,0 +1,190 @@
+@import "../style/Style.scss";
+
+$mobile: 550px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1440px;
+$tv: 1920px;
+
+.establish-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding: 2rem;
+  transition: var(--transition-colors);
+
+  .card {
+    width: 100%;
+    max-width: 500px;
+    padding: 2.5rem;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+
+    .title {
+      display: block;
+      text-align: center;
+      font-size: 2.2rem;
+      @include gradient-text(var(--gradient-brand-primary));
+      font-family: sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      display: block;
+      text-align: center;
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+
+  .hint {
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .input-name {
+    width: auto;
+    padding: 12px; // Consider making this a token too, e.g., --spacing-md
+    border: var(--border-width-sm) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+    background: var(--color-input-bg);
+    color: var(--color-text);
+    transition: var(--transition-all);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-border-focus);
+      box-shadow: var(--ring-focus-brand);
+    }
+  }
+}
+
+.mode-selector {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--color-border-soft);
+
+  .mode-tab {
+    background: transparent;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: var(--transition-all);
+    border-bottom: var(--border-width-lg) solid var(--color-border); // Gạch chân màu xám mặc định
+    margin-bottom: -1px; // Để border-bottom đè lên border-bottom của selector
+
+    &:hover {
+      color: var(--color-text);
+      border-bottom-color: var(--color-border-strong);
+    }
+
+    &.is-active {
+      border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0; // Bo góc trên để tạo khối
+      border-bottom-color: var(--color-accent); // Gạch chân màu xanh Neo
+      filter: drop-shadow(0 0 2px rgba(var(--color-accent-rgb), 0.3));
+    }
+  }
+}
+
+.settings-section {
+  margin-bottom: 2rem;
+  background: var(--color-accent-subtle);
+  padding: 1.25rem;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border-soft);
+
+  .hint {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+  }
+
+  .setting-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+
+    label {
+      font-size: 0.95rem;
+      color: var(--color-text);
+    }
+
+    input[type="number"] {
+      width: 80px;
+      padding: 6px 10px;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--color-border);
+      background: var(--color-input-bg);
+      color: var(--color-text);
+    }
+    @media (max-width: $mobile) {
+      span.hint {
+        display: none;
+      }
+    }
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      &:has(input:disabled) {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.btn-start {
+  @include gradient-button;
+  width: 100%;
+  padding: 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  border-radius: var(--border-radius-md);
+  margin-top: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+}

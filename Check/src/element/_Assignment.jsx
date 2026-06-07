@@ -5,7 +5,6 @@ import { QUIZ_MODES, TEXT, CSS } from "./config/constants.js";
 import "./_Assignment.scss";
 //? ------------------------------------------------------------
 
-
 /**
  * Lưới hiển thị trạng thái các câu hỏi
  */
@@ -62,6 +61,22 @@ const QuestionItem = observer(({ quiz, question, index, isExam }) => {
   // Loại bỏ logic khóa câu hỏi tuần tự theo yêu cầu "giống y vậy"
   const isLocked = false;
 
+  const resolveImg = url => {
+    if (!url) return "";
+    if (/^(http|https|data:)/.test(url)) return url;
+
+    // Đảm bảo không bị nhân đôi dấu gạch chéo và xử lý subpath từ BASE_URL
+    const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, ""); // Bỏ / cuối nếu có
+    const cleanUrl = url.replace(/^\//, ""); // Bỏ / đầu của url nếu có
+
+    // Nếu url đã bao gồm đường dẫn 'img/', chỉ cần nối với baseUrl
+    if (cleanUrl.startsWith("img/")) {
+      return `${baseUrl}/${cleanUrl}`;
+    }
+
+    return `${baseUrl}/img/${cleanUrl}`;
+  };
+
   const handleSelect = ansIdx => {
     if (!isExam && isAnswered) return;
 
@@ -89,11 +104,20 @@ const QuestionItem = observer(({ quiz, question, index, isExam }) => {
         {TEXT.ASSIGNMENT.QUESTION} {index + 1}: {question.q}
       </h3>
       {question.img && (
-        <img src={question.img} className={styles.QUESTION_IMAGE} alt="" />
+        <img
+          src={resolveImg(question.img)}
+          className={styles.QUESTION_IMAGE}
+          onError={e => (e.currentTarget.hidden = true)}
+        />
       )}
 
       <div className={styles.ANSWER_LIST}>
         {question.a.map((ans, idx) => {
+          // Hỗ trợ cả đáp án là String (pl10.json) hoặc Object {text, img}
+          const isObj = typeof ans === "object" && ans !== null;
+          const ansText = isObj ? ans.text : ans;
+          const ansImg = isObj ? ans.img : null;
+
           const isSelected = result?.selectedIndex === idx;
           let feedbackClass = "";
 
@@ -111,6 +135,7 @@ const QuestionItem = observer(({ quiz, question, index, isExam }) => {
               className={`${styles.ANSWER_ITEM} ${isSelected ? styles.SELECTED : ""} ${feedbackClass}`}
             >
               <input
+                style={{ display: "none" }}
                 type="radio"
                 checked={isSelected}
                 name={`q-${question.id}`}
@@ -120,7 +145,19 @@ const QuestionItem = observer(({ quiz, question, index, isExam }) => {
               <span className={styles.ANSWER_INDEX}>
                 {String.fromCharCode(65 + idx)}.
               </span>
-              <span className={styles.ANSWER_TEXT}>{ans.text}</span>
+              <span className={styles.ANSWER_TEXT}>{ansText}</span>
+              {ansImg && (
+                <img
+                  src={resolveImg(ansImg)}
+                  className="answer-image"
+                  onLoad={e => {
+                    e.currentTarget.style.visibility = "visible";
+                  }}
+                  onError={e => {
+                    e.currentTarget.style.visibility = "hidden";
+                  }}
+                />
+              )}
             </label>
           );
         })}
@@ -179,6 +216,7 @@ const Free = observer(({ quiz, onComplete }) => {
       <TagGrid quiz={quiz} />
 
       <QuestionItem
+        key={q.id}
         quiz={quiz}
         question={q}
         index={quiz.index}

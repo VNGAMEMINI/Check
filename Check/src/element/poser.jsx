@@ -2,7 +2,6 @@
 import { memo, useState, useMemo, useCallback } from "react";
 import { ADQuiz } from "../quiz/ADQuiz.js";
 import { QUIZ_STATES } from "./config/constants.js";
-import "./poser.scss";
 import Establish from "./_Establish.jsx";
 import Assignment from "./_Assignment.jsx";
 import Complete from "./_Complete.jsx";
@@ -11,7 +10,6 @@ import Complete from "./_Complete.jsx";
 function Poser({ data = [] }) {
   const quiz = useMemo(() => new ADQuiz(data), [data]);
   const [step, setStep] = useState(QUIZ_STATES.establish);
-  console.log(step);
 
   if (step === QUIZ_STATES.establish) {
     return (

@@ -5,7 +5,6 @@ import { TEXT, CSS } from "./config/constants.js";
 import "./_Complete.scss";
 //? ------------------------------------------------------------
 
-
 /**
  * Giao diện kết quả bài thi
  */

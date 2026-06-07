@@ -9,33 +9,38 @@
  * Format output:
  * { id, q, img, explanation, c, a: [{text, img, correct}] }
  */
-export const normalizeQuiz = data => {
-  return data.map((q, qIdx) => {
-    // Xác định đáp án đúng từ field 'c' (index) hoặc field 'correct' (boolean)
-    const rawCorrectIndex = q.a.findIndex(
-      a => typeof a === "object" && a !== null && a.correct,
-    );
-    const correctIndex =
-      q.c != null ? Number(q.c) : rawCorrectIndex >= 0 ? rawCorrectIndex : 0;
+export const normalizeQuiz = (data = []) => {
+  if (!Array.isArray(data)) return [];
+
+  return data.map((item, qIdx) => {
+    const q = item && typeof item === "object" ? item : {};
+    const answers = Array.isArray(q.a) ? q.a : [];
+
+    let correctIndex = Number(q.c);
+
+    if (
+      Number.isNaN(correctIndex) ||
+      correctIndex < 0 ||
+      correctIndex >= answers.length
+    ) {
+      correctIndex = 0;
+    }
 
     return {
-      id: qIdx,
-      q: q.q || "",
-      img: q.img || "",
-      explanation: q.explanation || "Chưa có giải thích cho câu hỏi này.",
+      id: q.id ?? qIdx,
+      q: q.q ?? "",
+      img: q.img ?? "",
+      e: q.e ?? "",
       c: correctIndex,
-      a: q.a.map((ans, idx) => {
-        // Xử lý cả format string và object
-        const isObject = typeof ans === "object" && ans !== null;
-        const answerImg = isObject ? ans.img : null;
 
-        return {
-          text: isObject ? ans.text || "" : String(ans),
-          // Nếu không có img từ object, tạo tên ảnh tự động từ question img
-          img: answerImg || (q.img ? `${idx}-${q.img}` : ""),
-          correct: idx === correctIndex,
-        };
-      }),
+      a: answers.map((answer, idx) => ({
+        text: answer == null ? "" : String(answer),
+
+        // 0-html.png, 1-html.png, 2-html.png...
+        img: q.img && typeof q.img === "string" ? `${idx}-${q.img}` : "",
+
+        correct: idx === correctIndex,
+      })),
     };
   });
 };
