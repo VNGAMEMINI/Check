@@ -56,7 +56,12 @@
   {
     "q": "The present simple is used to describe:",
     "img": "",
-    "a": ["a fact that is always true.", "a completed action in the past.", "an action happening at the time of speaking.", "an action that started in the past and continues in the present."],
+    "a": [
+      "a fact that is always true.",
+      "a completed action in the past.",
+      "an action happening at the time of speaking.",
+      "an action that started in the past and continues in the present."
+    ],
     "c": 0
   },
   {
@@ -176,13 +181,23 @@
   {
     "q": "Do you like ....................? - No, I don't.",
     "img": "",
-    "a": ["play tennis", "played tennis", "to play tennis", "to playing tennis"],
+    "a": [
+      "play tennis",
+      "played tennis",
+      "to play tennis",
+      "to playing tennis"
+    ],
     "c": 2
   },
   {
     "q": "When she has free time, she usually ....................",
     "img": "",
-    "a": ["listen to music", "listening music", "listened music", "listens to music"],
+    "a": [
+      "listen to music",
+      "listening music",
+      "listened music",
+      "listens to music"
+    ],
     "c": 3
   },
   {
@@ -254,36 +269,41 @@
   {
     "q": ".................... some pencils on the desk.",
     "img": "",
-    "a": ["There is", "There not / there isn't", "There are not / there aren't", "There are"],
+    "a": [
+      "There is",
+      "There not / there isn't",
+      "There are not / there aren't",
+      "There are"
+    ],
     "c": 3
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe man is .................... the girl.",
-    "img": "cau_44.png",
+    "img": "anh/img44.jpg",
     "a": ["near", "opposite", "behind", "between"],
     "c": 2
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe book is .................... the table.",
-    "img": "cau_45.png",
+    "img": "anh/img45.jpg",
     "a": ["under", "on", "in", "near"],
     "c": 1
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe TV is .................... the dog and the cat.",
-    "img": "cau_46.png",
+    "img": "anh/img46.jpg",
     "a": ["in front of", "opposite", "between", "in"],
     "c": 2
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe dog is .................... the armchair.",
-    "img": "cau_47.png",
+    "img": "anh/img47.jpg",
     "a": ["in", "on", "between", "in front of"],
     "c": 3
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.",
-    "img": "cau_48.png",
+    "img": "anh/img48.jpg",
     "a": ["go up", "go down", "turn right", "turn left"],
     "c": 2
   },
@@ -314,7 +334,12 @@
   {
     "q": " \"Milk\" is ....................",
     "img": "",
-    "a": ["a concrete noun", "an abstract noun", "a countable noun", "an uncountable noun"],
+    "a": [
+      "a concrete noun",
+      "an abstract noun",
+      "a countable noun",
+      "an uncountable noun"
+    ],
     "c": 3
   },
   {
@@ -338,84 +363,89 @@
   {
     "q": " \"Carrot\" is ....................",
     "img": "",
-    "a": ["a countable noun", "an uncountable noun", "an abstract noun", "a concrete noun"],
+    "a": [
+      "a countable noun",
+      "an uncountable noun",
+      "an abstract noun",
+      "a concrete noun"
+    ],
     "c": 0
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_58.png",
+    "img": "anh/img58.jpg",
     "a": ["tea", "beer", "wine", "soft drinks"],
     "c": 0
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_59.png",
+    "img": "anh/img59.jpg",
     "a": ["smoothies", "mineral water", "coffee", "wine"],
     "c": 1
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_60.png",
+    "img": "anh/img60.jpg",
     "a": ["smoothies", "mineral water", "lemon juice", "wine"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_61.png",
+    "img": "anh/img61.jpg",
     "a": ["smoothies", "mineral water", "lemon juice", "beer"],
     "c": 3
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_62.png",
+    "img": "anh/img62.jpg",
     "a": ["a bunch of bananas", "cheese", "beefsteak", "carrots"],
     "c": 0
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_63.png",
+    "img": "anh/img63.jpg",
     "a": ["banana", "potatoes", "beefsteak", "carrots"],
     "c": 3
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_64.png",
+    "img": "anh/img64.jpg",
     "a": ["beefsteak", "meat", "fish", "prawn"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_65.png",
+    "img": "anh/img65.jpg",
     "a": ["mushrooms", "potatoes", "oranges", "bananas"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_66.png",
+    "img": "anh/img66.jpg",
     "a": ["mineral water", "soft drinks", "beer", "wine"],
     "c": 1
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "cau_67.png",
+    "img": "anh/img67.jpg",
     "a": ["beer", "wine", "tea", "coffee"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_68.png",
+    "img": "anh/img68.jpg",
     "a": ["meat", "salmon", "beefsteak", "cheese"],
     "c": 1
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_69.png",
+    "img": "anh/img69.jpg",
     "a": ["oranges", "bananas", "tomatoes", "potatoes"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_70.png",
+    "img": "anh/img70.jpg",
     "a": ["mushrooms", "banana", "tomatoes", "potatoes"],
     "c": 3
   },
@@ -512,25 +542,45 @@
   {
     "q": "My father .................... (1) a worker. He .................... (2) for a big company now.",
     "img": "",
-    "a": ["(1) is / (2) works", "(1) is / (2) is working", "(1) is / (2) worked", "(1) is / (2) working"],
+    "a": [
+      "(1) is / (2) works",
+      "(1) is / (2) is working",
+      "(1) is / (2) worked",
+      "(1) is / (2) working"
+    ],
     "c": 1
   },
   {
     "q": "My / family / four / has / members.",
     "img": "",
-    "a": ["My members four family has.", "My family has four members.", "My has members family four.", "My members four has family."],
+    "a": [
+      "My members four family has.",
+      "My family has four members.",
+      "My has members family four.",
+      "My members four has family."
+    ],
     "c": 1
   },
   {
     "q": "tall / is / She / and / thin /",
     "img": "",
-    "a": ["She is tall and thin.", "She thin tall is and.", "She tall and is thin.", "She and is tall thin."],
+    "a": [
+      "She is tall and thin.",
+      "She thin tall is and.",
+      "She tall and is thin.",
+      "She and is tall thin."
+    ],
     "c": 0
   },
   {
     "q": "I / her long black hair / her light skin / love / and /",
     "img": "",
-    "a": ["I love black hair and her light skin her long.", "I love her light skin her long black hair and.", "I love her long black hair and her light skin.", "I love and her long black hair her light skin."],
+    "a": [
+      "I love black hair and her light skin her long.",
+      "I love her light skin her long black hair and.",
+      "I love her long black hair and her light skin.",
+      "I love and her long black hair her light skin."
+    ],
     "c": 2
   },
   {
@@ -673,25 +723,30 @@
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "cau_113.png",
+    "img": "anh/img113jpgg",
     "a": ["do homework", "iron the clothes", "wash the dishes", "go shopping"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "cau_114.png",
-    "a": ["play a computer game", "do homework", "study English", "listen to music"],
+    "img": "anh/img114jpgg",
+    "a": [
+      "play a computer game",
+      "do homework",
+      "study English",
+      "listen to music"
+    ],
     "c": 0
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "cau_115.png",
+    "img": "anh/img115jpgg",
     "a": ["make a cake", "watch a movie", "study English", "go shopping"],
     "c": 3
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "cau_116.png",
+    "img": "anh/img116jpgg",
     "a": ["wash the dishes", "make a cake", "watch a movie", "study English"],
     "c": 1
   },
@@ -854,7 +909,12 @@
   {
     "q": "I ‘ve got a toothache.",
     "img": "",
-    "a": ["You mustn’t go to the dentist.", "You should go to optician.", "You shouldn’t go to the dentist.", "You should go to the dentist."],
+    "a": [
+      "You mustn’t go to the dentist.",
+      "You should go to optician.",
+      "You shouldn’t go to the dentist.",
+      "You should go to the dentist."
+    ],
     "c": 3
   },
   {
@@ -878,7 +938,12 @@
   {
     "q": "What / you / are / interested / in / ?",
     "img": "",
-    "a": ["What interested in are you?", "What you are interested in?", "What are you interested in?", "What are you in interested?"],
+    "a": [
+      "What interested in are you?",
+      "What you are interested in?",
+      "What are you interested in?",
+      "What are you in interested?"
+    ],
     "c": 2
   },
   {

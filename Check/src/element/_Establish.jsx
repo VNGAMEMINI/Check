@@ -62,7 +62,10 @@ const Establish = observer(({ quiz, onStep }) => {
       quiz.startTime?.(quiz.state.time);
     }
 
-    quiz.state.autoNext = { enabled: finalConfig.autoNext, delay: 0 };
+    quiz.state.autoNext = {
+      enabled: finalConfig.autoNext,
+      delay: isExam ? 0 : 0.3, // Mặc định 0.3s cho chế độ Tự do để tăng trải nghiệm UX
+    };
 
     onStep(); // Chuyển sang bước Assignment
   };

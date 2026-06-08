@@ -85,12 +85,9 @@ const QuestionItem = observer(({ quiz, question, index, isExam }) => {
 
     quiz.selectAnswer(ansIdx);
 
-    if (quiz.state.autoNext?.enabled) {
-      if (isExam) {
-        quiz.next();
-      } else {
-        setTimeout(() => quiz.next(), 300);
-      }
+    if (quiz.isAutoNextEnabled) {
+      const delayMs = quiz.autoNextDelay * 1500;
+      delayMs > 0 ? setTimeout(() => quiz.next(), delayMs) : quiz.next();
     }
   };
 
@@ -151,10 +148,10 @@ const QuestionItem = observer(({ quiz, question, index, isExam }) => {
                   src={resolveImg(ansImg)}
                   className="answer-image"
                   onLoad={e => {
-                    e.currentTarget.style.visibility = "visible";
+                    e.currentTarget.style.display = "block";
                   }}
                   onError={e => {
-                    e.currentTarget.style.visibility = "hidden";
+                    e.currentTarget.style.display = "none";
                   }}
                 />
               )}
