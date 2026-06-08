@@ -279,31 +279,31 @@
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe man is .................... the girl.",
-    "img": "anh/img44.png",
+    "img": "anh/img44.jpg",
     "a": ["near", "opposite", "behind", "between"],
     "c": 2
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe book is .................... the table.",
-    "img": "anh/img45.png",
+    "img": "anh/img45.jpg",
     "a": ["under", "on", "in", "near"],
     "c": 1
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe TV is .................... the dog and the cat.",
-    "img": "anh/img46.png",
+    "img": "anh/img46.jpg",
     "a": ["in front of", "opposite", "between", "in"],
     "c": 2
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe dog is .................... the armchair.",
-    "img": "anh/img47.png",
+    "img": "anh/img47.jpg",
     "a": ["in", "on", "between", "in front of"],
     "c": 3
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.",
-    "img": "anh/img48.png",
+    "img": "anh/img48.jpg",
     "a": ["go up", "go down", "turn right", "turn left"],
     "c": 2
   },
@@ -373,79 +373,79 @@
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img58.png",
+    "img": "anh/img58.jpg",
     "a": ["tea", "beer", "wine", "soft drinks"],
     "c": 0
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img59.png",
+    "img": "anh/img59.jpg",
     "a": ["smoothies", "mineral water", "coffee", "wine"],
     "c": 1
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img60.png",
+    "img": "anh/img60.jpg",
     "a": ["smoothies", "mineral water", "lemon juice", "wine"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img61.png",
+    "img": "anh/img61.jpg",
     "a": ["smoothies", "mineral water", "lemon juice", "beer"],
     "c": 3
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img62.png",
+    "img": "anh/img62.jpg",
     "a": ["a bunch of bananas", "cheese", "beefsteak", "carrots"],
     "c": 0
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img63.png",
+    "img": "anh/img63.jpg",
     "a": ["banana", "potatoes", "beefsteak", "carrots"],
     "c": 3
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img64.png",
+    "img": "anh/img64.jpg",
     "a": ["beefsteak", "meat", "fish", "prawn"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img65.png",
+    "img": "anh/img65.jpg",
     "a": ["mushrooms", "potatoes", "oranges", "bananas"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img66.png",
+    "img": "anh/img66.jpg",
     "a": ["mineral water", "soft drinks", "beer", "wine"],
     "c": 1
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "anh/img67.png",
+    "img": "anh/img67.jpg",
     "a": ["beer", "wine", "tea", "coffee"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img68.png",
+    "img": "anh/img68.jpg",
     "a": ["meat", "salmon", "beefsteak", "cheese"],
     "c": 1
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img69.png",
+    "img": "anh/img69.jpg",
     "a": ["oranges", "bananas", "tomatoes", "potatoes"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img70.png",
+    "img": "anh/img70.jpg",
     "a": ["mushrooms", "banana", "tomatoes", "potatoes"],
     "c": 3
   },
@@ -723,13 +723,13 @@
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
-    "img": "anh/img113.png",
+    "img": "anh/img113.jpg",
     "a": ["do homework", "iron the clothes", "wash the dishes", "go shopping"],
     "c": 2
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "anh/img114.png",
+    "img": "anh/img114.jpg",
     "a": [
       "play a computer game",
       "do homework",
@@ -740,13 +740,13 @@
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "anh/img115.png",
+    "img": "anh/img115.jpg",
     "a": ["make a cake", "watch a movie", "study English", "go shopping"],
     "c": 3
   },
   {
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
-    "img": "anh/img116.png",
+    "img": "anh/img116.jpg",
     "a": ["wash the dishes", "make a cake", "watch a movie", "study English"],
     "c": 1
   },
