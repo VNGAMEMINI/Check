@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 
 import "../src/style/Style.scss";
 
-import data from "./json/anh.json";
+import data from "./json/test.json";
 import Poser from "./element/Poser.jsx";
 //? ------------------------------------------------------------
 
