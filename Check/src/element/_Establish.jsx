@@ -41,7 +41,7 @@ const Establish = observer(({ quiz, onStep }) => {
       isRandomAns: isExam ? true : config.randomAns,
       autoNext: isExam ? true : config.autoNext,
       limit: Number(config.limit) || 0,
-      time: isExam ? 60 * 60 : config.timeTotal > 0 ? config.timeTotal * 60 : 0,
+      time: config.timeTotal > 0 ? config.timeTotal * 60 : 0,
     };
 
     // 2. Cập nhật trực tiếp vào state để đảm bảo tính đồng bộ cho ADQuiz

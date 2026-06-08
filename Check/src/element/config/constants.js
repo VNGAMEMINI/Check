@@ -113,6 +113,7 @@ export const TEXT = {
     CORRECT: "Đúng", // Đổi tên từ STATS_CORRECT
     WRONG: "Sai", // Đổi tên từ STATS_WRONG
     PENDING: "Nguội", // Đổi tên từ STATS_SKIPPED
+    PROGRESS: "Tiến độ",
     TOTAL_TIME: "Tổng thời gian",
     Q_TIME: "Thời gian câu", // Đổi tên từ QUESTION_TIME
     PREV: "<=", // Đổi tên từ BTN_PREV
