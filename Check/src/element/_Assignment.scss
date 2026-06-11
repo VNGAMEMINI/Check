@@ -266,6 +266,7 @@ $tv: 1920px;
     }
   }
 
+
   .btn-submit {
     @include gradient-button(
       var(--gradient-brand-primary),
@@ -275,6 +276,19 @@ $tv: 1920px;
     border-radius: var(--border-radius-lg);
     font-weight: 800;
     font-size: 1.1rem;
+  }
+
+  @media (max-width: $mobile) {
+    .btn-nav,
+    .btn-bookmark {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+    }
+    .btn-submit {
+      display: inline;
+      font-size: 0.95rem;
+      padding: 0.5rem;
+    }
   }
 }
 

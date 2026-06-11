@@ -6,6 +6,7 @@ $laptop: 1024px;
 $desktop: 1440px;
 $tv: 1920px;
 
+
 .establish-container {
   display: flex;
   align-items: center;
@@ -41,6 +42,15 @@ $tv: 1920px;
       color: var(--color-text-secondary);
       font-weight: 400;
       margin-bottom: 2rem;
+    }
+  }
+}
+@media (max-width: 550px) {
+  .establish-container {
+    padding: 0.5rem;
+
+    .card {
+      padding: 1.5rem;
     }
   }
 }
