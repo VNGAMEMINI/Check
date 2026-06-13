@@ -31,7 +31,6 @@ $tv: 1920px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-height: 90vh;
   overflow: hidden; // Giữ card không bị scroll, scroll bên trong danh sách
 
   .status-text {
@@ -99,11 +98,9 @@ $tv: 1920px;
 }
 
 .detail-list {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   text-align: left;
-  overflow: hidden;
 
   h3 {
     font-size: 1.1rem;
@@ -114,9 +111,10 @@ $tv: 1920px;
   }
 
   .detail-list-wrapper {
+    overflow: hidden;
     overflow-y: auto;
-    height: 50rem !important; // Cố định chiều cao để kích hoạt scroll
     padding-right: 0.5rem;
+    max-height: 10rem;
 
     &::-webkit-scrollbar {
       width: 5px;
