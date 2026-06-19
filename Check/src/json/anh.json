@@ -305,7 +305,7 @@
     "q": "Look at the picture and complete the following sentence with a preposition.",
     "img": "anh/img48.jpg",
     "a": ["go up", "go down", "turn right", "turn left"],
-    "c": 2
+    "c": 3
   },
   {
     "q": "Excuse me, .................... is the post office, please?",
@@ -429,7 +429,7 @@
     "q": "Look at picture and choose A, B, C or D to complete the sentence.",
     "img": "anh/img67.jpg",
     "a": ["beer", "wine", "tea", "coffee"],
-    "c": 2
+    "c": 3
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
