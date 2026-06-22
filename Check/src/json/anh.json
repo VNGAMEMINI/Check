@@ -281,13 +281,13 @@
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe man is .................... the girl.",
     "img": "anh/img44.jpg",
     "a": ["near", "opposite", "behind", "between"],
-    "c": 2
+    "c": 1
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe book is .................... the table.",
     "img": "anh/img45.jpg",
     "a": ["under", "on", "in", "near"],
-    "c": 1
+    "c": 0
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe TV is .................... the dog and the cat.",
@@ -299,7 +299,7 @@
     "q": "Look at the picture and complete the following sentence with a preposition.\nThe dog is .................... the armchair.",
     "img": "anh/img47.jpg",
     "a": ["in", "on", "between", "in front of"],
-    "c": 3
+    "c": 1
   },
   {
     "q": "Look at the picture and complete the following sentence with a preposition.",
@@ -417,7 +417,7 @@
     "q": "Look at picture and choose A, B, C or D.",
     "img": "anh/img65.jpg",
     "a": ["mushrooms", "potatoes", "oranges", "bananas"],
-    "c": 2
+    "c": 0
   },
   {
     "q": "Look at picture and choose A, B, C or D.",
